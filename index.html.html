@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>드림 커플 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     SITE_DATA 를 실제 내용으로 채우면 이 사이트가 완성됩니다.
+     이 파일 아래쪽 <script> 안의 SITE_DATA 객체만 수정하면 됩니다.
+     ============================================================ */
+
+  :root{
+    --bg: #EEF1F4;
+    --bg-panel: #E4E8EC;
+    --paper: #F8F9FA;
+    --ink: #14181C;
+    --ink-soft: #4B5560;
+    --line: rgba(20,24,28,0.14);
+    --accent-a: #2F6F63;   /* 캐릭터 A 색 */
+    --accent-a-soft: #2F6F6318;
+    --accent-b: #B98B3E;   /* 캐릭터 B 색 */
+    --accent-b-soft: #B98B3E18;
+    --radius: 2px;
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+
+  :focus-visible{
+    outline:2px solid var(--ink);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 32px;
+  }
+  @media (max-width:640px){
+    .wrap{ padding:0 20px; }
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+  }
+
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:0.02em;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 32px;
+    mix-blend-mode:difference;
+    color:#fff;
+    font-size:14px;
+  }
+  .nav .site-title{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:16px;
+  }
+  .nav-links{
+    display:flex;
+    gap:28px;
+    list-style:none;
+    margin:0; padding:0;
+  }
+  .nav-links a{
+    text-decoration:none;
+    opacity:0.85;
+  }
+  .nav-links a:hover{ opacity:1; }
+  @media (max-width:640px){
+    .nav-links{ gap:16px; font-size:12px; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:120px 32px 80px;
+    position:relative;
+  }
+  .hero-names{
+    font-size:clamp(48px, 10vw, 128px);
+    line-height:0.98;
+    display:flex;
+    align-items:baseline;
+    gap:0.3em;
+    flex-wrap:wrap;
+  }
+  .hero-names .name-a{ color:var(--accent-a); }
+  .hero-names .name-b{ color:var(--accent-b); }
+  .hero-names .x{
+    font-family:'Work Sans', sans-serif;
+    font-weight:300;
+    font-size:0.5em;
+    color:var(--ink-soft);
+  }
+  .hero-tagline{
+    margin-top:28px;
+    max-width:44ch;
+    font-size:17px;
+    color:var(--ink-soft);
+  }
+  .hero-meta{
+    margin-top:48px;
+    display:flex;
+    gap:32px;
+    font-size:13px;
+    color:var(--ink-soft);
+    flex-wrap:wrap;
+  }
+  .hero-meta span{ display:block; }
+  .hero-meta strong{
+    display:block;
+    color:var(--ink);
+    font-family:'Fraunces', serif;
+    font-size:15px;
+    font-weight:500;
+    margin-bottom:2px;
+  }
+
+  /* ---------- Section shared ---------- */
+  section{ position:relative; }
+  .section-head{
+    padding:100px 32px 40px;
+    max-width:var(--maxw);
+    margin:0 auto;
+  }
+  .section-head h2{
+    font-size:clamp(28px, 4vw, 40px);
+  }
+
+  /* ---------- Profile (split) ---------- */
+  .profile-split{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  @media (max-width:820px){
+    .profile-split{ grid-template-columns:1fr; }
+  }
+  .profile-panel{
+    padding:64px 40px 90px;
+    border-top:1px solid var(--line);
+    position:relative;
+  }
+  .profile-panel:first-child{
+    border-right:1px solid var(--line);
+  }
+  @media (max-width:820px){
+    .profile-panel:first-child{ border-right:none; }
+  }
+  .profile-photo{
+    width:100%;
+    aspect-ratio:4/5;
+    border-radius:var(--radius);
+    margin-bottom:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:15px;
+    color:var(--ink-soft);
+    background:
+      repeating-linear-gradient(135deg, transparent 0 12px, var(--line) 12px 13px);
+    border:1px solid var(--line);
+  }
+  .profile-panel[data-role="a"] .profile-photo{ background-color:var(--accent-a-soft); }
+  .profile-panel[data-role="b"] .profile-photo{ background-color:var(--accent-b-soft); }
+
+  .profile-name{
+    font-size:34px;
+    margin-bottom:4px;
+  }
+  .profile-panel[data-role="a"] .profile-name{ color:var(--accent-a); }
+  .profile-panel[data-role="b"] .profile-name{ color:var(--accent-b); }
+
+  .profile-role{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-bottom:22px;
+  }
+  .profile-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:26px;
+  }
+  .profile-tags span{
+    font-size:12px;
+    padding:5px 11px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    color:var(--ink-soft);
+  }
+  .profile-bio{
+    font-size:15px;
+    color:var(--ink-soft);
+    max-width:46ch;
+  }
+  .profile-bio p + p{ margin-top:14px; }
+
+  /* connecting mark between panels */
+  .profile-split::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    width:1px;
+  }
+
+  /* ---------- Narrative ---------- */
+  .narrative{
+    background:var(--bg-panel);
+  }
+  .narrative-body{
+    max-width:640px;
+    margin:0 auto;
+    padding:0 32px 110px;
+    font-size:17px;
+    color:var(--ink-soft);
+  }
+  .narrative-body p{ margin:0 0 20px; }
+  .narrative-body p:first-of-type::first-letter{
+    font-family:'Fraunces', serif;
+    font-size:58px;
+    font-weight:500;
+    float:left;
+    line-height:0.85;
+    padding-right:10px;
+    padding-top:6px;
+    color:var(--ink);
+  }
+  .narrative-pull{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:24px;
+    color:var(--ink);
+    max-width:640px;
+    margin:0 auto 48px;
+    padding:0 32px;
+    line-height:1.5;
+  }
+
+  /* ---------- Archive ---------- */
+  .archive-controls{
+    display:flex;
+    gap:10px;
+    padding:0 32px 36px;
+    max-width:var(--maxw);
+    margin:0 auto;
+    flex-wrap:wrap;
+  }
+  .filter-btn{
+    font-family:'Work Sans', sans-serif;
+    font-size:13px;
+    padding:8px 16px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .filter-btn:hover{ color:var(--ink); }
+  .filter-btn.active{
+    background:var(--ink);
+    color:var(--bg);
+    border-color:var(--ink);
+  }
+
+  .archive-grid{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 32px 120px;
+    columns:3 260px;
+    column-gap:20px;
+  }
+  @media (max-width:640px){
+    .archive-grid{ columns:1; }
+  }
+  .archive-card{
+    break-inside:avoid;
+    margin-bottom:20px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .archive-thumb{
+    width:100%;
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    color:var(--ink-soft);
+    background:
+      repeating-linear-gradient(135deg, transparent 0 12px, var(--line) 12px 13px);
+  }
+  .archive-card[data-type="글"] .archive-thumb{ aspect-ratio:auto; padding:34px 20px; text-align:left; align-items:flex-start; }
+  .archive-body{ padding:16px 18px 20px; }
+  .archive-type{
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .archive-title{
+    font-family:'Fraunces', serif;
+    font-size:17px;
+    margin-bottom:6px;
+  }
+  .archive-meta{
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .archive-card[hidden]{ display:none; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:60px 32px 40px;
+    border-top:1px solid var(--line);
+    text-align:center;
+  }
+  footer p{
+    font-size:12px;
+    color:var(--ink-soft);
+    margin:0;
+  }
+</style>
+</head>
+<body>
+
+  <header class="nav">
+    <span class="site-title" id="nav-title">드림 커플</span>
+    <ul class="nav-links">
+      <li><a href="#profile">프로필</a></li>
+      <li><a href="#narrative">서사</a></li>
+      <li><a href="#archive">아카이브</a></li>
+    </ul>
+  </header>
+
+  <section class="hero" id="hero">
+    <div class="wrap" style="padding:0; max-width:100%;">
+      <h1 class="hero-names" id="hero-names"><!-- JS 렌더 --></h1>
+      <p class="hero-tagline" id="hero-tagline"><!-- JS 렌더 --></p>
+      <div class="hero-meta" id="hero-meta"><!-- JS 렌더 --></div>
+    </div>
+  </section>
+
+  <section class="profile" id="profile">
+    <div class="section-head">
+      <div class="eyebrow">Profile</div>
+      <h2>두 사람을 소개합니다</h2>
+    </div>
+    <div class="profile-split" id="profile-split"><!-- JS 렌더 --></div>
+  </section>
+
+  <section class="narrative" id="narrative">
+    <div class="section-head">
+      <div class="eyebrow">Story</div>
+      <h2 id="narrative-title"><!-- JS 렌더 --></h2>
+    </div>
+    <p class="narrative-pull" id="narrative-pull"><!-- JS 렌더 --></p>
+    <div class="narrative-body" id="narrative-body"><!-- JS 렌더 --></div>
+  </section>
+
+  <section class="archive" id="archive">
+    <div class="section-head">
+      <div class="eyebrow">Archive</div>
+      <h2>커미션 아카이브</h2>
+    </div>
+    <div class="archive-controls" id="archive-controls"><!-- JS 렌더 --></div>
+    <div class="archive-grid" id="archive-grid"><!-- JS 렌더 --></div>
+  </section>
+
+  <footer>
+    <p id="footer-text"><!-- JS 렌더 --></p>
+  </footer>
+
+<script>
+/* ================================================================
+   SITE_DATA
+   ----------------------------------------------------------------
+   아래 값들을 실제 내용으로 바꾸면 사이트에 바로 반영됩니다.
+   이미지가 준비되면 profile.photo / archive item의 thumb 값에
+   이미지 경로나 URL을 넣고, 아래 render 함수에서 배경 placeholder
+   대신 <img> 태그를 쓰도록 바꿔주면 됩니다. (지금은 틀만 먼저
+   잡아둔 상태라 이미지 없이도 자연스럽게 보이도록 만들어 두었습니다.)
+   ================================================================ */
+const SITE_DATA = {
+  siteTitle: "드림 커플",
+
+  hero: {
+    nameA: "캐릭터 A",
+    nameB: "캐릭터 B",
+    tagline: "두 사람의 세계관과 관계, 그리고 지금까지 쌓아온 커미션 기록을 담은 아카이브입니다.",
+    meta: [
+      { label: "관계", value: "관계 한 줄 소개" },
+      { label: "세계관", value: "세계관 이름" },
+      { label: "시작", value: "2024" }
+    ]
+  },
+
+  characters: [
+    {
+      role: "a", // 색상 매핑용, 고정값
+      name: "캐릭터 A 이름",
+      subtitle: "한 줄 소개 / 직업 / 종족 등",
+      tags: ["태그1", "태그2", "태그3"],
+      bio: [
+        "캐릭터 A에 대한 소개 문단입니다. 성격, 외형, 배경 등 원하는 내용을 자유롭게 채워주세요.",
+        "두 번째 문단도 필요하면 이렇게 이어서 작성할 수 있습니다."
+      ]
+    },
+    {
+      role: "b",
+      name: "캐릭터 B 이름",
+      subtitle: "한 줄 소개 / 직업 / 종족 등",
+      tags: ["태그1", "태그2", "태그3"],
+      bio: [
+        "캐릭터 B에 대한 소개 문단입니다.",
+        "필요한 만큼 문단을 추가해 주세요."
+      ]
+    }
+  ],
+
+  narrative: {
+    title: "두 사람의 이야기",
+    pullQuote: "핵심이 되는 한 문장이나 인상적인 대사를 여기에 넣으면 좋습니다.",
+    paragraphs: [
+      "여기서부터 세계관과 서사를 자유롭게 서술하면 됩니다. 두 사람이 어떻게 만났는지, 어떤 사건을 함께 겪었는지 등을 적어주세요.",
+      "문단은 얼마든지 추가할 수 있습니다. 이 배열(paragraphs)에 문자열을 하나씩 더하면 됩니다.",
+      "장(chapter)이 나뉘는 긴 서사라면 소제목을 위해 섹션을 복제해서 확장하는 것도 가능합니다."
+    ]
+  },
+
+  archive: [
+    { type: "그림", title: "커미션 제목 1", creator: "작가명", date: "2025.03", thumb: null },
+    { type: "글", title: "커미션 제목 2", creator: "작가명", date: "2025.05", excerpt: "글 커미션의 도입부나 요약을 여기에 짧게 넣으면 카드에 미리보기로 표시됩니다." },
+    { type: "그림", title: "커미션 제목 3", creator: "작가명", date: "2025.06", thumb: null },
+    { type: "그림", title: "커미션 제목 4", creator: "작가명", date: "2025.07", thumb: null },
+    { type: "글", title: "커미션 제목 5", creator: "작가명", date: "2025.08", excerpt: "짧은 요약 텍스트 예시입니다." }
+  ],
+
+  footerText: "© 2026 드림 커플 아카이브. 개인 소장용 팬 아카이브입니다."
+};
+
+/* ================================================================
+   렌더링 로직 (수정하지 않아도 됩니다)
+   ================================================================ */
+function renderHero(){
+  document.getElementById('nav-title').textContent = SITE_DATA.siteTitle;
+  document.title = SITE_DATA.siteTitle + " 아카이브";
+
+  document.getElementById('hero-names').innerHTML =
+    `<span class="name-a">${SITE_DATA.hero.nameA}</span><span class="x">×</span><span class="name-b">${SITE_DATA.hero.nameB}</span>`;
+
+  document.getElementById('hero-tagline').textContent = SITE_DATA.hero.tagline;
+
+  document.getElementById('hero-meta').innerHTML = SITE_DATA.hero.meta.map(m =>
+    `<span><strong>${m.label}</strong>${m.value}</span>`
+  ).join('');
+}
+
+function renderProfiles(){
+  const el = document.getElementById('profile-split');
+  el.innerHTML = SITE_DATA.characters.map(c => `
+    <div class="profile-panel" data-role="${c.role}">
+      <div class="profile-photo">이미지 추가 예정</div>
+      <h3 class="profile-name">${c.name}</h3>
+      <div class="profile-role">${c.subtitle}</div>
+      <div class="profile-tags">${c.tags.map(t => `<span>${t}</span>`).join('')}</div>
+      <div class="profile-bio">${c.bio.map(p => `<p>${p}</p>`).join('')}</div>
+    </div>
+  `).join('');
+}
+
+function renderNarrative(){
+  document.getElementById('narrative-title').textContent = SITE_DATA.narrative.title;
+  document.getElementById('narrative-pull').textContent = SITE_DATA.narrative.pullQuote;
+  document.getElementById('narrative-body').innerHTML =
+    SITE_DATA.narrative.paragraphs.map(p => `<p>${p}</p>`).join('');
+}
+
+function renderArchive(){
+  const types = ["전체", ...Array.from(new Set(SITE_DATA.archive.map(i => i.type)))];
+  const controls = document.getElementById('archive-controls');
+  controls.innerHTML = types.map((t, i) =>
+    `<button class="filter-btn${i===0 ? ' active' : ''}" data-type="${t}">${t}</button>`
+  ).join('');
+
+  const grid = document.getElementById('archive-grid');
+  grid.innerHTML = SITE_DATA.archive.map(item => `
+    <div class="archive-card" data-type="${item.type}">
+      <div class="archive-thumb">${item.type === '글'
+        ? (item.excerpt || '')
+        : '이미지 추가 예정'}</div>
+      <div class="archive-body">
+        <div class="archive-type">${item.type}</div>
+        <div class="archive-title">${item.title}</div>
+        <div class="archive-meta">${item.creator} · ${item.date}</div>
+      </div>
+    </div>
+  `).join('');
+
+  controls.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if(!btn) return;
+    controls.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const type = btn.dataset.type;
+    grid.querySelectorAll('.archive-card').forEach(card => {
+      card.hidden = !(type === '전체' || card.dataset.type === type);
+    });
+  });
+}
+
+function renderFooter(){
+  document.getElementById('footer-text').textContent = SITE_DATA.footerText;
+}
+
+renderHero();
+renderProfiles();
+renderNarrative();
+renderArchive();
+renderFooter();
+</script>
+</body>
+</html>
