@@ -335,7 +335,31 @@
     background:
       repeating-linear-gradient(135deg, transparent 0 12px, var(--line) 12px 13px);
   }
-  .archive-card[data-type="글"] .archive-thumb{ aspect-ratio:auto; padding:34px 20px; text-align:left; align-items:flex-start; }
+  .archive-thumb img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .archive-thumb.is-text{
+    aspect-ratio:auto;
+    padding:28px 20px;
+    text-align:left;
+    align-items:flex-start;
+    font-size:13px;
+    line-height:1.6;
+    color:var(--ink-soft);
+  }
+  .archive-thumb.is-gallery{
+    background:none;
+    border:none;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:2px;
+  }
+  .archive-thumb.is-gallery img{
+    width:100%;
+    aspect-ratio:4/3;
+  }
   .archive-body{ padding:16px 18px 20px; }
   .archive-type{
     font-size:11px;
@@ -477,11 +501,34 @@ const SITE_DATA = {
   },
 
   archive: [
-    { type: "그림", title: "커미션 제목 1", creator: "작가명", date: "2025.03", thumb: null },
-    { type: "글", title: "커미션 제목 2", creator: "작가명", date: "2025.05", excerpt: "글 커미션의 도입부나 요약을 여기에 짧게 넣으면 카드에 미리보기로 표시됩니다." },
-    { type: "그림", title: "커미션 제목 3", creator: "작가명", date: "2025.06", thumb: null },
-    { type: "그림", title: "커미션 제목 4", creator: "작가명", date: "2025.07", thumb: null },
-    { type: "글", title: "커미션 제목 5", creator: "작가명", date: "2025.08", excerpt: "짧은 요약 텍스트 예시입니다." }
+    {
+      type: "그림",
+      title: "재회",
+      creator: "rosa (@OLYKNo4H)",
+      date: "2025.08.12",
+      thumb: "images/archive-1-rosa.jpg"
+    },
+    {
+      type: "그림",
+      title: "나란히",
+      creator: "듀듀 (@imnotartist)",
+      date: "",
+      thumb: "images/archive-2-duyu.jpg"
+    },
+    {
+      type: "썰",
+      title: "그리스 로마 신화 AU",
+      creator: "Hoya (@Dear_your_H)",
+      date: "2026.09.12",
+      excerpt: "재경은 제우스와 테미스 사이에서 태어난 호라이, 책임의 신이다. 경석은 코린토스의 영웅 시시포스의 아들로, 아버지의 죄로 인해 이른 죽음을 예언받았다. 재경을 비롯한 호라이가 개입해 그의 운명에 질서를 되묻고, 그 결과 경석은 영원히 신들에게 복종하는 대신 재경과 혼인하게 된다."
+    },
+    {
+      type: "개인봇",
+      title: "고 양님과의 개인 롤플레이",
+      creator: "고 양 (@d5l3o)",
+      date: "2026.08",
+      images: ["images/archive-4-1.jpg", "images/archive-4-2.jpg", "images/archive-4-3.png"]
+    }
   ],
 
   footerText: "© 2026 드림 커플 아카이브. 개인 소장용 팬 아카이브입니다."
@@ -532,18 +579,32 @@ function renderArchive(){
   ).join('');
 
   const grid = document.getElementById('archive-grid');
-  grid.innerHTML = SITE_DATA.archive.map(item => `
+  grid.innerHTML = SITE_DATA.archive.map(item => {
+    let thumbHtml;
+    let thumbClass = '';
+    if (item.images && item.images.length){
+      thumbClass = 'is-gallery';
+      thumbHtml = item.images.map(src => `<img src="${src}" alt="${item.title}" loading="lazy">`).join('');
+    } else if (item.thumb){
+      thumbHtml = `<img src="${item.thumb}" alt="${item.title}" loading="lazy">`;
+    } else if (item.excerpt){
+      thumbClass = 'is-text';
+      thumbHtml = item.excerpt;
+    } else {
+      thumbHtml = '이미지 추가 예정';
+    }
+    const metaText = item.date ? `${item.creator} · ${item.date}` : item.creator;
+    return `
     <div class="archive-card" data-type="${item.type}">
-      <div class="archive-thumb">${item.type === '글'
-        ? (item.excerpt || '')
-        : '이미지 추가 예정'}</div>
+      <div class="archive-thumb ${thumbClass}">${thumbHtml}</div>
       <div class="archive-body">
         <div class="archive-type">${item.type}</div>
         <div class="archive-title">${item.title}</div>
-        <div class="archive-meta">${item.creator} · ${item.date}</div>
+        <div class="archive-meta">${metaText}</div>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   controls.addEventListener('click', (e) => {
     const btn = e.target.closest('.filter-btn');
