@@ -205,6 +205,12 @@
   }
   .profile-panel[data-role="a"] .profile-photo{ background-color:var(--accent-a-soft); }
   .profile-panel[data-role="b"] .profile-photo{ background-color:var(--accent-b-soft); }
+  .profile-photo img{
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center top;
+    display:block;
+  }
 
   .profile-name{
     font-size:34px;
@@ -467,6 +473,7 @@ const SITE_DATA = {
     {
       role: "a", // 색상 매핑용, 고정값
       name: "남경석",
+      photo: "images/profile-gyeongseok.png",
       subtitle: "YBS 스포츠국 차장 · 前 대학농구 선수 (44세 · 196cm)",
       tags: ["K대 신방과", "現場·데스크 겸임", "스마일 럭키"],
       bio: [
@@ -478,6 +485,7 @@ const SITE_DATA = {
     {
       role: "b",
       name: "신재경",
+      photo: "images/profile-jaegyeong.png",
       subtitle: "UBS 9시 뉴스 메인 앵커 · 희도의 모친 (44세 · 170cm)",
       tags: ["K대 신방과 수석졸업", "메인 앵커", "희도의 엄마"],
       bio: [
@@ -555,7 +563,7 @@ function renderProfiles(){
   const el = document.getElementById('profile-split');
   el.innerHTML = SITE_DATA.characters.map(c => `
     <div class="profile-panel" data-role="${c.role}">
-      <div class="profile-photo">이미지 추가 예정</div>
+      <div class="profile-photo">${c.photo ? `<img src="${c.photo}" alt="${c.name}" loading="lazy">` : '이미지 추가 예정'}</div>
       <h3 class="profile-name">${c.name}</h3>
       <div class="profile-role">${c.subtitle}</div>
       <div class="profile-tags">${c.tags.map(t => `<span>${t}</span>`).join('')}</div>
