@@ -7,6 +7,6 @@
    두 칸이 비어 있으면 [로그인] 버튼과 댓글칸이 사이트에 나타나지 않아요.
    ============================================================ */
 window.SITE_CONFIG = {
-  url: '',
-  key: ''
+  url: 'https://pgxbrifganrbgorxwrfo.supabase.co',
+  key: 'sb_publishable_s9Q5MgOklRFRnI1LuQe4hA_NU_sAZtS'
 };
