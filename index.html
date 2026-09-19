@@ -103,9 +103,9 @@ button{font:inherit;color:inherit}
 .duo-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;text-decoration:none}
 .duo-card img{width:100%;aspect-ratio:3/2;object-fit:cover}
 @media (max-width:760px){.duo-card img{aspect-ratio:4/3}}
-.duo-card.gs img{object-position:60% 18%}
+.duo-card.gs img{object-position:65% 15%}
 .duo-card.jg img{object-position:50% 30%}
-.duo-text{flex:1;display:flex;flex-direction:column;gap:10px;padding:20px 22px 22px}
+.duo-text{flex:1;display:flex;flex-direction:column;gap:10px;padding:20px 22px 24px}
 .duo-card.gs .duo-text{background:var(--gs-tint)}
 .duo-card.jg .duo-text{background:var(--jg-tint)}
 .duo-name{display:flex;align-items:baseline;gap:10px;font-size:1.5rem;font-weight:800}
@@ -114,9 +114,13 @@ button{font:inherit;color:inherit}
 .jg .duo-role{background:var(--jg);color:var(--jg-on)}
 .duo-meta{font-size:.92rem;color:var(--muted)}
 .duo-quote{font-size:clamp(1.05rem,2.3vw,1.3rem);font-weight:600;line-height:1.6;margin-top:4px}
-.duo-go{margin-top:auto;padding-top:6px;font-weight:700;font-size:.95rem}
-.gs .duo-go{color:var(--gs-ink)}.jg .duo-go{color:var(--jg-ink)}
-.duo-card:hover .duo-go{text-decoration:underline;text-underline-offset:4px}
+.duo-go{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:13px 22px 13px 24px;border-radius:999px;font-weight:800;font-size:1rem;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.16)}
+.duo-go .ico{width:1.1em;height:1.1em;transition:transform .2s}
+.duo-card.gs .duo-go{background:var(--gs);color:var(--gs-on)}
+.duo-card.jg .duo-go{background:var(--jg);color:var(--jg-on)}
+.duo-card:hover .duo-go{filter:brightness(.93)}
+.duo-card:hover .duo-go .ico{transform:translateX(3px)}
+.duo-card:focus-visible .duo-go{outline:3px solid var(--focus);outline-offset:3px}
 .duo-x{position:absolute;left:50%;top:28%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-size:1.5rem;font-weight:300;line-height:1;border:4px solid var(--paper);z-index:2}
 @media (max-width:760px){
   .duo{grid-template-columns:1fr}
@@ -196,7 +200,16 @@ figure.ph figcaption{padding:8px 12px 10px;font-size:.88rem;color:var(--muted);l
 /* ============================================================ 프로필 */
 .pquote{max-width:46rem;font-size:clamp(1.25rem,3vw,1.75rem);font-weight:700;line-height:1.55;letter-spacing:-.01em;padding-left:20px;border-left:5px solid var(--accent);margin-bottom:clamp(24px,4vw,40px)}
 .pquote.gs{--accent:var(--gs)}.pquote.jg{--accent:var(--jg)}
-.gallery{margin-bottom:clamp(28px,5vw,52px)}
+/* 넓은 화면에서는 줄바꿈 없이 한 줄로 (글자 크기는 화면 폭에 맞춰 자동 조절, 아래 스크립트가 미세 조정) */
+@media (min-width:860px){
+  .pquote.oneline{max-width:none;white-space:nowrap;font-size:min(1.75rem,calc((100vw - 2*var(--gutter) - 30px) / 47))}
+}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:clamp(28px,5vw,52px)}
+@media (max-width:640px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.gallery figure.ph{position:relative;margin:0;aspect-ratio:1/1;border-radius:12px;background:var(--line)}
+.gallery .zoom{position:absolute;inset:0;width:100%;height:100%;border-radius:0;background:var(--line)}
+.gallery .zoom::before{content:"";position:absolute;inset:-28px;background:var(--bg) center/cover no-repeat;filter:blur(22px) saturate(1.1);opacity:.65}
+.gallery .zoom img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .profile-grid{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:start}
 .profile-side{position:sticky;top:96px;display:grid;gap:14px}
 @media (max-width:900px){.profile-grid{grid-template-columns:1fr}.profile-side{position:static}}
@@ -395,12 +408,12 @@ details.fold .fold-body p{padding-top:1em}
 
     <div class="duo">
       <a class="duo-card gs" href="#gyeongseok">
-        <img src="images/gs-2.webp" width="880" height="1048" alt="남경석 이미지: 커피를 내리는 모습">
+        <img src="images/gs-main.webp" width="1200" height="851" alt="남경석 대표 이미지: 수건을 두르고 웃는 모습">
         <div class="duo-text">
           <div class="duo-name">남경석 <span class="duo-role">드림주</span></div>
           <p class="duo-meta">44세 · YBS 스포츠국 차장</p>
           <blockquote class="duo-quote">“야아, 재경아, 커피 마시고 싶지 않냐?”</blockquote>
-          <span class="duo-go">프로필 보기</span>
+          <span class="duo-go">프로필 보기<svg class="ico" aria-hidden="true"><use href="#i-next"/></svg></span>
         </div>
       </a>
       <div class="duo-x" aria-hidden="true">×</div>
@@ -410,7 +423,7 @@ details.fold .fold-body p{padding-top:1em}
           <div class="duo-name">신재경 <span class="duo-role">드림캐</span></div>
           <p class="duo-meta">44세 · UBS 9시 뉴스 메인앵커</p>
           <blockquote class="duo-quote">“통화불량 아니지? 그냥 전화 끊은 거지?”</blockquote>
-          <span class="duo-go">프로필 보기</span>
+          <span class="duo-go">프로필 보기<svg class="ico" aria-hidden="true"><use href="#i-next"/></svg></span>
         </div>
       </a>
     </div>
@@ -504,14 +517,14 @@ details.fold .fold-body p{padding-top:1em}
       <h2 class="view-title" tabindex="-1">남경석</h2>
       <div class="tags"><span class="tag">드림주</span></div>
     </div>
-      <blockquote class="pquote gs">“아직까지 결혼 못(안)한 이유는··· 좌우지간, 얘기 끝. 야아, 재경아, 커피 마시고 싶지 않냐?”</blockquote>
+      <blockquote class="pquote gs oneline">“아직까지 결혼 못(안)한 이유는··· 좌우지간, 얘기 끝. 야아, 재경아, 커피 마시고 싶지 않냐?”</blockquote>
 
-      <div class="gallery masonry">
-        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 1"><img src="images/gs-1.webp" width="1200" height="851" alt="남경석 이미지 1" loading="lazy"></button></figure>
-        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 2"><img src="images/gs-2.webp" width="880" height="1048" alt="남경석 이미지 2" loading="lazy"></button></figure>
-        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 3"><img src="images/gs-3.webp" width="960" height="960" alt="남경석 이미지 3" loading="lazy"></button></figure>
-        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 4"><img src="images/gs-4.webp" width="655" height="648" alt="남경석 이미지 4" loading="lazy"></button></figure>
-        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 5"><img src="images/gs-5.webp" width="1200" height="1499" alt="남경석 이미지 5" loading="lazy"></button></figure>
+      <div class="gallery">
+        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 1" style="--bg:url('images/gs-1.webp')"><img src="images/gs-1.webp" width="1200" height="851" alt="남경석 이미지 1" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 2" style="--bg:url('images/gs-2.webp')"><img src="images/gs-2.webp" width="880" height="1048" alt="남경석 이미지 2" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 3" style="--bg:url('images/gs-3.webp')"><img src="images/gs-3.webp" width="960" height="960" alt="남경석 이미지 3" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 4" style="--bg:url('images/gs-4.webp')"><img src="images/gs-4.webp" width="655" height="648" alt="남경석 이미지 4" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 5" style="--bg:url('images/gs-5.webp')"><img src="images/gs-5.webp" width="1200" height="1499" alt="남경석 이미지 5" loading="lazy"></button></figure>
       </div>
 
       <div class="profile-grid">
@@ -564,6 +577,15 @@ details.fold .fold-body p{padding-top:1em}
     </div>
       <blockquote class="pquote jg">“통화불량 아니지? 그냥 전화 끊은 거지?”</blockquote>
 
+      <div class="gallery">
+        <figure class="ph"><button class="zoom" type="button" data-caption="신재경 이미지 1" style="--bg:url('images/jg-1.webp')"><img src="images/jg-1.webp" width="1344" height="965" alt="신재경 이미지 1" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="신재경 이미지 2" style="--bg:url('images/jg-p1.webp')"><img src="images/jg-p1.webp" width="1200" height="674" alt="신재경 이미지 2" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="신재경 이미지 3" style="--bg:url('images/jg-p2.webp')"><img src="images/jg-p2.webp" width="852" height="855" alt="신재경 이미지 3" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="신재경 이미지 4" style="--bg:url('images/jg-p3.webp')"><img src="images/jg-p3.webp" width="860" height="857" alt="신재경 이미지 4" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="신재경 이미지 5" style="--bg:url('images/jg-p4.webp')"><img src="images/jg-p4.webp" width="860" height="857" alt="신재경 이미지 5" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="신재경 이미지 6" style="--bg:url('images/jg-p5.webp')"><img src="images/jg-p5.webp" width="914" height="913" alt="신재경 이미지 6" loading="lazy"></button></figure>
+      </div>
+
       <div class="profile-grid">
         <aside class="profile-side">
           <div class="idcard jg">
@@ -575,7 +597,6 @@ details.fold .fold-body p{padding-top:1em}
             </dl>
             <div class="chips"><span class="chip">냉철하고 이지적</span><span class="chip">약한 면을 감춤</span><span class="chip">희도의 어머니</span></div>
           </div>
-          <figure class="ph" style="margin:0"><button class="zoom" type="button" data-caption="신재경 이미지"><img src="images/jg-1.webp" width="1344" height="965" alt="신재경 이미지" loading="lazy"></button></figure>
           <div class="theme">
             <h4>캐릭터 테마곡</h4>
             <a href="https://youtu.be/DLWarJWn5-o" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span>Paganini - La Campanella</span></a>
@@ -926,6 +947,7 @@ details.fold .fold-body p{padding-top:1em}
       jumpTop();
       var h=$('.view-title',viewEls[name]);
       if(h)h.focus({preventScroll:true});
+      if(name==='gyeongseok')fitOneLine();
     }
     if(target){
       var el=document.getElementById(target);
@@ -933,6 +955,18 @@ details.fold .fold-body p{padding-top:1em}
     }
   }
   window.addEventListener('hashchange',route);
+  /* 남경석 인용문을 한 줄에 딱 맞게 (폰트가 바뀌어도 넘치지 않도록 확인) */
+  function fitOneLine(){
+    var q=$('.pquote.oneline');
+    if(!q||q.offsetParent===null)return;
+    q.style.fontSize='';
+    if(window.innerWidth<860)return;
+    var size=parseFloat(getComputedStyle(q).fontSize);
+    while(q.scrollWidth>q.clientWidth&&size>13){size-=.5;q.style.fontSize=size+'px'}
+  }
+  var fitTimer;
+  window.addEventListener('resize',function(){clearTimeout(fitTimer);fitTimer=setTimeout(fitOneLine,80)});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitOneLine);
   /* 이미 보고 있는 메뉴를 다시 누르면 그 페이지의 맨 위로 */
   $$('a.brand, #nav a').forEach(function(a){
     a.addEventListener('click',function(){
