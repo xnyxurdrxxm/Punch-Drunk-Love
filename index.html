@@ -1,640 +1,1024 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>드림 커플 아카이브</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>시가렛 스윙! | 남경석 × 신재경 드림 커플</title>
+<meta name="description" content="드라마 <스물다섯 스물하나>의 1998년 방송가를 배경으로 한 드림 커플, 남경석과 신재경의 설정집입니다.">
+<meta property="og:title" content="시가렛 스윙! | 남경석 × 신재경">
+<meta property="og:description" content="드라마 <스물다섯 스물하나> 드림 커플 설정집 — 세계관, 인물 관계도, 프로필, 서사, 연성 아카이브">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2a14 14 0 0 0 0 28z' fill='%23E2A81D'/%3E%3Cpath d='M16 2a14 14 0 0 1 0 28z' fill='%2322406A'/%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
 <style>
-  /* ============================================================
-     SITE_DATA 를 실제 내용으로 채우면 이 사이트가 완성됩니다.
-     이 파일 아래쪽 <script> 안의 SITE_DATA 객체만 수정하면 됩니다.
-     ============================================================ */
+/* ============================================================
+   디자인 토큰 (색·글꼴·간격은 여기서만 바꾸면 됩니다)
+   gs = 남경석(금빛), jg = 신재경(남색)
+   ============================================================ */
+:root{
+  --paper:#F3F5F8; --paper-glass:rgba(243,245,248,.92); --surface:#FFFFFF;
+  --ink:#151E28; --ink-2:#3A4655; --muted:#65717F; --line:#DCE1E8;
+  --jg:#22406A; --jg-ink:#22406A; --jg-tint:#E7EDF6; --jg-on:#FFFFFF;
+  --gs:#E2A81D; --gs-ink:#7A5400; --gs-tint:#FBF1D6; --gs-on:#1F1707;
+  --alert:#A93B35; --alert-tint:#FAEAE8;
+  --focus:#2F6FE4;
+  --radius:14px; --radius-lg:20px;
+  --gutter:clamp(16px,4vw,32px);
+  --font-body:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Noto Sans CJK KR",sans-serif;
+  --font-display:"Black Han Sans","Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Noto Sans CJK KR",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F151C; --paper-glass:rgba(15,21,28,.92); --surface:#161E27;
+    --ink:#E8EDF2; --ink-2:#C2CBD5; --muted:#93A0AE; --line:#263241;
+    --jg:#2C4F82; --jg-ink:#93B6EA; --jg-tint:#16263B; --jg-on:#FFFFFF;
+    --gs:#E9B93F; --gs-ink:#EDC25E; --gs-tint:#2A2211; --gs-on:#1F1707;
+    --alert:#EE9A94; --alert-tint:#2E1B1A;
+    --focus:#8DB4FF;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F151C; --paper-glass:rgba(15,21,28,.92); --surface:#161E27;
+  --ink:#E8EDF2; --ink-2:#C2CBD5; --muted:#93A0AE; --line:#263241;
+  --jg:#2C4F82; --jg-ink:#93B6EA; --jg-tint:#16263B; --jg-on:#FFFFFF;
+  --gs:#E9B93F; --gs-ink:#EDC25E; --gs-tint:#2A2211; --gs-on:#1F1707;
+  --alert:#EE9A94; --alert-tint:#2E1B1A;
+  --focus:#8DB4FF;
+}
 
-  :root{
-    --bg: #EEF1F4;
-    --bg-panel: #E4E8EC;
-    --paper: #F8F9FA;
-    --ink: #14181C;
-    --ink-soft: #4B5560;
-    --line: rgba(20,24,28,0.14);
-    --accent-a: #2F6F63;   /* 캐릭터 A 색 */
-    --accent-a-soft: #2F6F6318;
-    --accent-b: #B98B3E;   /* 캐릭터 B 색 */
-    --accent-b-soft: #B98B3E18;
-    --radius: 2px;
-    --maxw: 1180px;
-  }
+/* ============================================================ 기본 */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:116px}
+@media (min-width:761px){html{scroll-padding-top:88px}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:1rem;line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+body.lb-open{overflow:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure,blockquote{margin:0}
+ul,ol{padding:0;list-style:none}
+button{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.wrap{width:min(1120px,100% - 2*var(--gutter));margin-inline:auto}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:8px 14px;border-radius:8px;z-index:100}
+.skip:focus{left:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ico{width:1em;height:1em;flex:none}
+.ext{display:inline-flex;align-items:center;gap:4px;font-weight:600;color:var(--jg-ink);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.ext .ico{width:.95em;height:.95em}
 
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
-  }
+/* ============================================================ 상단 바 */
+.site-header{position:sticky;top:0;z-index:50;background:var(--paper-glass);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;flex-wrap:wrap;gap:4px 12px;min-height:60px;padding-block:6px}
+.brand{font-family:var(--font-display);font-weight:900;font-synthesis:none;font-size:1.4rem;text-decoration:none;letter-spacing:-.01em;margin-right:auto}
+.nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;font-size:.95rem;font-weight:600;color:var(--ink-2);padding:7px 14px;border-radius:999px}
+.nav a:hover{background:var(--line)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--paper)}
+.nav a[data-tab="gyeongseok"][aria-current="true"]{background:var(--gs);color:var(--gs-on)}
+.nav a[data-tab="jaegyeong"][aria-current="true"]{background:var(--jg);color:var(--jg-on)}
+.icon-btn{appearance:none;border:1px solid var(--line);background:var(--surface);width:40px;height:40px;border-radius:999px;display:grid;place-items:center;cursor:pointer;font-size:1.15rem}
+.icon-btn:hover{border-color:var(--muted)}
+.icon-btn .i-sun{display:none}
+.icon-btn[data-mode="dark"] .i-sun{display:block}
+.icon-btn[data-mode="dark"] .i-moon{display:none}
+@media (max-width:760px){
+  .brand{order:1}.icon-btn{order:2}
+  .nav{order:3;flex-basis:100%;margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);padding-bottom:6px}
+}
+@media (min-width:761px){.brand{margin-right:24px}.nav{margin-right:auto}}
 
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Work Sans', sans-serif;
-    font-weight:400;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
+/* ============================================================ 첫 화면 */
+.hero{padding-top:clamp(28px,5vw,64px);padding-bottom:clamp(40px,6vw,72px)}
+.hero-title{font-family:var(--font-display);font-weight:900;font-synthesis:none;font-size:clamp(3.2rem,13.5vw,8.75rem);line-height:1.02;letter-spacing:-.02em}
+.hero-sub{margin-top:clamp(14px,2vw,22px);max-width:36rem;font-size:clamp(1.02rem,2.2vw,1.2rem);color:var(--ink-2);line-height:1.75}
+.duo{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:clamp(28px,5vw,56px)}
+.duo-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;text-decoration:none}
+.duo-card img{width:100%;aspect-ratio:3/2;object-fit:cover}
+@media (max-width:760px){.duo-card img{aspect-ratio:4/3}}
+.duo-card.gs img{object-position:60% 18%}
+.duo-card.jg img{object-position:50% 30%}
+.duo-text{flex:1;display:flex;flex-direction:column;gap:10px;padding:20px 22px 22px}
+.duo-card.gs .duo-text{background:var(--gs-tint)}
+.duo-card.jg .duo-text{background:var(--jg-tint)}
+.duo-name{display:flex;align-items:baseline;gap:10px;font-size:1.5rem;font-weight:800}
+.duo-role{font-size:.88rem;font-weight:700;padding:1px 10px;border-radius:999px}
+.gs .duo-role{background:var(--gs);color:var(--gs-on)}
+.jg .duo-role{background:var(--jg);color:var(--jg-on)}
+.duo-meta{font-size:.92rem;color:var(--muted)}
+.duo-quote{font-size:clamp(1.05rem,2.3vw,1.3rem);font-weight:600;line-height:1.6;margin-top:4px}
+.duo-go{margin-top:auto;padding-top:6px;font-weight:700;font-size:.95rem}
+.gs .duo-go{color:var(--gs-ink)}.jg .duo-go{color:var(--jg-ink)}
+.duo-card:hover .duo-go{text-decoration:underline;text-underline-offset:4px}
+.duo-x{position:absolute;left:50%;top:28%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-size:1.5rem;font-weight:300;line-height:1;border:4px solid var(--paper);z-index:2}
+@media (max-width:760px){
+  .duo{grid-template-columns:1fr}
+  .duo-x{display:none}
+}
+@media (prefers-reduced-motion:no-preference){
+  .duo-card.gs{animation:slide-l .8s cubic-bezier(.2,.7,.2,1) both}
+  .duo-card.jg{animation:slide-r .8s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes slide-l{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+  @keyframes slide-r{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+}
+.guide{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:clamp(20px,3vw,32px)}
+.guide a{display:block;padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);text-decoration:none}
+.guide a:hover{border-color:var(--ink-2)}
+.guide strong{display:block;font-size:1.02rem;margin-bottom:2px}
+.guide span{font-size:.92rem;color:var(--muted);line-height:1.55}
+@media (max-width:760px){.guide{grid-template-columns:1fr}}
+.songs{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:22px;align-items:center}
+.songs-label{font-weight:700;font-size:.92rem;color:var(--ink-2);margin-right:4px}
+.song{display:inline-flex;align-items:center;gap:8px;font-size:.92rem;padding:6px 14px 6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);text-decoration:none}
+.song:hover{border-color:var(--ink-2)}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+.dot.gs{background:var(--gs)}.dot.jg{background:var(--jg)}
+.dot.both{background:linear-gradient(90deg,var(--gs) 50%,var(--jg) 50%)}
 
-  a{ color:inherit; }
-  img{ max-width:100%; display:block; }
+/* ============================================================ 섹션 공통 */
+.section{padding-block:clamp(56px,9vw,104px);border-top:1px solid var(--line)}
+.section-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-bottom:clamp(24px,4vw,40px)}
+.section-head h2{font-size:clamp(1.8rem,4.2vw,2.6rem);font-weight:800;letter-spacing:-.02em}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:.85rem;padding:2px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted)}
+.lead{max-width:42rem;font-size:1.08rem;line-height:1.85;color:var(--ink-2)}
+.banner{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);margin-bottom:clamp(24px,4vw,40px)}
+.banner img{width:100%;max-height:340px;object-fit:cover}
+h3.sub{font-size:1.3rem;font-weight:800;margin-bottom:14px}
 
-  :focus-visible{
-    outline:2px solid var(--ink);
-    outline-offset:3px;
-  }
+.prose{max-width:41rem}
+.prose p{font-size:1.0625rem;line-height:1.95;margin-bottom:1.15em}
+.prose h3{font-size:1.35rem;font-weight:800;margin:2.4em 0 .9em}
+.prose h3:first-child{margin-top:0}
+.prose strong{font-weight:700}
+.prose .fn{font-size:.92rem;color:var(--muted);line-height:1.7}
+.callout{max-width:41rem;border-left:4px solid var(--accent,var(--ink));background:var(--surface);padding:18px 22px;border-radius:0 var(--radius) var(--radius) 0;margin:1.6em 0}
+.callout h4{font-size:1rem;font-weight:800;margin-bottom:6px;color:var(--accent-ink,var(--ink))}
+.callout p{margin:0!important;line-height:1.85!important}
+.callout.gs{--accent:var(--gs);--accent-ink:var(--gs-ink);background:var(--gs-tint)}
+.callout.jg{--accent:var(--jg);--accent-ink:var(--jg-ink);background:var(--jg-tint)}
+.callout.alert{--accent:var(--alert);--accent-ink:var(--alert);background:var(--alert-tint)}
 
-  .wrap{
-    max-width:var(--maxw);
-    margin:0 auto;
-    padding:0 32px;
-  }
-  @media (max-width:640px){
-    .wrap{ padding:0 20px; }
-  }
+.zoom{appearance:none;display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;overflow:hidden;border-radius:10px}
+.zoom img{width:100%}
+figure.ph{margin:0 0 12px;break-inside:avoid;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+figure.ph figcaption{padding:8px 12px 10px;font-size:.88rem;color:var(--muted);line-height:1.5}
+.masonry{columns:3 230px;column-gap:12px}
 
-  h1,h2,h3{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    margin:0;
-  }
+/* ============================================================ 세계관 */
+.world-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:start}
+@media (max-width:900px){.world-grid{grid-template-columns:1fr}}
+.drama h3{font-size:1.3rem;font-weight:800;margin-bottom:14px}
+.drama li{position:relative;padding-left:1.1em;margin-bottom:.9em;font-size:1.02rem;line-height:1.85}
+.drama li::before{content:"";position:absolute;left:0;top:.85em;width:5px;height:5px;border-radius:50%;background:var(--muted)}
+.gloss{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
+.gloss h3{font-size:1.1rem;font-weight:800;margin-bottom:12px}
+.gloss h4{font-size:.9rem;font-weight:700;color:var(--muted);margin:16px 0 6px}
+.gloss dl{display:grid;gap:8px}
+.gloss dt{font-weight:800;font-size:.98rem}
+.gloss dd{font-size:.94rem;color:var(--ink-2);line-height:1.65;margin-bottom:6px}
+.premise{margin-top:clamp(20px,3vw,28px);padding:20px 24px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);font-size:1.05rem;line-height:1.85}
+.premise b{font-weight:800}
 
-  .eyebrow{
-    font-size:13px;
-    letter-spacing:0.02em;
-    color:var(--ink-soft);
-    margin-bottom:10px;
-  }
+/* ============================================================ 인물 관계도 */
+.rel-title{font-size:1.15rem;font-weight:700;color:var(--ink-2);margin-bottom:18px}
+.rel-hub{display:grid;grid-template-columns:auto 1fr;gap:6px 20px;align-items:center;background:var(--jg);color:var(--jg-on);border-radius:var(--radius);padding:20px 24px;margin-bottom:14px}
+.rel-hub .name{font-size:1.6rem;font-weight:800}
+.rel-hub p{font-size:1.02rem;line-height:1.75}
+.rel-hub small{display:block;font-size:.85rem;opacity:.8;margin-bottom:2px}
+@media (max-width:640px){.rel-hub{grid-template-columns:1fr}}
+.rel-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.rel-grid{grid-template-columns:1fr}}
+.rel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;display:flex;flex-direction:column;gap:6px}
+.rel-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.rel h4{font-size:1.25rem;font-weight:800}
+.rel .role{font-size:.88rem;color:var(--jg-ink);font-weight:600}
+.rel .from{font-size:.82rem;font-weight:700;color:var(--gs-ink);margin-top:8px}
+.rel p{font-size:1rem;line-height:1.8}
+.rel .ext{margin-top:auto;padding-top:8px;font-size:.92rem;background:none;border:0;cursor:pointer;justify-content:flex-start}
+.rel .ext{font-family:inherit}
 
-  /* ---------- Nav ---------- */
-  .nav{
-    position:fixed;
-    top:0; left:0; right:0;
-    z-index:50;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:22px 32px;
-    mix-blend-mode:difference;
-    color:#fff;
-    font-size:14px;
-  }
-  .nav .site-title{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:16px;
-  }
-  .nav-links{
-    display:flex;
-    gap:28px;
-    list-style:none;
-    margin:0; padding:0;
-  }
-  .nav-links a{
-    text-decoration:none;
-    opacity:0.85;
-  }
-  .nav-links a:hover{ opacity:1; }
-  @media (max-width:640px){
-    .nav-links{ gap:16px; font-size:12px; }
-  }
+/* ============================================================ 프로필 */
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:clamp(24px,4vw,36px)}
+.tab{appearance:none;display:flex;flex-direction:column;gap:2px;text-align:left;cursor:pointer;padding:14px 20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+.tab-name{font-size:1.3rem;font-weight:800}
+.tab-role{font-size:.92rem;color:var(--muted)}
+.tab:hover{border-color:var(--ink-2)}
+.tab[aria-selected="true"].gs{background:var(--gs);border-color:var(--gs)}
+.tab[aria-selected="true"].jg{background:var(--jg);border-color:var(--jg)}
+.tab[aria-selected="true"].gs .tab-name,.tab[aria-selected="true"].gs .tab-role{color:var(--gs-on)}
+.tab[aria-selected="true"].jg .tab-name,.tab[aria-selected="true"].jg .tab-role{color:var(--jg-on)}
+.pquote{max-width:46rem;font-size:clamp(1.25rem,3vw,1.75rem);font-weight:700;line-height:1.55;letter-spacing:-.01em;padding-left:20px;border-left:5px solid var(--accent);margin-bottom:clamp(24px,4vw,40px)}
+.pquote.gs{--accent:var(--gs)}.pquote.jg{--accent:var(--jg)}
+.gallery{margin-bottom:clamp(28px,5vw,52px)}
+.profile-grid{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:start}
+.profile-side{position:sticky;top:96px;display:grid;gap:14px}
+@media (max-width:900px){.profile-grid{grid-template-columns:1fr}.profile-side{position:static}}
+.idcard{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--accent);border-radius:var(--radius);padding:18px 20px 20px}
+.idcard.gs{--accent:var(--gs)}.idcard.jg{--accent:var(--jg)}
+.idcard h3{display:flex;align-items:baseline;gap:10px;font-size:1.5rem;font-weight:800;margin-bottom:12px}
+.idcard h3 small{font-size:.95rem;font-weight:600;color:var(--muted)}
+.idcard dl{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:.96rem;line-height:1.6}
+.idcard dt{font-weight:700;color:var(--muted);white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.chip{font-size:.85rem;font-weight:600;padding:3px 11px;border-radius:999px}
+.gs .chip{background:var(--gs-tint);color:var(--gs-ink)}
+.jg .chip{background:var(--jg-tint);color:var(--jg-ink)}
+.theme{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.theme h4{font-size:.92rem;font-weight:700;color:var(--muted);margin-bottom:8px}
+.theme a{display:flex;align-items:center;gap:8px;padding:6px 0;text-decoration:none;font-size:.98rem;font-weight:600}
+.theme a:hover span{text-decoration:underline;text-underline-offset:3px}
+.theme .ico{color:var(--muted)}
+details{max-width:41rem}
+details.fold{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin:1.6em 0}
+details.fold>summary{cursor:pointer;list-style:none;padding:14px 20px;font-weight:700;display:flex;align-items:center;gap:8px}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary .ico{margin-left:auto;transition:transform .2s}
+details.fold[open]>summary .ico{transform:rotate(180deg)}
+details.fold .fold-body{padding:2px 20px 8px;border-top:1px solid var(--line)}
+details.fold .fold-body p{padding-top:1em}
+.vids{max-width:41rem}
+.vids li{padding:16px 0;border-top:1px solid var(--line)}
+.vids li:last-child{border-bottom:1px solid var(--line)}
+.vids .ep{display:inline-block;font-size:.85rem;font-weight:800;background:var(--jg-tint);color:var(--jg-ink);padding:1px 10px;border-radius:999px;margin-bottom:6px}
+.vids p{font-size:1rem!important;line-height:1.8!important;margin-bottom:6px!important}
+.relvids{max-width:41rem;display:grid;gap:0}
+.relvids li{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;padding:14px 0;border-top:1px solid var(--line)}
+.relvids li:last-child{border-bottom:1px solid var(--line)}
+.relvids b{font-weight:800}
+.relvids small{color:var(--muted);font-size:.9rem;flex-basis:100%}
+.relvids .links{display:flex;flex-wrap:wrap;gap:6px 14px;margin-left:auto}
 
-  /* ---------- Hero ---------- */
-  .hero{
-    min-height:100svh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:120px 32px 80px;
-    position:relative;
-  }
-  .hero-names{
-    font-size:clamp(48px, 10vw, 128px);
-    line-height:0.98;
-    display:flex;
-    align-items:baseline;
-    gap:0.3em;
-    flex-wrap:wrap;
-  }
-  .hero-names .name-a{ color:var(--accent-a); }
-  .hero-names .name-b{ color:var(--accent-b); }
-  .hero-names .x{
-    font-family:'Work Sans', sans-serif;
-    font-weight:300;
-    font-size:0.5em;
-    color:var(--ink-soft);
-  }
-  .hero-tagline{
-    margin-top:28px;
-    max-width:44ch;
-    font-size:17px;
-    color:var(--ink-soft);
-  }
-  .hero-meta{
-    margin-top:48px;
-    display:flex;
-    gap:32px;
-    font-size:13px;
-    color:var(--ink-soft);
-    flex-wrap:wrap;
-  }
-  .hero-meta span{ display:block; }
-  .hero-meta strong{
-    display:block;
-    color:var(--ink);
-    font-family:'Fraunces', serif;
-    font-size:15px;
-    font-weight:500;
-    margin-bottom:2px;
-  }
+/* ============================================================ 서사 */
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;margin-bottom:clamp(32px,5vw,56px);border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+.flow a{display:block;padding:14px 16px;text-decoration:none;border-right:1px solid var(--line);font-size:.9rem;line-height:1.55;color:var(--ink-2)}
+.flow a:last-child{border-right:0}
+.flow a:hover{background:var(--paper)}
+.flow b{display:block;font-size:.95rem;color:var(--ink);margin-bottom:2px}
+@media (max-width:1000px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.flow a{border-bottom:1px solid var(--line)}.flow a:nth-child(2n){border-right:0}}
+@media (max-width:520px){.flow{grid-template-columns:1fr}.flow a{border-right:0}}
+.tl{position:relative}
+.tl-item{display:grid;grid-template-columns:150px minmax(0,1fr);gap:0 clamp(20px,4vw,48px);position:relative;padding-bottom:clamp(40px,6vw,72px)}
+.tl-item::before{content:"";position:absolute;left:167px;top:8px;bottom:0;width:2px;background:var(--line)}
+.tl-item:last-child::before{display:none}
+.tl-item::after{content:"";position:absolute;left:162px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 4px var(--paper)}
+.tl-item.gs::after{background:var(--gs)}.tl-item.jg::after{background:var(--jg)}
+.tl-when{text-align:right;padding-top:0}
+.tl-ep{display:block;font-size:1.05rem;font-weight:800}
+.tl-year{display:block;font-size:.9rem;color:var(--muted)}
+.tl-body{padding-left:clamp(20px,4vw,48px)}
+.tl-body>h3{font-size:1.5rem;font-weight:800;margin-bottom:8px}
+.tl-sum{max-width:41rem;font-size:1.02rem;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;margin-bottom:22px;line-height:1.75}
+.tl-sum b{font-weight:800}
+.beat{margin-bottom:8px}
+.beat>h4{font-size:1.05rem;font-weight:800;margin:1.9em 0 .7em;padding-top:1.1em;border-top:1px solid var(--line);max-width:41rem}
+.beat:first-of-type>h4{border-top:0;padding-top:0;margin-top:1em}
+.tl-img{max-width:41rem;margin:1.2em 0 1.6em;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+.tl-img+.tl-img{margin-top:0}
+@media (max-width:760px){
+  .tl-item{grid-template-columns:1fr;padding-left:28px}
+  .tl-item::before{left:5px}
+  .tl-item::after{left:0}
+  .tl-when{text-align:left;display:flex;flex-wrap:wrap;gap:0 10px;align-items:baseline;margin-bottom:6px}
+  .tl-body{padding-left:0}
+}
 
-  /* ---------- Section shared ---------- */
-  section{ position:relative; }
-  .section-head{
-    padding:100px 32px 40px;
-    max-width:var(--maxw);
-    margin:0 auto;
-  }
-  .section-head h2{
-    font-size:clamp(28px, 4vw, 40px);
-  }
+/* ============================================================ 연성 아카이브 */
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px}
+@media (max-width:820px){.notes{grid-template-columns:1fr}}
+.notes .callout{max-width:none;margin:0}
+.notes .callout h4{font-size:1.05rem}
+.notes .thanks{grid-column:1/-1;font-size:.95rem;color:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:clamp(28px,5vw,44px) 0 clamp(20px,3vw,32px)}
+.filter{appearance:none;cursor:pointer;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:.95rem;color:var(--ink-2)}
+.filter:hover{border-color:var(--ink-2)}
+.filter[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.group{margin-bottom:clamp(40px,6vw,64px)}
+.group-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin-bottom:6px}
+.group-head h3{font-size:1.45rem;font-weight:800}
+.group-head span{font-size:.92rem;color:var(--muted)}
+.group-note{max-width:41rem;font-size:.98rem;color:var(--ink-2);margin-bottom:16px}
+.shots{display:grid;gap:12px}
+.shots.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.shots.two{grid-template-columns:1.76fr 1fr;align-items:start}
+@media (max-width:640px){.shots.two{grid-template-columns:1fr}}
+@media (max-width:640px){.shots.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.shots figure.ph{margin:0}
+.crop .zoom{aspect-ratio:3/4}
+.crop .zoom img{height:100%;object-fit:cover;object-position:top}
+.playlist{max-width:41rem;border-top:1px solid var(--line)}
+.playlist a{display:flex;align-items:center;gap:12px;padding:14px 4px;border-bottom:1px solid var(--line);text-decoration:none;font-weight:600}
+.playlist a:hover span{text-decoration:underline;text-underline-offset:3px}
+.playlist .ico{color:var(--muted)}
+.cookie-asides{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+@media (max-width:820px){.cookie-asides{grid-template-columns:1fr}}
+.cookie-asides .callout{margin:0;max-width:none}
+.cookie-asides h4{font-size:1rem}
+.cookie-asides p{overflow-wrap:anywhere;font-size:.98rem!important;line-height:1.85!important;margin-bottom:.6em!important}
+.cookie-asides p:last-child{margin-bottom:0!important}
+.cookie-asides .dots{color:var(--muted);letter-spacing:.3em}
 
-  /* ---------- Profile (split) ---------- */
-  .profile-split{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-  }
-  @media (max-width:820px){
-    .profile-split{ grid-template-columns:1fr; }
-  }
-  .profile-panel{
-    padding:64px 40px 90px;
-    border-top:1px solid var(--line);
-    position:relative;
-  }
-  .profile-panel:first-child{
-    border-right:1px solid var(--line);
-  }
-  @media (max-width:820px){
-    .profile-panel:first-child{ border-right:none; }
-  }
-  .profile-photo{
-    width:100%;
-    aspect-ratio:4/5;
-    border-radius:var(--radius);
-    margin-bottom:28px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:15px;
-    color:var(--ink-soft);
-    background:
-      repeating-linear-gradient(135deg, transparent 0 12px, var(--line) 12px 13px);
-    border:1px solid var(--line);
-  }
-  .profile-panel[data-role="a"] .profile-photo{ background-color:var(--accent-a-soft); }
-  .profile-panel[data-role="b"] .profile-photo{ background-color:var(--accent-b-soft); }
-  .profile-photo img{
-    width:100%; height:100%;
-    object-fit:cover;
-    object-position:center top;
-    display:block;
-  }
+/* ============================================================ 하단 */
+.site-footer{border-top:1px solid var(--line);padding-block:40px 64px;color:var(--muted);font-size:.9rem;line-height:1.8}
+.site-footer strong{color:var(--ink-2)}
+.to-top{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));width:48px;height:48px;border-radius:50%;border:0;background:var(--ink);color:var(--paper);display:grid;place-items:center;cursor:pointer;font-size:1.3rem;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:40}
 
-  .profile-name{
-    font-size:34px;
-    margin-bottom:4px;
-  }
-  .profile-panel[data-role="a"] .profile-name{ color:var(--accent-a); }
-  .profile-panel[data-role="b"] .profile-name{ color:var(--accent-b); }
+/* ============================================================ 이미지 크게 보기 */
+.lb{position:fixed;inset:0;z-index:200;background:rgba(8,12,16,.96);display:flex;align-items:center;justify-content:center;padding:56px 64px}
+.lb figure{display:flex;flex-direction:column;align-items:center;gap:12px;max-width:100%;max-height:100%}
+.lb img{max-width:100%;max-height:calc(100vh - 150px);width:auto;height:auto;border-radius:6px;background:#111}
+.lb figcaption{color:#DDE3EA;font-size:.95rem;text-align:center}
+.lb-btn{position:absolute;appearance:none;border:0;cursor:pointer;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center;font-size:1.4rem}
+.lb-btn:hover{background:rgba(255,255,255,.26)}
+.lb-close{top:12px;right:12px}
+.lb-prev{left:10px;top:50%;transform:translateY(-50%)}
+.lb-next{right:10px;top:50%;transform:translateY(-50%)}
+@media (max-width:640px){.lb{padding:56px 8px}.lb-prev,.lb-next{top:auto;bottom:10px;transform:none}.lb-prev{left:calc(50% - 56px)}.lb-next{right:calc(50% - 56px)}}
 
-  .profile-role{
-    font-size:14px;
-    color:var(--ink-soft);
-    margin-bottom:22px;
-  }
-  .profile-tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-bottom:26px;
-  }
-  .profile-tags span{
-    font-size:12px;
-    padding:5px 11px;
-    border:1px solid var(--line);
-    border-radius:999px;
-    color:var(--ink-soft);
-  }
-  .profile-bio{
-    font-size:15px;
-    color:var(--ink-soft);
-    max-width:46ch;
-  }
-  .profile-bio p + p{ margin-top:14px; }
-
-  /* connecting mark between panels */
-  .profile-split::after{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:0;
-    width:1px;
-  }
-
-  /* ---------- Narrative ---------- */
-  .narrative{
-    background:var(--bg-panel);
-  }
-  .narrative-body{
-    max-width:640px;
-    margin:0 auto;
-    padding:0 32px 110px;
-    font-size:17px;
-    color:var(--ink-soft);
-  }
-  .narrative-body p{ margin:0 0 20px; }
-  .narrative-body p:first-of-type::first-letter{
-    font-family:'Fraunces', serif;
-    font-size:58px;
-    font-weight:500;
-    float:left;
-    line-height:0.85;
-    padding-right:10px;
-    padding-top:6px;
-    color:var(--ink);
-  }
-  .narrative-pull{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:24px;
-    color:var(--ink);
-    max-width:640px;
-    margin:0 auto 48px;
-    padding:0 32px;
-    line-height:1.5;
-  }
-
-  /* ---------- Archive ---------- */
-  .archive-controls{
-    display:flex;
-    gap:10px;
-    padding:0 32px 36px;
-    max-width:var(--maxw);
-    margin:0 auto;
-    flex-wrap:wrap;
-  }
-  .filter-btn{
-    font-family:'Work Sans', sans-serif;
-    font-size:13px;
-    padding:8px 16px;
-    border-radius:999px;
-    border:1px solid var(--line);
-    background:transparent;
-    color:var(--ink-soft);
-    cursor:pointer;
-  }
-  .filter-btn:hover{ color:var(--ink); }
-  .filter-btn.active{
-    background:var(--ink);
-    color:var(--bg);
-    border-color:var(--ink);
-  }
-
-  .archive-grid{
-    max-width:var(--maxw);
-    margin:0 auto;
-    padding:0 32px 120px;
-    columns:3 260px;
-    column-gap:20px;
-  }
-  @media (max-width:640px){
-    .archive-grid{ columns:1; }
-  }
-  .archive-card{
-    break-inside:avoid;
-    margin-bottom:20px;
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    overflow:hidden;
-  }
-  .archive-thumb{
-    width:100%;
-    aspect-ratio:1/1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:12px;
-    color:var(--ink-soft);
-    background:
-      repeating-linear-gradient(135deg, transparent 0 12px, var(--line) 12px 13px);
-  }
-  .archive-thumb img{
-    width:100%; height:100%;
-    object-fit:cover;
-    display:block;
-  }
-  .archive-thumb.is-text{
-    aspect-ratio:auto;
-    padding:28px 20px;
-    text-align:left;
-    align-items:flex-start;
-    font-size:13px;
-    line-height:1.6;
-    color:var(--ink-soft);
-  }
-  .archive-thumb.is-gallery{
-    background:none;
-    border:none;
-    display:grid;
-    grid-template-columns:1fr;
-    gap:2px;
-  }
-  .archive-thumb.is-gallery img{
-    width:100%;
-    aspect-ratio:4/3;
-  }
-  .archive-body{ padding:16px 18px 20px; }
-  .archive-type{
-    font-size:11px;
-    color:var(--ink-soft);
-    margin-bottom:6px;
-  }
-  .archive-title{
-    font-family:'Fraunces', serif;
-    font-size:17px;
-    margin-bottom:6px;
-  }
-  .archive-meta{
-    font-size:12px;
-    color:var(--ink-soft);
-  }
-  .archive-card[hidden]{ display:none; }
-
-  /* ---------- Footer ---------- */
-  footer{
-    padding:60px 32px 40px;
-    border-top:1px solid var(--line);
-    text-align:center;
-  }
-  footer p{
-    font-size:12px;
-    color:var(--ink-soft);
-    margin:0;
-  }
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 </style>
+<noscript><style>[role="tabpanel"][hidden]{display:block!important}</style></noscript>
 </head>
-<body>
 
-  <header class="nav">
-    <span class="site-title" id="nav-title">드림 커플</span>
-    <ul class="nav-links">
-      <li><a href="#profile">프로필</a></li>
-      <li><a href="#narrative">서사</a></li>
-      <li><a href="#archive">아카이브</a></li>
-    </ul>
-  </header>
+<body id="top">
+<!-- 아이콘 모음 (아래 화면에서 재사용됩니다) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a6.8 6.8 0 0 0 9.7 9.7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
 
-  <section class="hero" id="hero">
-    <div class="wrap" style="padding:0; max-width:100%;">
-      <h1 class="hero-names" id="hero-names"><!-- JS 렌더 --></h1>
-      <p class="hero-tagline" id="hero-tagline"><!-- JS 렌더 --></p>
-      <div class="hero-meta" id="hero-meta"><!-- JS 렌더 --></div>
+<a class="skip" href="#main">본문으로 바로가기</a>
+
+<!-- ================= 상단 바 ================= -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#top">시가렛 스윙!</a>
+    <nav class="nav" id="nav" aria-label="페이지 이동">
+      <a href="#world" data-section="world">세계관</a>
+      <a href="#relations" data-section="relations">관계도</a>
+      <a href="#profile" data-section="profile" data-tab="gyeongseok">남경석</a>
+      <a href="#profile" data-section="profile" data-tab="jaegyeong">신재경</a>
+      <a href="#story" data-section="story">서사</a>
+      <a href="#archive" data-section="archive">연성·참고사항</a>
+    </nav>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="화면 밝기 바꾸기 (밝게/어둡게)">
+      <svg class="ico i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      <svg class="ico i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= 첫 화면 ================= -->
+<section class="hero">
+  <div class="wrap">
+    <h1 class="hero-title">시가렛 스윙!</h1>
+    <p class="hero-sub">드라마 &lt;스물다섯 스물하나&gt;의 1998년 방송가에 ‘드림주 남경석’이 함께한다면. 남경석과 신재경의 설정을 한곳에 모았습니다.</p>
+
+    <div class="duo">
+      <a class="duo-card gs" href="#profile" data-tab="gyeongseok">
+        <img src="images/gs-2.webp" width="880" height="1048" alt="남경석 이미지: 커피를 내리는 모습">
+        <div class="duo-text">
+          <div class="duo-name">남경석 <span class="duo-role">드림주</span></div>
+          <p class="duo-meta">44세 · YBS 스포츠국 차장</p>
+          <blockquote class="duo-quote">“야아, 재경아, 커피 마시고 싶지 않냐?”</blockquote>
+          <span class="duo-go">프로필 보기</span>
+        </div>
+      </a>
+      <div class="duo-x" aria-hidden="true">×</div>
+      <a class="duo-card jg" href="#profile" data-tab="jaegyeong">
+        <img src="images/jg-1.webp" width="1344" height="965" alt="신재경 이미지: 블레이저 차림으로 옆을 바라보는 모습">
+        <div class="duo-text">
+          <div class="duo-name">신재경 <span class="duo-role">드림캐</span></div>
+          <p class="duo-meta">44세 · UBS 9시 뉴스 메인앵커</p>
+          <blockquote class="duo-quote">“통화불량 아니지? 그냥 전화 끊은 거지?”</blockquote>
+          <span class="duo-go">프로필 보기</span>
+        </div>
+      </a>
     </div>
-  </section>
 
-  <section class="profile" id="profile">
+    <nav class="guide" aria-label="읽는 방법">
+      <a href="#world"><strong>처음 오셨다면</strong><span>원작과 시대 배경, 낯선 용어 설명부터 읽어보세요.</span></a>
+      <a href="#story"><strong>두 사람이 궁금하다면</strong><span>서사 타임라인에서 어떻게 엮였는지 한눈에 볼 수 있어요.</span></a>
+      <a href="#archive-notes"><strong>연성·커미션을 생각 중이라면</strong><span>원하는 분위기(핵심 요소)와 NG 요소를 먼저 확인해 주세요.</span></a>
+    </nav>
+
+    <div class="songs">
+      <span class="songs-label">테마곡</span>
+      <a class="song" href="https://youtu.be/j1J3ZUd1Nqo" target="_blank" rel="noopener noreferrer"><span class="dot both"></span>전람회 - 취중진담</a>
+      <a class="song" href="https://youtu.be/A-4dJU06sqY" target="_blank" rel="noopener noreferrer"><span class="dot gs"></span>이광조 - 즐거운 인생</a>
+      <a class="song" href="https://youtu.be/-Un2J8eCwCI" target="_blank" rel="noopener noreferrer"><span class="dot gs"></span>인디고 - 여름아 부탁해!</a>
+      <a class="song" href="https://youtu.be/DLWarJWn5-o" target="_blank" rel="noopener noreferrer"><span class="dot jg"></span>Paganini - La Campanella</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 원작 및 세계관 ================= -->
+<section class="section" id="world">
+  <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Profile</div>
-      <h2>두 사람을 소개합니다</h2>
+      <h2>원작 및 세계관</h2>
+      <div class="tags"><span class="tag">1998년</span><span class="tag">IMF</span><span class="tag">여름</span></div>
     </div>
-    <div class="profile-split" id="profile-split"><!-- JS 렌더 --></div>
-  </section>
 
-  <section class="narrative" id="narrative">
+    <figure class="banner"><img src="images/world-banner.webp" width="1440" height="544" alt="스튜디오드래곤 기획 타이틀 화면" loading="lazy"></figure>
+
+    <div class="world-grid">
+      <div class="drama">
+        <h3>tvN 드라마 ‘스물다섯 스물하나’</h3>
+        <ul>
+          <li>1998년 IMF. 누군가는 시대에 꿈을 빼앗기고 누군가는 기회를 얻는다. 펜싱선수를 꿈꾸는 ‘희도’가 좌충우돌을 겪고, 또 깎이며 성장해나가는 이야기.</li>
+          <li>청춘물인 만큼 전반부가 가볍고 청량하다. 그러나 후반부로 갈수록 현실적이고 어두운 감이 있어 호불호가 갈린다.</li>
+          <li>추측컨대, 작가가 전하고자 하는 바는 ‘유한성의 아름다움’이다. 청춘이란 영원하지 않기 때문에 슬프고, 그렇기 때문에 아름다우며, 삶의 모든 순간들도 마찬가지이므로 우리는 매 순간 최선을 다해 살아내야 한다는 메시지를 담고 있다고 생각한다. (개인적으로는 해당 결말을 매우 좋아한다.)</li>
+        </ul>
+        <p class="premise">이 사이트의 이야기는 원작의 1998년 방송가에 원작에 없는 인물 <b>남경석</b>(YBS 스포츠국 차장)이 있다는 설정에서 출발해요. 그는 대학 때부터 원작 인물 <b>신재경</b>(UBS 9시 뉴스 메인앵커)을 좋아해 온 동문입니다.</p>
+      </div>
+
+      <aside class="gloss" aria-labelledby="gloss-title">
+        <h3 id="gloss-title">처음 보시는 분을 위한 용어</h3>
+        <h4>드림 기본</h4>
+        <dl>
+          <dt>드림</dt><dd>원작 세계에 내가 만든 캐릭터가 들어가, 원작 캐릭터와 이야기를 만드는 2차 창작 방식이에요.</dd>
+          <dt>드림주</dt><dd>내가 직접 만든 캐릭터예요. 여기서는 <b>남경석</b>입니다.</dd>
+          <dt>드림캐</dt><dd>드림주와 이어지는 원작 캐릭터예요. 여기서는 <b>신재경</b>(주인공 희도의 어머니)입니다.</dd>
+        </dl>
+        <h4>창작물</h4>
+        <dl>
+          <dt>연성</dt><dd>글, 그림 등 팬이 만든 2차 창작물을 말해요.</dd>
+          <dt>커미션</dt><dd>창작자에게 의뢰해서 받은 창작물이에요.</dd>
+          <dt>개인봇</dt><dd>캐릭터가 직접 대화하듯 이어 쓰는 롤플레이 형식의 창작이에요.</dd>
+        </dl>
+        <h4>참고사항에 나오는 말</h4>
+        <dl>
+          <dt>캐해</dt><dd>캐릭터 해석의 줄임말이에요.</dd>
+          <dt>납작 캐해</dt><dd>캐릭터를 한두 가지 특징으로만 단순하게 요약한 해석이에요.</dd>
+          <dt>마망</dt><dd>‘엄마’를 뜻하는 말로, 여기서는 다정하게 품어주는 엄마상을 가리켜요.</dd>
+          <dt>남공여수</dt><dd>남성 캐릭터가 ‘공’, 여성 캐릭터가 ‘수’인 구도예요. 공은 관계를 주도하는 쪽, 수는 받아주는 쪽을 뜻해요.</dd>
+        </dl>
+      </aside>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- ================= 인물 관계도 ================= -->
+<section class="section" id="relations">
+  <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Story</div>
-      <h2 id="narrative-title"><!-- JS 렌더 --></h2>
+      <h2>인물 관계도</h2>
+      <div class="tags"><span class="tag">이진</span><span class="tag">재경의 남편</span><span class="tag">찬미</span><span class="tag">희도</span></div>
     </div>
-    <p class="narrative-pull" id="narrative-pull"><!-- JS 렌더 --></p>
-    <div class="narrative-body" id="narrative-body"><!-- JS 렌더 --></div>
-  </section>
 
-  <section class="archive" id="archive">
-    <div class="section-head">
-      <div class="eyebrow">Archive</div>
-      <h2>커미션 아카이브</h2>
-    </div>
-    <div class="archive-controls" id="archive-controls"><!-- JS 렌더 --></div>
-    <div class="archive-grid" id="archive-grid"><!-- JS 렌더 --></div>
-  </section>
+    <figure class="banner"><img src="images/relations-banner.webp" width="1000" height="381" alt="원작 인물 세 명의 클로즈업 컷" loading="lazy"></figure>
 
-  <footer>
-    <p id="footer-text"><!-- JS 렌더 --></p>
-  </footer>
+    <h3 class="rel-title">(드림주 ‘경석’ 기준) 드림캐 ‘재경’ 및 주변인과의 관계</h3>
 
-<script>
-/* ================================================================
-   SITE_DATA
-   ----------------------------------------------------------------
-   아래 값들을 실제 내용으로 바꾸면 사이트에 바로 반영됩니다.
-   이미지가 준비되면 profile.photo / archive item의 thumb 값에
-   이미지 경로나 URL을 넣고, 아래 render 함수에서 배경 placeholder
-   대신 <img> 태그를 쓰도록 바꿔주면 됩니다. (지금은 틀만 먼저
-   잡아둔 상태라 이미지 없이도 자연스럽게 보이도록 만들어 두었습니다.)
-   ================================================================ */
-const SITE_DATA = {
-  siteTitle: "남경석 × 신재경",
-
-  hero: {
-    nameA: "남경석",
-    nameB: "신재경",
-    tagline: "＜스물다섯 스물하나＞ 원작 기반 드림 개입 세계관. 신방과 동문으로 만나 오랜 세월을 돌아, 서로의 곁에 남은 두 사람의 기록.",
-    meta: [
-      { label: "관계", value: "신방과 동문 · 오랜 짝사랑에서 연인으로" },
-      { label: "세계관", value: "스물다섯 스물하나 드림 개입" },
-      { label: "시대 배경", value: "1998년 IMF 전후" }
-    ]
-  },
-
-  characters: [
-    {
-      role: "a", // 색상 매핑용, 고정값
-      name: "남경석",
-      photo: "images/profile-gyeongseok.png",
-      subtitle: "YBS 스포츠국 차장 · 前 대학농구 선수 (44세 · 196cm)",
-      tags: ["K대 신방과", "現場·데스크 겸임", "스마일 럭키"],
-      bio: [
-        "K대 신방과에 턱걸이로 입학해 대학 연맹 농구선수로 데뷔했으나 부상으로 전공에 복귀했다. 현재는 YBS 스포츠국 차장으로 현장과 데스크를 오가며 일한다.",
-        "여유만만하고 붙임성 좋은 성격에 시답잖은 농담도 잘 던지지만 정이 많아, 후배들에게는 너그럽고 가끔 술 한 잔 사주는 선배로 통한다. 대학 시절 파워포워드로 '스마일 럭키'라 불렸고, 그 무렵부터 신재경을 오래 짝사랑해왔다.",
-        "선수이자 기자였던 신재경의 회색지대 같은 존재. 1남 1녀 중 막내로 서울 출생, 부족함 없이 자라 기세가 좋다. 꿈을 이루지 못했다고 실패한 인생도, 꿈을 이뤘다고 성공한 인생도 아니라는 걸 아는 사람."
-      ]
-    },
-    {
-      role: "b",
-      name: "신재경",
-      photo: "images/profile-jaegyeong.png",
-      subtitle: "UBS 9시 뉴스 메인 앵커 · 희도의 모친 (44세 · 170cm)",
-      tags: ["K대 신방과 수석졸업", "메인 앵커", "희도의 엄마"],
-      bio: [
-        "K대 신방과를 수석으로 졸업하고 UBS 9시 뉴스 메인 앵커로 일하는 냉철하고 이지적인 커리어우먼. 일에 대한 욕심도 야망도 크다.",
-        "완벽해 보이지만 인간관계 앞에서는, 특히 딸 희도를 대할 때는 너그럽기는커녕 엄격한 잣대를 들이민다. 남편을 먼저 보낸 뒤로는 홀로 딸을 책임지기 위해, 또 자신의 커리어를 지키기 위해 스스로 단단해지려 애써왔다.",
-        "실제로 강한 면이 7할이지만 나머지 3할의 약한 부분은 감추려 든다. 불편한 감정을 마주해야 하는 순간엔 그렁그렁한 눈물을 참거나, 불편한 상대 앞에서 귀가 붉어지며 맥을 못 추는 모습을 들키고 만다."
-      ]
-    }
-  ],
-
-  narrative: {
-    title: "회색지대",
-    pullQuote: "재경아. 정 기댈 데 없으면, 나한테 이렇게 해. 앞으로도.",
-    paragraphs: [
-      "대학 시절부터 재경을 좋아했던 경석. 신입생 환영회부터 축제, 시험, 죽도록 마시고 토하던 시절까지 함께했지만 재경의 곁엔 늘 다른 사람이 있었다. 관계가 깊어지려 할 때마다 타이밍이 어긋나거나 선수를 빼앗기듯 마음을 놓쳤다. 졸업 후 재경이 먼저 방송국에 취업하고 경석은 군복무로 자연스럽게 연락이 끊겼다.",
-      "1998년, IMF로 방송 3사의 공동 대응이 잦아지며 경석이 속한 YBS와 재경이 있는 UBS 사람들이 교류하기 시작한다. IMF TF에 핵심 인력으로 동원된 두 사람은 몇 년 만에 UBS 사옥에서 다시 마주친다. '재경아! 오랜만이다, 야.' '남경석?' 이후 경석이 희도의 국가대표 선발전을 취재하며 딸을 알아보고, 이를 계기로 둘의 연락이 다시 잦아진다.",
-      "차 사고가 난 날, 바쁘다며 끊으려던 통화 끝에 결국 다른 약속을 다 제치고 재경에게 달려간 경석. 그날 잡은 저녁 자리에서 둘 다 너무 많은 걸 마셔버렸다. 참았던 눈물을 터뜨리는 재경을 품에 안으며 경석이 말한다. '재경아. 정 기댈 데 없으면, 나한테 이렇게 해. 앞으로도.' 다음 날 재경은 '어제는 없던 셈 치자' 선언하지만, 경석은 '싫은데? 안 되겠는데?'로 맞선다.",
-      "그 뒤로 경석은 뻔뻔하고 능청맞게 플러팅을 이어가고, 철벽에 재능 있는 재경은 좀처럼 마음을 열지 않는다. 창과 방패의 싸움 같던 시간 끝에 경석이 반쯤 고백하지만 재경은 받아주지 않고, 경석의 일방향 마음만 한동안 이어진다.",
-      "시간이 흘러 희도가 성장하고, 남편의 산소를 다녀온 뒤 재경은 비로소 이별을 받아들인다. 마음의 여유가 생기며 서서히 경석에게 스며들기 시작하지만, 희도가 마음고생을 할 때는 '이제는 딸에게 잘해야겠다'며 거리를 두려 하기도 한다. 경석은 싹싹 빌고 구르면서도 곁을 지키겠다고 약속한다. 둘의 연애는 희도에게 비밀이었지만, 집 앞까지 바래다주던 길에 들키고 만다. 이후 두 사람은 같이 나이 들어가는 연인으로, 쭉 함께하는 중이다."
-    ]
-  },
-
-  archive: [
-    {
-      type: "그림",
-      title: "재회",
-      creator: "rosa (@OLYKNo4H)",
-      date: "2025.08.12",
-      thumb: "images/archive-1-rosa.jpg"
-    },
-    {
-      type: "그림",
-      title: "나란히",
-      creator: "듀듀 (@imnotartist)",
-      date: "",
-      thumb: "images/archive-2-duyu.jpg"
-    },
-    {
-      type: "썰",
-      title: "그리스 로마 신화 AU",
-      creator: "Hoya (@Dear_your_H)",
-      date: "2026.09.12",
-      excerpt: "재경은 제우스와 테미스 사이에서 태어난 호라이, 책임의 신이다. 경석은 코린토스의 영웅 시시포스의 아들로, 아버지의 죄로 인해 이른 죽음을 예언받았다. 재경을 비롯한 호라이가 개입해 그의 운명에 질서를 되묻고, 그 결과 경석은 영원히 신들에게 복종하는 대신 재경과 혼인하게 된다."
-    },
-    {
-      type: "개인봇",
-      title: "고 양님과의 개인 롤플레이",
-      creator: "고 양 (@d5l3o)",
-      date: "2026.08",
-      images: ["images/archive-4-1.jpg", "images/archive-4-2.jpg", "images/archive-4-3.png"]
-    }
-  ],
-
-  footerText: "© 2026 드림 커플 아카이브. 개인 소장용 팬 아카이브입니다."
-};
-
-/* ================================================================
-   렌더링 로직 (수정하지 않아도 됩니다)
-   ================================================================ */
-function renderHero(){
-  document.getElementById('nav-title').textContent = SITE_DATA.siteTitle;
-  document.title = SITE_DATA.siteTitle + " 아카이브";
-
-  document.getElementById('hero-names').innerHTML =
-    `<span class="name-a">${SITE_DATA.hero.nameA}</span><span class="x">×</span><span class="name-b">${SITE_DATA.hero.nameB}</span>`;
-
-  document.getElementById('hero-tagline').textContent = SITE_DATA.hero.tagline;
-
-  document.getElementById('hero-meta').innerHTML = SITE_DATA.hero.meta.map(m =>
-    `<span><strong>${m.label}</strong>${m.value}</span>`
-  ).join('');
-}
-
-function renderProfiles(){
-  const el = document.getElementById('profile-split');
-  el.innerHTML = SITE_DATA.characters.map(c => `
-    <div class="profile-panel" data-role="${c.role}">
-      <div class="profile-photo">${c.photo ? `<img src="${c.photo}" alt="${c.name}" loading="lazy">` : '이미지 추가 예정'}</div>
-      <h3 class="profile-name">${c.name}</h3>
-      <div class="profile-role">${c.subtitle}</div>
-      <div class="profile-tags">${c.tags.map(t => `<span>${t}</span>`).join('')}</div>
-      <div class="profile-bio">${c.bio.map(p => `<p>${p}</p>`).join('')}</div>
-    </div>
-  `).join('');
-}
-
-function renderNarrative(){
-  document.getElementById('narrative-title').textContent = SITE_DATA.narrative.title;
-  document.getElementById('narrative-pull').textContent = SITE_DATA.narrative.pullQuote;
-  document.getElementById('narrative-body').innerHTML =
-    SITE_DATA.narrative.paragraphs.map(p => `<p>${p}</p>`).join('');
-}
-
-function renderArchive(){
-  const types = ["전체", ...Array.from(new Set(SITE_DATA.archive.map(i => i.type)))];
-  const controls = document.getElementById('archive-controls');
-  controls.innerHTML = types.map((t, i) =>
-    `<button class="filter-btn${i===0 ? ' active' : ''}" data-type="${t}">${t}</button>`
-  ).join('');
-
-  const grid = document.getElementById('archive-grid');
-  grid.innerHTML = SITE_DATA.archive.map(item => {
-    let thumbHtml;
-    let thumbClass = '';
-    if (item.images && item.images.length){
-      thumbClass = 'is-gallery';
-      thumbHtml = item.images.map(src => `<img src="${src}" alt="${item.title}" loading="lazy">`).join('');
-    } else if (item.thumb){
-      thumbHtml = `<img src="${item.thumb}" alt="${item.title}" loading="lazy">`;
-    } else if (item.excerpt){
-      thumbClass = 'is-text';
-      thumbHtml = item.excerpt;
-    } else {
-      thumbHtml = '이미지 추가 예정';
-    }
-    const metaText = item.date ? `${item.creator} · ${item.date}` : item.creator;
-    return `
-    <div class="archive-card" data-type="${item.type}">
-      <div class="archive-thumb ${thumbClass}">${thumbHtml}</div>
-      <div class="archive-body">
-        <div class="archive-type">${item.type}</div>
-        <div class="archive-title">${item.title}</div>
-        <div class="archive-meta">${metaText}</div>
+    <div class="rel-hub">
+      <div class="name">재경</div>
+      <div>
+        <small>경석이 보는 재경</small>
+        <p>신방과 동문. 오랫동안 짝사랑해온 대상.</p>
       </div>
     </div>
-  `;
-  }).join('');
 
-  controls.addEventListener('click', (e) => {
-    const btn = e.target.closest('.filter-btn');
-    if(!btn) return;
-    controls.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const type = btn.dataset.type;
-    grid.querySelectorAll('.archive-card').forEach(card => {
-      card.hidden = !(type === '전체' || card.dataset.type === type);
+    <div class="rel-grid">
+      <article class="rel">
+        <div class="rel-top"><h4>이진</h4><span class="role">재경의 방송국 후배이자, 딸의 남자친구</span></div>
+        <span class="from">경석의 시선</span>
+        <p>면접 붙여줬는데 UBS로 쏠랑 가버린 놈. 그런데 본인 같았어도 그런 선택을 했을 거라며 개의치 않는다. 일면식 있으나 현재는 어리고 잘생긴 게 재경 곁에 있다는 이유만으로 은근히 질투하는 대상이다. (<strong>남한테 한두 번 뺏겼어야지···</strong>) 라는 생각이 그 이유.</p>
+        <a class="ext" href="#jg-relvideos" data-tab="jaegyeong">재경과의 관계 영상 보기</a>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><h4>희도</h4><span class="role">재경의 딸</span></div>
+        <span class="from">경석의 시선</span>
+        <p>희도가 어릴 때. 재경이 동문회에 몇 번 데리고 나온 적이 있어, ‘경석 삼촌’이라는 칭호로 불렸다. 재경을 닮은 구석이 있어 아주 예뻐라 했던 조카. 정확히는 짝사랑 대상의 딸. 이후 스포츠국 일원으로서 예의주시하는 선수가 된다.</p>
+        <a class="ext" href="#jg-relvideos" data-tab="jaegyeong">재경과의 관계 영상 보기</a>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><h4>재경의 남편</h4><span class="role">재경과 사별</span></div>
+        <span class="from">경석의 시선</span>
+        <p>경석만 아는 라이벌···혼자하는 싸움! 그러나 남편 쪽에서도 직감이라는 게 있는 바. 생전에 은근히 경계심을 느낀 대상이기도 하다.</p>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><h4>찬미</h4><span class="role">재경과는 과거 기자와 선수이자 친구, 현재는 틀어진 인연</span></div>
+        <span class="from">경석의 시선</span>
+        <p>여자들의 우정 그 이상도 이하도 아닌···. 도리어 찬미와의 화해를 응원한다.</p>
+        <a class="ext" href="#jg-relvideos" data-tab="jaegyeong">재경과의 관계 영상 보기</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 인물 프로필 (남경석 / 신재경) ================= -->
+<section class="section" id="profile">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>인물 프로필</h2>
+      <div class="tags"><span class="tag">드림주 남경석</span><span class="tag">드림캐 신재경</span></div>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="인물 선택">
+      <button class="tab gs" type="button" role="tab" id="tab-gyeongseok" data-tab="gyeongseok" aria-controls="profile-gyeongseok" aria-selected="true"><span class="tab-name">남경석</span><span class="tab-role">드림주</span></button>
+      <button class="tab jg" type="button" role="tab" id="tab-jaegyeong" data-tab="jaegyeong" aria-controls="profile-jaegyeong" aria-selected="false" tabindex="-1"><span class="tab-name">신재경</span><span class="tab-role">드림캐</span></button>
+    </div>
+
+    <!-- ---------- 남경석 ---------- -->
+    <div role="tabpanel" id="profile-gyeongseok" aria-labelledby="tab-gyeongseok" data-panel="gyeongseok" data-lb-scope>
+      <blockquote class="pquote gs">“아직까지 결혼 못(안)한 이유는··· 좌우지간, 얘기 끝. 야아, 재경아, 커피 마시고 싶지 않냐?”</blockquote>
+
+      <div class="gallery masonry">
+        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 1"><img src="images/gs-1.webp" width="1200" height="851" alt="남경석 이미지 1" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 2"><img src="images/gs-2.webp" width="880" height="1048" alt="남경석 이미지 2" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 3"><img src="images/gs-3.webp" width="960" height="960" alt="남경석 이미지 3" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 4"><img src="images/gs-4.webp" width="655" height="648" alt="남경석 이미지 4" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 5"><img src="images/gs-5.webp" width="1200" height="1499" alt="남경석 이미지 5" loading="lazy"></button></figure>
+      </div>
+
+      <div class="profile-grid">
+        <aside class="profile-side">
+          <div class="idcard gs">
+            <h3>남경석 <small>44세</small></h3>
+            <dl>
+              <dt>성별·키</dt><dd>M · 196cm avg(+5)</dd>
+              <dt>학력</dt><dd>K대 신방과 학사</dd>
+              <dt>이력</dt><dd>대학 연맹으로 농구선수 데뷔했으나, 부상으로 전공 복귀.</dd>
+              <dt>현직</dt><dd>YBS 스포츠국 차장. 현장·데스크 양측 개입 및 관리.</dd>
+              <dt>한 줄</dt><dd>선수이자 기자였던, 신재경의 회색지대.</dd>
+            </dl>
+            <div class="chips"><span class="chip">여유만만</span><span class="chip">유쾌한 능글</span><span class="chip">전 대학 농구선수</span><span class="chip">재경을 오래 짝사랑</span></div>
+          </div>
+          <div class="theme">
+            <h4>캐릭터 테마곡</h4>
+            <a href="https://youtu.be/A-4dJU06sqY" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span>이광조 - 즐거운 인생</span></a>
+            <a href="https://youtu.be/-Un2J8eCwCI" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span>인디고 - 여름아 부탁해!</span></a>
+          </div>
+        </aside>
+
+        <div class="profile-main prose">
+          <h3>인물 소개</h3>
+          <p>1남 1녀 중 막내. 서울 출생. 정서적으로든 경제적으로든 받을만큼 받고 자라, 배알 없는 듯 굴어도 기세 자체가 좋은 편이다. 크게 잘난 얼굴은 아니나 기본적으로 골격이 좋고 개성이 있어, 나름대로 ‘시네마틱’한 페이스. 친가는 전부 아담하고 외가 일가 장대한데 후자를 빼닮았다. 6살 위 누나에겐 어릴 때야 조금 대들어 댔으나, 점점 덩치가 크며 건드리면 생쥐 마냥 터질 것 같아 언젠가부터 맞먹길 포기했다. 나이차라는게 은근히 작용하기도 하고. 지금도 연상 여자들한테 잘하는 편이다.</p>
+          <p>기본적으로 여유만만한 성격. 덩치에 어울리지 않게 촐랑대고 잘 웃는다. 정이 많으니 살가운 짓도 잘하고. 시답잖은 농담을 할 때는 첫인상과 달리 모양 빠져 보일 때도 있지만··· 어찌 됐든 유쾌하게 살자 노력하는 바, 함께하긴 즐거운 인간이다.</p>
+
+          <h3>꿈과 농구</h3>
+          <p>내내 노는 일에 전념하다 고등학교 2학년, 진로 칸을 더이상 빈칸으로 둘 수 없어 골머리 좀 앓았다. 마침 그날 저녁 뉴스를 보는데 특파원이라는 사람이 캘리포니아에서 죽이는 채광을 맞으며 서 있길래. 그날부로 경석의 꿈은 ‘해외 어디든 갈 수 있는 특파원’이 되었고, 이후 대학생 남경석은 그때를 뒤지게 후회하게 된다···.</p>
+          <p>지루한 신방과를 견디게 해준 게 그나마 농구였다. 아니, 그나마 수준을 넘어서. 대학 연맹 대회는 경석에게 유일하게 숨통을 트이게 해주는 시간이었다.</p>
+          <p>대학시절 파워 포워드로, ‘스마일 럭키’ 라는 별명이 붙은 바있다. 경기 도중 그가 웃으면 승리한다는 법칙이 있어서. 더 정확히는, 종종 ‘이길 방법이 보이는’ 상대 플레이를 발견하면 자기도 모르게 자신만만한 미소를 띠어서였다. 그 모습에 반한 여자 팬들도 제법 있었는데, 대학시절 재경은 다음과 같이 첨언했다. <strong>치, 저게 치명적으로 웃는 거야? 실실 쪼개는 거지.</strong> (그 전날, 딱밤 내기에서 신나서 힘 조절을 못했던 경석의 덜 큰 대가리 때문에··· 물론 그 이후로 엄청나게 맞았다. 재경이 경석을 때리고 싶을 때마다.) 아무튼간에, 스마일 럭키의 팬클럽 ‘클로버 럭키’까지 생겼는데. 그때 경석은 이 정도면 재경에게 먹힐만 하지 않나, 기대했던 적이 있다. <strong>그리고 그 무렵 재경은 한 학년 선배와 연애를 시작했다··· 젠장!</strong></p>
+
+          <h3>직장에서의 모습</h3>
+          <p><strong>야, 우중아. 잠깐 나갔다 올래? 아이, 괜찮아. 괜찮아. 그거 하나 띵까먹었다고 안 죽어.</strong> 현재는 후배들에겐 너그럽고 가끔 술 한 잔 사주는 선배로 유명하나, 상사들에게 제법 골칫거리였었다.</p>
+          <p><strong>남경석? 그 새끼는 안 쫄아. 뭔 놈이 혼내도 주눅이 안 드냐.</strong> 지금에야 노하우고 짬이고 쌓였다지만, 20대엔 꾀를 자주 부린 탓에 윗선에선 아직도 ‘남한량이’로 불린다. 일각에선 김 선배한테 옥상에서 터지도록 맞고 정신 차렸다는 소문도··· 아마도 그 시기에는― 밟지 못한 코트에 대한 미련을 그런식으로 풀지 않았나 싶다. 어디로든 훨훨 날아가고 싶은. 마치 잘못된 묘박지에 묶여 있는 것 같은··· 그러나 경석은 <strong>모종의 계기로</strong> 다시 돌아왔다. 여기, 이 자리로. 그렇다고 철이 든 건 잘 모르겠지만.</p>
+          <p>그럼에도 전부 미워할 수 없던 이유는, 자진해서 능글거려 예쁜 짓하고 현장에서 구르기 딱 좋은 체력과 몸뚱이 덕분이라는 후문. ¹꿈을 이루지 못했다고, 실패한 인생도 아니고. 꿈을 이뤘다고 성공한 인생도 아니더라고.</p>
+          <p class="fn">¹스물다섯 스물하나, 백이진의 말 인용.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- 신재경 ---------- -->
+    <div role="tabpanel" id="profile-jaegyeong" aria-labelledby="tab-jaegyeong" data-panel="jaegyeong" data-lb-scope hidden>
+      <blockquote class="pquote jg">“통화불량 아니지? 그냥 전화 끊은 거지?”</blockquote>
+
+      <div class="profile-grid">
+        <aside class="profile-side">
+          <div class="idcard jg">
+            <h3>신재경 <small>44세</small></h3>
+            <dl>
+              <dt>성별·키</dt><dd>F · 170cm avg(-7)</dd>
+              <dt>학력</dt><dd>K대 신방과 학사. 수석 졸업.</dd>
+              <dt>현직</dt><dd>UBS 9시 뉴스 메인앵커이자 희도의 모친.</dd>
+            </dl>
+            <div class="chips"><span class="chip">냉철하고 이지적</span><span class="chip">약한 면을 감춤</span><span class="chip">희도의 어머니</span></div>
+          </div>
+          <figure class="ph" style="margin:0"><button class="zoom" type="button" data-caption="신재경 이미지"><img src="images/jg-1.webp" width="1344" height="965" alt="신재경 이미지" loading="lazy"></button></figure>
+          <div class="theme">
+            <h4>캐릭터 테마곡</h4>
+            <a href="https://youtu.be/DLWarJWn5-o" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span>Paganini - La Campanella</span></a>
+          </div>
+        </aside>
+
+        <div class="profile-main prose">
+          <h3>성격</h3>
+          <p>냉철하고 이지적인 커리어우먼. 일에 대한 욕심도 야망도 크다. 완벽해보이지만, 고질적인 문제가 있다면 인간관계에서도 마찬가지라는 것. 딸을 대할 때도 너그럽기는 커녕 엄격한 잣대를 들이밀고, 사회생활이 아닌 이상 부드럽게 웃는 얼굴을 보기 힘들다.</p>
+          <p>본인 스스로 ‘나약한 면’을 경계하는 느낌. 약한 지점도 분명 있으나 이를 감추거나 회피한다. 남편이 사망한 이후로 희도를 홀로 책임지기 위해서. 혹은 자신의 커리어 실현을 위해서. 어떤 이유로든 재경은 단단해져야만 했다.</p>
+          <p>그래서인지 불편한 감정을 직면해야하는 상황에서는 반응이 솔직하게 드러나 버린다. 이미 그렁그렁한 눈물을 참는다거나. 불편한 상대 앞에서 귀가 붉어지며(…) 맥을 못추고 조심스러워진다든지.</p>
+          <p>특히, 후반부 남편 산소에 방문했을 때는 희도의 앞에서 참았던 그리움이 눈물로 터지고 만다.</p>
+
+          <div class="callout jg">
+            <h4>재경 총평</h4>
+            <p><strong>실제로 강한 면이 7할 정도지만, 나머지 3할인 약한 일부는 감추려드는 느낌. 지는 싸가지 없고 고고하면서 (…) 은근히 상처도 잘 받는 느낌. 가만 보면 짜증도 화도 많다. 공적자리에서는 좀 더 포멀하게 짜증을 낼 뿐…</strong></p>
+          </div>
+
+          <details class="fold">
+            <summary>제작자 코멘트 (드림을 만든 이유)<svg class="ico" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+            <div class="fold-body">
+              <p>그리고 저는 이 모든 요소에 사랑을 느낍니다. 차가운 아짐마가 사실은 연약한 모습을 어쩌다 한번 보여줄 때. 존나게 안아주고 싶고 이런 마음이 됩니다…</p>
+              <figure class="ph" style="max-width:340px;margin:0 0 1em"><button class="zoom" type="button" data-caption="제작자가 만든 텍스트 이미지"><img src="images/jg-2.webp" width="1080" height="1467" alt="문장이 길게 이어지는 텍스트 이미지" loading="lazy"></button></figure>
+              <p>그래서 이런 드림을 만들었습니다. 이런 연상녀 한정 부치, 대디 성향, 그런 사람이 되는 바람에. 성별 일체감까지 포기하고 드림캐에게 가장 잘 어울리는 캐가 누굴까 고민해 만든 드림이기도 합니다. 드림캐가 아 이뻐 죽겠네 싶어서 만든 드림입니다. 초면이신데도 제 리비도를 읽어주셔서 대단히 감사합니다.</p>
+              <p>중간중간 밤티한 쇼츠는 (…) 흐린 눈 하고 봐주시면 감사하겠습니다.</p>
+            </div>
+          </details>
+
+          <h3>재경 성격 참고 영상</h3>
+          <ul class="vids">
+            <li><span class="ep">EP 1</span><p>IMF로 교내 펜싱부가 폐지된 희도. 아직 펜싱부가 있는 태양고로 전학을 원하지만, 재경은 저성과를 이유로 이참에 펜싱을 그만두길 종용한다. 희도는 엄마를 설득하는 데 실패하자 강제전학을 계획한다. 그렇게 패싸움, 나이트 방문 등 일부러 사고를 치다 재경에게 들통이 난다.</p><a class="ext" href="https://youtu.be/QMLX1sahl4A" target="_blank" rel="noopener noreferrer">영상 보기<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+            <li><span class="ep">EP 5</span><p>태양고로 전학에 성공한 희도. 하지만 피나는 노력에 비해 실력이 단번에 성장하지 못하는데. 기적적으로 열외 선수가 생기며 국가대표 선발전의 기회를 얻게 된다. 그러나 재경은 이 사실을 잘 알지 못한 채 희도를 질책한다.</p><a class="ext" href="https://youtu.be/XUkWKNw06fs" target="_blank" rel="noopener noreferrer">영상 보기<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+            <li><span class="ep">EP 8</span><p>국가대표로서 금메달을 수상한 희도. 방송국에서 경기를 지켜보며 남몰래 뿌듯해하지만, 기자회견장에서 일어난 이슈로 희도는 금메달을 포기하겠다고 선언하며 뛰어나온다. 재경은 언론인으로서 해당 상황을 전달하고, 이 과정에서 딸에게 상처를 주고 마는데. 희도가 설움을 토로하자 재경은 단호하게 반응한다.</p><a class="ext" href="https://youtu.be/_yh5WumMiRk" target="_blank" rel="noopener noreferrer">영상 보기<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+            <li><span class="ep">EP 9</span><p>재경은 자신의 행동에 대해 사과하기 위해 희도의 코치에게서 금메달을 받아 온다. 서툴게나마 처음으로 진지한 사과를 건넨다.</p><a class="ext" href="https://youtu.be/yGUvMEG0SJ0" target="_blank" rel="noopener noreferrer">영상 보기<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+            <li><span class="ep">EP 11</span><p>재경과 희도, 두 모녀에게 특별한 의미인 의자. 사별한 전 남편이 만든 의자가 성치 않자 희도가 수리를 제안한다. 의외로 흔쾌히 허락하는 재경.</p><a class="ext" href="https://youtu.be/W-I-FcDkfLU" target="_blank" rel="noopener noreferrer">영상 보기<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+            <li><span class="ep">EP 11</span><p>회식이 잡힌 재경. 후배 이진과 꿈에 대한 대화를 나눈다.</p><a class="ext" href="https://youtu.be/tzSQxEXf7FI" target="_blank" rel="noopener noreferrer">영상 보기<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+            <li><span class="ep">EP 11</span><p>희도와 의자를 고치러 가기 위한 약속을 지키려는 순간, 속보가 뜨고 만다.</p><a class="ext" href="https://youtube.com/shorts/nkjJLM8zqMU" target="_blank" rel="noopener noreferrer">영상 보기<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+            <li><span class="ep">EP 11</span><p>결국 약속을 지키지 못한 재경. 희도는 크게 실망해 엄마와 다투게 된다. 냉전 후, 아빠이자 남편의 산소에 같이 가게 되는 둘. 그러나 재경은 숨겨왔던 감정을 드러내고 만다.</p><a class="ext" href="https://youtu.be/dTCNZ6ics3A" target="_blank" rel="noopener noreferrer">영상 보기<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+          </ul>
+
+          <h3 id="jg-relvideos">주변인과의 관계에서 드러나는 성격</h3>
+          <ul class="relvids">
+            <li><b>재경-희도</b><small>모녀</small><span class="links"><a class="ext" href="https://youtu.be/EuyOuYAdZl4" target="_blank" rel="noopener noreferrer">영상 보기<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a></span></li>
+            <li><b>재경-이진</b><small>방송국 선후배이자, 딸의 남자친구</small><span class="links">
+              <a class="ext" href="https://youtube.com/shorts/oDexEOcuW8Y" target="_blank" rel="noopener noreferrer">영상 1<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a>
+              <a class="ext" href="https://youtu.be/JNd7Q1R8KT8" target="_blank" rel="noopener noreferrer">영상 2<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a>
+              <a class="ext" href="https://youtu.be/iNrpqZxM-xY" target="_blank" rel="noopener noreferrer">영상 3<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a></span></li>
+            <li><b>재경-찬미</b><small>과거 기자와 선수이자 친구, 현재는 틀어진 인연</small><span class="links">
+              <a class="ext" href="https://youtu.be/_F8v4Q6uP0E" target="_blank" rel="noopener noreferrer">영상 1<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a>
+              <a class="ext" href="https://youtu.be/W38YCke_y-Q" target="_blank" rel="noopener noreferrer">영상 2<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a></span></li>
+            <li><b>재경의 시선에서 전개한 스물다섯, 스물하나</b><span class="links"><a class="ext" href="https://youtu.be/_znDV-LdNXw" target="_blank" rel="noopener noreferrer">영상 보기<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg></a></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 서사 (타임라인) ================= -->
+<section class="section" id="story">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>서사</h2>
+      <div class="tags"><span class="tag">타임라인</span></div>
+    </div>
+
+    <p class="lead">대학 동문이던 경석과 재경이 IMF 시기 방송가에서 다시 만나, 경석의 일방향 플러팅에서 시작해 서서히 연인이 되기까지의 이야기예요.</p>
+    <div class="songs" style="margin:16px 0 32px"><span class="songs-label">Dream Couple Theme</span><a class="song" href="https://youtu.be/j1J3ZUd1Nqo" target="_blank" rel="noopener noreferrer"><span class="dot both"></span>전람회 - 취중진담</a></div>
+
+    <nav class="flow" aria-label="서사 한눈에 보기">
+      <a href="#s-prehistory"><b>전사</b>대학 동문. 경석은 재경을 계속 좋아했지만 타이밍이 어긋났어요.</a>
+      <a href="#s-tf"><b>1화 무렵</b>IMF TF로 몇 년 만에 재회해요.</a>
+      <a href="#s-fifth"><b>5화 무렵</b>경석이 희도의 선발전을 취재하며 연락이 잦아져요.</a>
+      <a href="#s-night"><b>사고와 저녁 약속</b>술자리에서 서로의 마음이 잠시 맞물려요.</a>
+      <a href="#s-after"><b>다음 날 이후</b>재경은 ‘없던 셈’, 경석은 일방향 플러팅을 시작해요.</a>
+      <a href="#s-late"><b>12화~마지막화</b>남편 산소 방문 이후 서서히 스며들어 연인이 돼요.</a>
+    </nav>
+
+    <ol class="tl" data-lb-scope>
+      <!-- 전사 -->
+      <li class="tl-item" id="s-prehistory">
+        <div class="tl-when"><span class="tl-ep">전사</span><span class="tl-year">~1997년</span></div>
+        <div class="tl-body prose">
+          <h3>대학 동문, 어긋난 타이밍</h3>
+          <p>재경과 각종 신입생 환영회, 축제, 중간고사와 기말고사, 그리고 죽도록 마시고 토하던 야만의 시대까지 함께 한 사이. 그리고 사실은, 대학 때부터 재경을 좋아했다. 공교롭게도 그녀는 늘 사랑하는 대상이 있었지만. 한 때는 양찬미 선수였다가, 그 다음은 남편이었다가, 이제는 자신의 커리어가 됐다.</p>
+          <p>관계가 깊어질라치면 타이밍이 어긋나거나, 매번 선수를 다른 사람에게 빼앗겼었다. 그럴 때마다 마지막 경기에서 공을 빼앗겼던 일도 왜 문득 생각이 나던지. 살다보니 경석도 연애를 전폐하지는 않았으나, 종착지는 늘 재경이었다.</p>
+          <p>졸업 후 재경이 먼저 방송국에 취업. 경석은 군복무로 인해 자연스럽게 연락이 끊겼다. 사건 B. 이때 둘의 졸업년도에 차이가 발생했고, 각자의 공백이 생겼다. 이후 재경이 동문회에 어린 희도를 데리고 종종 나타났으나 그마저도 어느 순간부터 나오지 않았다. 그렇게 잊고 지냈다. 아니, 아주 가끔은. 뉴스 속에서 여전히 총명하다 못해 자신만만한 눈빛, 그리고··· 여전히 예쁜. 재경을 보면서 시선을 떼지 못할 때도 있었지만.</p>
+          <figure class="tl-img" style="max-width:30rem"><button class="zoom" type="button" data-caption="원작 캡처"><img src="images/story-2.webp" width="1080" height="716" alt="‘경경 사초생때. 이거 진짜같다’ 문구가 붙은 두 인물 컷" loading="lazy"></button></figure>
+        </div>
+      </li>
+
+      <!-- 1화~10화 -->
+      <li class="tl-item gs" id="s-drama">
+        <div class="tl-when"><span class="tl-ep">1화~10화</span><span class="tl-year">1998~1999년</span></div>
+        <div class="tl-body prose">
+          <h3>재회, 그리고 일방향 플러팅의 시작</h3>
+          <figure class="tl-img"><button class="zoom" type="button" data-caption="1998년 7월 (원작 장면)"><img src="images/story-1.webp" width="735" height="413" alt="1998년 7월 자막이 뜬 원작 장면" loading="lazy"></button></figure>
+
+          <div class="beat" id="s-tf">
+            <h4>IMF TF에서의 재회 (1화 무렵)</h4>
+            <p>각자의 삶을 살던 도중, IMF 시기를 맞이했다. 외환위기 극복과 김대중 대통령 당선에 따른 정치·경제적 대전환기였기 때문에, 방송사 간의 공동 대응과 실무 회의가 잦아졌다.</p>
+            <p>UBS, LBS, KBY가 방송 3사였다가, KBY의 도산으로 그 자리를 YBS가 치고 들어왔다. 경석이 속한 방송국으로, 이전까지는 신생 케이블사에 불과했으나. 이를 계기로 UBS와 교류할 일이 없던 YBS는 그와 어깨를 나란히 하게 된다. 따라서 이전까지 YBS의 헤드급만을 인지하고 취급하던 UBS도 내부 직원들과 교류하기 시작한다.</p>
+            <p>또한 시대적 상황에 따른 공동 비용 절감 회의, 대형 정치 이벤트(대통령 대담 등)을 위한 프로그램 합동 제작, 통합방송법 제정을 위한 의견 조율 등으로, 3사 핵심인력을 동원해 IMF TF까지 개설되며 재경과 경석은 한동안 서로의 방송국을 매일같이 오가는 동료가 된다. <strong>이 시기는 1화에 해당된다.</strong></p>
+            <p>TF 결성. “재경아! 오랜만이다, 야.” “남경석?” UBS 사옥에서 몇 년만의 조우. <strong>(UBS는 왜 지원 안 했냐고? ···떨어졌는데? 아, 아프다. 뭐지, 이 실체 없는 주먹은?)</strong></p>
+          </div>
+
+          <div class="beat" id="s-fifth">
+            <h4>희도의 선발전 취재 (5화 무렵)</h4>
+            <p><strong>5화 무렵, 경석이 희도의 화성 국가대표 선발전을 취재한다.</strong> 인수인계 차 후배와 동석했다가 재경의 딸임을 알아보고 직접 인터뷰하게 된다. 이후 희도가 ‘경석 삼촌을 만났다’며 지나가듯 언급하며, 이 시기를 기점으로 경석의 연락이 잦아진다.</p>
+          </div>
+
+          <div class="beat" id="s-night">
+            <h4>차 사고와 저녁 약속</h4>
+            <p>여자는 제법 친했던 동문과 일하게 되었고, 그 뒤로 가끔 먼저 오는 연락에 답을 했을 뿐이다. 재경은 경석에게 늘 쫓던 마지막 공과 같았으나. 재경에게 그는 ‘우연’ 그 이상도 이하도 아니었다. 그런데 하필 차 사고가 났을 때도 연락이 오는 바람에. <strong>나 지금 바빠. 꼭 지금 얘기 해야 되니? (중략) 어, 차에 조금 문제가 생겨서.</strong></p>
+            <p>그리고 그 우연은 다른 약속을 다 제치고 재경에게로 달려왔다. 기껏해야, 가벼운 접촉사고였대도. 그런데 상대 운전자가 좀 돌아버렸던 모양이다. 감히 신재경 앵커님도 일개 여자라고 껄렁대며 따지고 드는 것 아닌가! 경석은 그 꼴에 떨리는 입꼬리를 감추지 못하는 재경 앞에 섰다. <strong>근데, 내가 싸움 막아준 거잖아. 이거 밥이라도 한 끼 사줘야 하는 거 아냐? 아이, 나 배 고파아~.</strong></p>
+          </div>
+
+          <div class="beat">
+            <h4>그날 밤</h4>
+            <p>그리고.</p>
+            <p>그렇게 잡은 저녁 약속에서 술을 너무 많이 마신 게 화근이었다. 하필, 하필. 술을 마시면 다정해지는 주사를 가진 재경도. 그날 여자가 희도에게 모진 말을 듣고 참고 참은 눈물을 괸 것도. 앉은 스툴이 너무 작고 좁았던 것도. 시간이 지나도 재경이 계속해서, 빛나고 아름다웠던 것도. 대학 때 얘기를 너무 많이 해버린 것도.</p>
+            <p><strong>나한텐 아무것도 안 남은 것 같아···그 사람도, 희도도.</strong> 그러니 재채기처럼 마음이 튀어나올 수밖에.</p>
+            <p>결국 손이 먼저 뻗어 나갔다. 재경을 품에 안고, 반듯할 줄만 알았던 등을 토닥이고, 참았던 눈물을 엉엉 터뜨리는 여자의 뒤통수를 쓸어주며 경석은 말했다.</p>
+            <div class="callout gs"><p><strong>―재경아. 정 기댈 데 없으면, 나한테 이렇게 해. 앞으로도.</strong></p></div>
+            <p>(아니··· 남자 놈이 돼서, 눈앞에서 여자가 우는데 가만 있냐, 그럼?) 속으로는 이따위 핑계를 대며.</p>
+            <p>그리고 바투 눈이 마주친, 미묘한 찰나를 둘은 명백히 알고 있다. 돌아가는 택시 뒷좌석에서 내내 손을 잡은 일도.</p>
+          </div>
+
+          <div class="beat" id="s-after">
+            <h4>다음 날 이후, 창과 방패</h4>
+            <p>그러나 한 여름밤의 꿈이었을 뿐. 다 큰 어른들은 청바지를 입은 대학생들처럼 곧장 사랑에 빠지지 않았다. 그러니까, 정확히는, 남편과 사별하고 일에 미쳐 사는 여자가 그걸 쉽게 할 수 있을리 없었다. 또한 그렇게 철두철미한 재경이···.</p>
+            <p>다음날 재경, “어제는 없던 셈 치자” 선언. 경석, “싫은데? 안 되겠는데?” 선언. 재경, “미친 거야?” 선언.</p>
+            <p>그 이후로 제 마음을 재확인한 경석은 뻔뻔하고 능청맞게도 플러팅을 난사하고 있다. 물론 재경도 그만큼 철벽에 재능이 있는 인간이라. 마치 창과 방패의 싸움. <strong>그러나 공적으로도, 사적으로도 엮일 일 많은 방송가 사람들로써 쉽게 남남이 되긴 어려운 모양이다. 어떤 이유로든, 서로에게.</strong></p>
+            <p><strong>결론.</strong> 서로의 마음이 잠시 맞물렸고, 경석은 재경에게 짝사랑(호감)을 반쯤은 고백하게 된다. 그러나 재경 쪽에서 받아주지 않고, 경석의 일방향 플러팅이 시작되었다.</p>
+          </div>
+        </div>
+      </li>
+
+      <!-- 12화~마지막화 -->
+      <li class="tl-item jg" id="s-late">
+        <div class="tl-when"><span class="tl-ep">12화~마지막화</span><span class="tl-year">1999~2000년대</span></div>
+        <div class="tl-body prose">
+          <h3>스며듦, 그리고 함께 나이 들어가는 연인</h3>
+          <p><strong>남편 산소 방문 이후.</strong></p>
+          <p><strong>희도가 성장하고, 재경은 비로소 남편과의 이별을 받아들인다. 마음 정리 후 여유가 생겼을 때부터 서서히 경석에게도 스며들기 시작한다.</strong></p>
+          <p>희도가 이진으로 인해 마음고생을 했을 때는 재경이 ‘역시 이제는 희도에게 잘해야겠다’라며 연애를 포기하려 하거나 거리를 두기도 하는 등 한 차례 위기가 있었으나, 경석은 그 옆을 지키겠다고 약속한다. (정확히 말하면 매번 멋있지는 않았고, 싹싹 빌고, 구르고, 재경이 너를 행복하게 하는 게 내 행복이다··· 제발··· 눈물 콧물 쏟으며 부탁한 적도 있다.) 연애 시작은 희도에게는 비밀로 하려 했지만, 재경을 집 앞까지 바래다주던 도중 들키고 만다. <strong>“뭐야! 아니, 아, 지금 둘이 뭐하는 거예요?!”</strong> 이후 둘은 같이 나이 들어가는 연인이 되었고, 함께하는 중이다. 쭈욱.</p>
+          <div class="callout jg">
+            <h4>설정 안내</h4>
+            <p>재경에게 경석이라는 연인이 생긴 설정이므로, 작중 노년기로 교차되는 현대에도 ‘경석이 존재하며, 언제든지 만날 수 있음’ 쯤으로 인지해주시면 감사하겠습니다. 재경 쪽에서 경력 단절을 이유로 재혼은 원하지 않아 반동거 형태로 서로를 존중하며 지내왔다는 설정입니다. 손녀인 민채도 존재를 알고 있으며, 별칭 없이 ‘아현동 할아버지’ 정도로 부르는 사이입니다.</p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= 연성 아카이빙 및 참고사항 ================= -->
+<section class="section" id="archive">
+  <div class="wrap" data-lb-scope>
+    <div class="section-head">
+      <h2>연성 아카이빙 및 참고사항</h2>
+      <div class="tags"><span class="tag">NG</span><span class="tag">커미션</span></div>
+    </div>
+
+    <div class="notes" id="archive-notes">
+      <div class="callout jg">
+        <h4>핵심 요소</h4>
+        <p>경석 일방향 플러팅, 재경 철벽 (티키타카하는 가볍고 재밌는 느낌이 주가 됐으면 좋겠습니다!) → 중간중간 재경 쪽에서도 진지하게 마음이 흔들리거나 아차 싶은 느낌. 이후 서사를 쌓으며 천천히 스며들어 쌍방이 되는 구도를 생각 중입니다.</p>
+      </div>
+      <div class="callout alert">
+        <h4>NG 요소</h4>
+        <p>엄마라고 무조건 마망으로 캐해석 되는 일. 납작 캐해 하자면 일에 미쳐서 자식 방치하는 T 엄마 입니다!! 또한 저는 성별고정관념을 공고히 하는 앞잡이 새키라, 남공여수가 아니면 죽어버리고 맙니다 ㅜㅜ</p>
+      </div>
+      <p class="thanks">감사합니다. 낯선 용어는 <a href="#gloss-title" style="text-underline-offset:3px">세계관의 용어 설명</a>에서 볼 수 있어요.</p>
+    </div>
+
+    <div class="filters" role="group" aria-label="보고 싶은 종류 고르기">
+      <button class="filter" type="button" data-filter="all" aria-pressed="true">전체</button>
+      <button class="filter" type="button" data-filter="bot" aria-pressed="false">개인봇</button>
+      <button class="filter" type="button" data-filter="art" aria-pressed="false">그림</button>
+      <button class="filter" type="button" data-filter="music" aria-pressed="false">플레이리스트</button>
+      <button class="filter" type="button" data-filter="cookie" aria-pressed="false">납작 캐해 참고</button>
+    </div>
+
+    <!-- 개인봇 -->
+    <div class="group" data-group="bot">
+      <div class="group-head"><h3>개인봇</h3><span>고 양님 커미션 (@d5l3o)</span></div>
+      <p class="group-note">이미지를 누르면 대화 전체를 크게 볼 수 있어요.</p>
+      <div class="shots three crop">
+        <figure class="ph"><button class="zoom" type="button" data-caption="개인봇 커미션 1 · 고 양님 (@d5l3o)"><img src="images/bot-1.webp" width="1080" height="2445" alt="개인봇 커미션 대화 캡처 1" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="개인봇 커미션 2 · 고 양님 (@d5l3o)"><img src="images/bot-2.webp" width="1080" height="2637" alt="개인봇 커미션 대화 캡처 2" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="개인봇 커미션 3 · 고 양님 (@d5l3o)"><img src="images/bot-3.webp" width="1080" height="1621" alt="개인봇 커미션 대화 캡처 3" loading="lazy"></button></figure>
+      </div>
+    </div>
+
+    <!-- 그림 -->
+    <div class="group" data-group="art">
+      <div class="group-head"><h3>그림</h3><span>자체 드로잉, rosa님 커미션</span></div>
+      <div class="shots two">
+        <figure class="ph"><button class="zoom" type="button" data-caption="자체 드로잉"><img src="images/art-1.webp" width="1800" height="1349" alt="자체 드로잉: 남경석과 신재경 스케치" loading="lazy"></button><figcaption>자체 드로잉</figcaption></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="rosa님 커미션 (@OLYKNo4H)"><img src="images/art-2.webp" width="1400" height="1852" alt="rosa님 커미션 일러스트" loading="lazy"></button><figcaption>rosa님 커미션 (@OLYKNo4H)</figcaption></figure>
+      </div>
+    </div>
+
+    <!-- 플레이리스트 -->
+    <div class="group" data-group="music">
+      <div class="group-head"><h3>플레이리스트</h3><span>4곡</span></div>
+      <div class="playlist">
+        <a href="https://youtu.be/r9HOpjOFr6Y" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span>뿌요뿌요 - up</span></a>
+        <a href="https://youtu.be/bJxcFpSVZQY" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span>더 넛츠 - 사랑의 바보</span></a>
+        <a href="https://www.youtube.com/watch?v=s3uPXokhpnA&amp;list=RDs3uPXokhpnA&amp;start_radio=1" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span>샤프 - 연극이 끝난 후</span></a>
+        <a href="https://youtu.be/7xobleMnKhU" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span>자우림 - 스물다섯, 스물하나</span></a>
+      </div>
+    </div>
+
+    <!-- 납작 적폐 캐해 -->
+    <div class="group" data-group="cookie">
+      <div class="group-head"><h3>납작 적폐 캐해 (🍪 Cookie Clip)</h3></div>
+      <p class="group-note">말 그대로 납작 적폐라… 참고용으로만 부탁드립니다!</p>
+      <div class="masonry">
+        <figure class="ph"><button class="zoom" type="button" data-caption="납작 적폐 캐해 1"><img src="images/clip-1.webp" width="456" height="456" alt="납작 적폐 캐해 참고 이미지 1" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="납작 적폐 캐해 2"><img src="images/clip-2.webp" width="456" height="360" alt="납작 적폐 캐해 참고 이미지 2" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="납작 적폐 캐해 3"><img src="images/clip-3.webp" width="456" height="719" alt="납작 적폐 캐해 참고 이미지 3" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="납작 적폐 캐해 4"><img src="images/clip-4.webp" width="640" height="903" alt="납작 적폐 캐해 참고 이미지 4" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="납작 적폐 캐해 5"><img src="images/clip-5.webp" width="1200" height="679" alt="납작 적폐 캐해 참고 이미지 5" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="납작 적폐 캐해 6"><img src="images/clip-6.webp" width="735" height="501" alt="납작 적폐 캐해 참고 이미지 6" loading="lazy"></button></figure>
+      </div>
+      <div class="cookie-asides">
+        <div class="callout jg">
+          <h4>#경경코어</h4>
+          <p>신재경 → 남경석 : 킹받는데 가끔 진심으로 설렘 또한 그런 자신을 용납할 수가 없음 근데 또 일 터질 때마다 남경석 생각나고 결국 그에게 의지하게 됨 (여자가 되)</p>
+          <p>남경석 → 신재경 : 재경아!재경아신재경씨~나랑놀자좋아해사랑해와르르르알알껄껄터그놀이도하자어또화내쥬?왜화내쥬?헤헤재밌다재밌다아아때리지마아퍼ㅠㅋㅋ아놔난너를너무사랑하는듯ㅋㅋ</p>
+          <p class="dots" aria-hidden="true">⋮</p>
+          <p>재경아. 정 기댈 데 없으면 앞으로도 나한테 이렇게 해. (남자가 되)</p>
+        </div>
+        <div class="callout gs">
+          <h4>#경석이패고싶은일화</h4>
+          <p>남경석 노래방에서 [더 넛츠-사랑의 바보] 이딴거 부르면 신재경 존내 질색함</p>
+          <p>근데 집 와서 그래도 목소리는 괜찮았던 것 같고 ← 이런 생각 하는 순간 2차로 개킹받음 동시에 설렌 본인을 용납할 수가 없고, 자존심 상하고,</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>시가렛 스윙!</strong> 드라마 &lt;스물다섯 스물하나&gt;를 바탕으로 한 팬 창작(드림) 설정집입니다.</p>
+    <p>원작과 외부 이미지의 저작권은 각 권리자에게, 커미션 작품의 저작권은 각 창작자에게 있습니다.</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="맨 위로 이동" hidden><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg></button>
+
+<!-- 이미지 크게 보기 -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="이미지 크게 보기" hidden>
+  <button class="lb-btn lb-close" type="button" aria-label="닫기"><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button>
+  <button class="lb-btn lb-prev" type="button" aria-label="이전 이미지"><svg class="ico" aria-hidden="true"><use href="#i-prev"/></svg></button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="lb-btn lb-next" type="button" aria-label="다음 이미지"><svg class="ico" aria-hidden="true"><use href="#i-next"/></svg></button>
+</div>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var root=document.documentElement;
+
+  /* ---------- 밝게/어둡게 ---------- */
+  var themeBtn=$('#themeBtn');
+  var darkQuery=window.matchMedia('(prefers-color-scheme: dark)');
+  function effectiveTheme(){
+    var t=root.getAttribute('data-theme');
+    return t||(darkQuery.matches?'dark':'light');
+  }
+  function syncThemeBtn(){themeBtn.setAttribute('data-mode',effectiveTheme())}
+  try{var saved=localStorage.getItem('sigaret-theme');if(saved==='light'||saved==='dark')root.setAttribute('data-theme',saved)}catch(e){}
+  syncThemeBtn();
+  if(darkQuery.addEventListener)darkQuery.addEventListener('change',syncThemeBtn);
+  themeBtn.addEventListener('click',function(){
+    var next=effectiveTheme()==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('sigaret-theme',next)}catch(e){}
+    syncThemeBtn();
+  });
+
+  /* ---------- 인물 탭 (남경석 / 신재경) ---------- */
+  var tabs=$$('[role="tab"]');
+  var panels=$$('[role="tabpanel"]');
+  var currentTab='gyeongseok';
+  var currentSection='';
+  function selectTab(id,focus){
+    currentTab=id;
+    tabs.forEach(function(t){
+      var on=t.getAttribute('data-tab')===id;
+      t.setAttribute('aria-selected',on?'true':'false');
+      t.tabIndex=on?0:-1;
+      if(on&&focus)t.focus();
+    });
+    panels.forEach(function(p){p.hidden=p.getAttribute('data-panel')!==id});
+    updateNav();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){selectTab(t.getAttribute('data-tab'))});
+    t.addEventListener('keydown',function(e){
+      var n=null;
+      if(e.key==='ArrowRight')n=tabs[(i+1)%tabs.length];
+      if(e.key==='ArrowLeft')n=tabs[(i-1+tabs.length)%tabs.length];
+      if(n){e.preventDefault();selectTab(n.getAttribute('data-tab'),true)}
     });
   });
-}
+  /* data-tab 이 붙은 링크(상단 메뉴, 첫 화면 카드, 관계도 카드)를 누르면 해당 탭을 먼저 열어줍니다 */
+  $$('a[data-tab]').forEach(function(a){
+    a.addEventListener('click',function(){selectTab(a.getAttribute('data-tab'))});
+  });
+  if(location.hash==='#profile-jaegyeong'||location.hash==='#profile-gyeongseok'){selectTab(location.hash==='#profile-jaegyeong'?'jaegyeong':'gyeongseok');var ps=document.getElementById('profile');if(ps)setTimeout(function(){ps.scrollIntoView()},0)}
 
-function renderFooter(){
-  document.getElementById('footer-text').textContent = SITE_DATA.footerText;
-}
+  /* ---------- 상단 메뉴: 지금 보는 위치 표시 ---------- */
+  var nav=$('#nav');
+  var navLinks=$$('a',nav);
+  function updateNav(){
+    navLinks.forEach(function(a){
+      var on=a.getAttribute('data-section')===currentSection;
+      if(on&&a.getAttribute('data-tab'))on=a.getAttribute('data-tab')===currentTab;
+      if(on){a.setAttribute('aria-current','true')}else{a.removeAttribute('aria-current')}
+    });
+    var active=$('a[aria-current="true"]',nav);
+    if(active&&nav.scrollWidth>nav.clientWidth){
+      nav.scrollTo({left:active.offsetLeft-(nav.clientWidth-active.clientWidth)/2,behavior:'smooth'});
+    }
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){currentSection=en.target.id;updateNav()}
+      });
+    },{rootMargin:'-35% 0px -60% 0px'});
+    ['world','relations','profile','story','archive'].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
+  }
 
-renderHero();
-renderProfiles();
-renderNarrative();
-renderArchive();
-renderFooter();
+  /* ---------- 연성 아카이브 종류 고르기 ---------- */
+  var filters=$$('.filter');
+  var groups=$$('.group');
+  filters.forEach(function(b){
+    b.addEventListener('click',function(){
+      var f=b.getAttribute('data-filter');
+      filters.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      groups.forEach(function(g){g.hidden=!(f==='all'||g.getAttribute('data-group')===f)});
+    });
+  });
+
+  /* ---------- 이미지 크게 보기 ---------- */
+  var lb=$('#lb'),lbImg=$('#lbImg'),lbCap=$('#lbCap');
+  var items=[],idx=0,lastFocus=null;
+  function showItem(){
+    var b=items[idx];
+    var img=$('img',b);
+    lbImg.src=img.currentSrc||img.src;
+    lbImg.alt=img.alt;
+    lbCap.textContent=(b.getAttribute('data-caption')||img.alt)+(items.length>1?'  ('+(idx+1)+'/'+items.length+')':'');
+    $('.lb-prev',lb).hidden=$('.lb-next',lb).hidden=items.length<2;
+  }
+  function openLb(btn){
+    var scope=btn.closest('[data-lb-scope]')||document;
+    items=$$('.zoom',scope).filter(function(b){return b.offsetParent!==null});
+    idx=Math.max(0,items.indexOf(btn));
+    lastFocus=document.activeElement;
+    showItem();
+    lb.hidden=false;
+    document.body.classList.add('lb-open');
+    $('.lb-close',lb).focus();
+  }
+  function closeLb(){
+    lb.hidden=true;
+    document.body.classList.remove('lb-open');
+    lbImg.removeAttribute('src');
+    if(lastFocus)lastFocus.focus();
+  }
+  function step(d){idx=(idx+d+items.length)%items.length;showItem()}
+  document.addEventListener('click',function(e){
+    var z=e.target.closest('.zoom');
+    if(z)openLb(z);
+  });
+  $('.lb-close',lb).addEventListener('click',closeLb);
+  $('.lb-prev',lb).addEventListener('click',function(){step(-1)});
+  $('.lb-next',lb).addEventListener('click',function(){step(1)});
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLb()});
+  document.addEventListener('keydown',function(e){
+    if(lb.hidden)return;
+    if(e.key==='Escape')closeLb();
+    else if(e.key==='ArrowLeft'&&items.length>1)step(-1);
+    else if(e.key==='ArrowRight'&&items.length>1)step(1);
+    else if(e.key==='Tab'){
+      var f=$$('.lb-btn',lb).filter(function(b){return !b.hidden});
+      var first=f[0],last=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+    }
+  });
+
+  /* ---------- 맨 위로 ---------- */
+  var toTop=$('#toTop');
+  function onScroll(){toTop.hidden=window.scrollY<700}
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  toTop.addEventListener('click',function(){window.scrollTo({top:0})});
+
+  updateNav();
+})();
 </script>
 </body>
 </html>
