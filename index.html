@@ -65,7 +65,9 @@ ul,ol{padding:0;list-style:none}
 button{font:inherit;color:inherit}
 [hidden]{display:none!important}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
-.wrap{width:min(1120px,100% - 2*var(--gutter));margin-inline:auto}
+/* 읽기 편한 본문 폭 (한국 포털·블로그 본문 폭 700~800px 기준). 폭을 바꾸려면 아래 --page 숫자만 수정하세요 */
+.wrap{--page:800px;width:min(var(--page),100% - 2*var(--gutter));margin-inline:auto}
+.wrap.wide{--page:1120px}
 .skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:8px 14px;border-radius:8px;z-index:100}
 .skip:focus{left:8px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -147,24 +149,29 @@ button{font:inherit;color:inherit}
 .section-head h2{font-size:clamp(1.8rem,4.2vw,2.6rem);font-weight:800;letter-spacing:-.02em}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 .tag{font-size:.85rem;padding:2px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted)}
-.lead{max-width:42rem;font-size:1.08rem;line-height:1.85;color:var(--ink-2)}
+.lead{font-size:1.08rem;line-height:1.85;color:var(--ink-2)}
 .banner{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);margin-bottom:clamp(24px,4vw,40px)}
 .banner img{width:100%;max-height:340px;object-fit:cover}
 h3.sub{font-size:1.3rem;font-weight:800;margin-bottom:14px}
 
-.prose{max-width:41rem}
+.prose{max-width:none}
 .prose p{font-size:1.0625rem;line-height:1.95;margin-bottom:1.15em}
 .prose h3{font-size:1.35rem;font-weight:800;margin:2.4em 0 .9em}
 .prose h3:first-child{margin-top:0}
 .prose strong{font-weight:700}
 .prose .fn{font-size:.92rem;color:var(--muted);line-height:1.7}
-.callout{max-width:41rem;border-left:4px solid var(--accent,var(--ink));background:var(--surface);padding:18px 22px;border-radius:0 var(--radius) var(--radius) 0;margin:1.6em 0}
+.callout{border-left:4px solid var(--accent,var(--ink));background:var(--surface);padding:18px 22px;border-radius:0 var(--radius) var(--radius) 0;margin:1.6em 0}
 .callout h4{font-size:1rem;font-weight:800;margin-bottom:6px;color:var(--accent-ink,var(--ink))}
 .callout p{margin:0!important;line-height:1.85!important}
 .callout.gs{--accent:var(--gs);--accent-ink:var(--gs-ink);background:var(--gs-tint)}
 .callout.jg{--accent:var(--jg);--accent-ink:var(--jg-ink);background:var(--jg-tint)}
 .callout.alert{--accent:var(--alert);--accent-ink:var(--alert);background:var(--alert-tint)}
 
+/* 본문 글은 좌우 끝선을 맞춰 양쪽 정렬 (모바일은 왼쪽 정렬) */
+@media (min-width:641px){
+  .prose p,.drama li,.premise,.callout p,.vids p,.rel p,.group-note{text-align:justify}
+  .cookie-asides .callout p{text-align:left}
+}
 .zoom{appearance:none;display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;overflow:hidden;border-radius:10px}
 .zoom img{width:100%}
 figure.ph{margin:0 0 12px;break-inside:avoid;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
@@ -172,7 +179,7 @@ figure.ph figcaption{padding:8px 12px 10px;font-size:.88rem;color:var(--muted);l
 .masonry{columns:3 230px;column-gap:12px}
 
 /* ============================================================ 세계관 */
-.world-grid{max-width:46rem}
+.world-grid{max-width:none}
 .drama h3{font-size:1.3rem;font-weight:800;margin-bottom:14px}
 .drama li{position:relative;padding-left:1.1em;margin-bottom:.9em;font-size:1.02rem;line-height:1.85}
 .drama li::before{content:"";position:absolute;left:0;top:.85em;width:5px;height:5px;border-radius:50%;background:var(--muted)}
@@ -186,8 +193,7 @@ figure.ph figcaption{padding:8px 12px 10px;font-size:.88rem;color:var(--muted);l
 .rel-hub p{font-size:1.02rem;line-height:1.75}
 .rel-hub small{display:block;font-size:.85rem;opacity:.8;margin-bottom:2px}
 @media (max-width:640px){.rel-hub{grid-template-columns:1fr}}
-.rel-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-@media (max-width:760px){.rel-grid{grid-template-columns:1fr}}
+.rel-grid{display:grid;grid-template-columns:1fr;gap:14px}
 .rel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;display:flex;flex-direction:column;gap:6px}
 .rel-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
 .rel h4{font-size:1.25rem;font-weight:800}
@@ -198,11 +204,11 @@ figure.ph figcaption{padding:8px 12px 10px;font-size:.88rem;color:var(--muted);l
 .rel .ext{font-family:inherit}
 
 /* ============================================================ 프로필 */
-.pquote{max-width:46rem;font-size:clamp(1.25rem,3vw,1.75rem);font-weight:700;line-height:1.55;letter-spacing:-.01em;padding-left:20px;border-left:5px solid var(--accent);margin-bottom:clamp(24px,4vw,40px)}
+.pquote{font-size:clamp(1.25rem,3vw,1.75rem);font-weight:700;line-height:1.55;letter-spacing:-.01em;padding-left:20px;border-left:5px solid var(--accent);margin-bottom:clamp(24px,4vw,40px)}
 .pquote.gs{--accent:var(--gs)}.pquote.jg{--accent:var(--jg)}
 /* 넓은 화면에서는 줄바꿈 없이 한 줄로 (글자 크기는 화면 폭에 맞춰 자동 조절, 아래 스크립트가 미세 조정) */
 @media (min-width:860px){
-  .pquote.oneline{max-width:none;white-space:nowrap;font-size:min(1.75rem,calc((100vw - 2*var(--gutter) - 30px) / 47))}
+  .pquote.oneline{max-width:none;white-space:nowrap;font-size:min(1.75rem,calc((min(800px,100vw - 2*var(--gutter)) - 30px) / 47))}
 }
 .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:clamp(28px,5vw,52px)}
 @media (max-width:640px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -210,9 +216,8 @@ figure.ph figcaption{padding:8px 12px 10px;font-size:.88rem;color:var(--muted);l
 .gallery .zoom{position:absolute;inset:0;width:100%;height:100%;border-radius:0;background:var(--line)}
 .gallery .zoom::before{content:"";position:absolute;inset:-28px;background:var(--bg) center/cover no-repeat;filter:blur(22px) saturate(1.1);opacity:.65}
 .gallery .zoom img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.profile-grid{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:start}
-.profile-side{position:sticky;top:96px;display:grid;gap:14px}
-@media (max-width:900px){.profile-grid{grid-template-columns:1fr}.profile-side{position:static}}
+.profile-side{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px;align-items:start;margin-bottom:clamp(28px,5vw,44px)}
+@media (max-width:640px){.profile-side{grid-template-columns:1fr}}
 .idcard{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--accent);border-radius:var(--radius);padding:18px 20px 20px}
 .idcard.gs{--accent:var(--gs)}.idcard.jg{--accent:var(--jg)}
 .idcard h3{display:flex;align-items:baseline;gap:10px;font-size:1.5rem;font-weight:800;margin-bottom:12px}
@@ -228,7 +233,7 @@ figure.ph figcaption{padding:8px 12px 10px;font-size:.88rem;color:var(--muted);l
 .theme a{display:flex;align-items:center;gap:8px;padding:6px 0;text-decoration:none;font-size:.98rem;font-weight:600}
 .theme a:hover span{text-decoration:underline;text-underline-offset:3px}
 .theme .ico{color:var(--muted)}
-details{max-width:41rem}
+details{max-width:none}
 details.fold{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin:1.6em 0}
 details.fold>summary{cursor:pointer;list-style:none;padding:14px 20px;font-weight:700;display:flex;align-items:center;gap:8px}
 details.fold>summary::-webkit-details-marker{display:none}
@@ -236,12 +241,12 @@ details.fold>summary .ico{margin-left:auto;transition:transform .2s}
 details.fold[open]>summary .ico{transform:rotate(180deg)}
 details.fold .fold-body{padding:2px 20px 8px;border-top:1px solid var(--line)}
 details.fold .fold-body p{padding-top:1em}
-.vids{max-width:41rem}
+.vids{max-width:none}
 .vids li{padding:16px 0;border-top:1px solid var(--line)}
 .vids li:last-child{border-bottom:1px solid var(--line)}
 .vids .ep{display:inline-block;font-size:.85rem;font-weight:800;background:var(--jg-tint);color:var(--jg-ink);padding:1px 10px;border-radius:999px;margin-bottom:6px}
 .vids p{font-size:1rem!important;line-height:1.8!important;margin-bottom:6px!important}
-.relvids{max-width:41rem;display:grid;gap:0}
+.relvids{display:grid;gap:0}
 .relvids li{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;padding:14px 0;border-top:1px solid var(--line)}
 .relvids li:last-child{border-bottom:1px solid var(--line)}
 .relvids b{font-weight:800}
@@ -249,42 +254,32 @@ details.fold .fold-body p{padding-top:1em}
 .relvids .links{display:flex;flex-wrap:wrap;gap:6px 14px;margin-left:auto}
 
 /* ============================================================ 서사 */
-.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;margin-bottom:clamp(32px,5vw,56px);border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow:hidden}
-.flow a{display:block;padding:14px 16px;text-decoration:none;border-right:1px solid var(--line);font-size:.9rem;line-height:1.55;color:var(--ink-2)}
-.flow a:last-child{border-right:0}
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-bottom:clamp(32px,5vw,56px);border:1px solid var(--line);border-radius:var(--radius);background:var(--line);overflow:hidden}
+.flow a{display:block;padding:14px 16px;text-decoration:none;background:var(--surface);font-size:.92rem;line-height:1.55;color:var(--ink-2)}
 .flow a:hover{background:var(--paper)}
-.flow b{display:block;font-size:.95rem;color:var(--ink);margin-bottom:2px}
-@media (max-width:1000px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.flow a{border-bottom:1px solid var(--line)}.flow a:nth-child(2n){border-right:0}}
-@media (max-width:520px){.flow{grid-template-columns:1fr}.flow a{border-right:0}}
+.flow b{display:block;font-size:.98rem;color:var(--ink);margin-bottom:2px}
+@media (max-width:640px){.flow{grid-template-columns:1fr}}
 .tl{position:relative}
-.tl-item{display:grid;grid-template-columns:150px minmax(0,1fr);gap:0 clamp(20px,4vw,48px);position:relative;padding-bottom:clamp(40px,6vw,72px)}
-.tl-item::before{content:"";position:absolute;left:167px;top:8px;bottom:0;width:2px;background:var(--line)}
+.tl-item{position:relative;padding:0 0 clamp(40px,6vw,64px) 30px}
+.tl-item::before{content:"";position:absolute;left:5px;top:10px;bottom:0;width:2px;background:var(--line)}
 .tl-item:last-child::before{display:none}
-.tl-item::after{content:"";position:absolute;left:162px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 4px var(--paper)}
+.tl-item::after{content:"";position:absolute;left:0;top:6px;width:12px;height:12px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 4px var(--paper)}
 .tl-item.gs::after{background:var(--gs)}.tl-item.jg::after{background:var(--jg)}
-.tl-when{text-align:right;padding-top:0}
-.tl-ep{display:block;font-size:1.05rem;font-weight:800}
-.tl-year{display:block;font-size:.9rem;color:var(--muted)}
-.tl-body{padding-left:clamp(20px,4vw,48px)}
+.tl-when{display:flex;flex-wrap:wrap;gap:0 10px;align-items:baseline;margin-bottom:6px}
+.tl-ep{font-size:1.05rem;font-weight:800}
+.tl-year{font-size:.9rem;color:var(--muted)}
+.tl-body{padding-left:0}
 .tl-body>h3{font-size:1.5rem;font-weight:800;margin-bottom:8px}
-.tl-sum{max-width:41rem;font-size:1.02rem;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;margin-bottom:22px;line-height:1.75}
+.tl-sum{font-size:1.02rem;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;margin-bottom:22px;line-height:1.75}
 .tl-sum b{font-weight:800}
 .beat{margin-bottom:8px}
-.beat>h4{font-size:1.05rem;font-weight:800;margin:1.9em 0 .7em;padding-top:1.1em;border-top:1px solid var(--line);max-width:41rem}
+.beat>h4{font-size:1.05rem;font-weight:800;margin:1.9em 0 .7em;padding-top:1.1em;border-top:1px solid var(--line)}
 .beat:first-of-type>h4{border-top:0;padding-top:0;margin-top:1em}
-.tl-img{max-width:41rem;margin:1.2em 0 1.6em;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+.tl-img{margin:1.2em 0 1.6em;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
 .tl-img+.tl-img{margin-top:0}
-@media (max-width:760px){
-  .tl-item{grid-template-columns:1fr;padding-left:28px}
-  .tl-item::before{left:5px}
-  .tl-item::after{left:0}
-  .tl-when{text-align:left;display:flex;flex-wrap:wrap;gap:0 10px;align-items:baseline;margin-bottom:6px}
-  .tl-body{padding-left:0}
-}
 
 /* ============================================================ 연성 아카이브 */
-.notes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px}
-@media (max-width:820px){.notes{grid-template-columns:1fr}}
+.notes{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:12px}
 .notes .callout{max-width:none;margin:0}
 .notes .callout h4{font-size:1.05rem}
 .notes .thanks{grid-column:1/-1;font-size:.95rem;color:var(--muted)}
@@ -296,7 +291,7 @@ details.fold .fold-body p{padding-top:1em}
 .group-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin-bottom:6px}
 .group-head h3{font-size:1.45rem;font-weight:800}
 .group-head span{font-size:.92rem;color:var(--muted)}
-.group-note{max-width:41rem;font-size:.98rem;color:var(--ink-2);margin-bottom:16px}
+.group-note{font-size:.98rem;color:var(--ink-2);margin-bottom:16px}
 .shots{display:grid;gap:12px}
 .shots.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .shots.two{grid-template-columns:1.76fr 1fr;align-items:start}
@@ -305,12 +300,11 @@ details.fold .fold-body p{padding-top:1em}
 .shots figure.ph{margin:0}
 .crop .zoom{aspect-ratio:3/4}
 .crop .zoom img{height:100%;object-fit:cover;object-position:top}
-.playlist{max-width:41rem;border-top:1px solid var(--line)}
+.playlist{border-top:1px solid var(--line)}
 .playlist a{display:flex;align-items:center;gap:12px;padding:14px 4px;border-bottom:1px solid var(--line);text-decoration:none;font-weight:600}
 .playlist a:hover span{text-decoration:underline;text-underline-offset:3px}
 .playlist .ico{color:var(--muted)}
-.cookie-asides{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
-@media (max-width:820px){.cookie-asides{grid-template-columns:1fr}}
+.cookie-asides{display:grid;grid-template-columns:1fr;gap:14px;margin-top:20px}
 .cookie-asides .callout{margin:0;max-width:none}
 .cookie-asides h4{font-size:1rem}
 .cookie-asides p{overflow-wrap:anywhere;font-size:.98rem!important;line-height:1.85!important;margin-bottom:.6em!important}
@@ -381,7 +375,7 @@ details.fold .fold-body p{padding-top:1em}
 
 <!-- ================= 상단 바 ================= -->
 <header class="site-header">
-  <div class="wrap bar">
+  <div class="wrap wide bar">
     <a class="brand" href="#home">시가렛 스윙!</a>
     <nav class="nav" id="nav" aria-label="페이지 이동">
       <a href="#world" data-view="world">세계관</a>
@@ -402,7 +396,7 @@ details.fold .fold-body p{padding-top:1em}
 
 <!-- ================= 첫 화면 ================= -->
 <section class="view hero" id="view-home" data-view="home">
-  <div class="wrap">
+  <div class="wrap wide">
     <h1 class="hero-title">시가렛 스윙!</h1>
     <p class="hero-sub">드림주 남경석 X 드림캐 &lt;스물다섯 스물하나&gt; 신재경</p>
 
@@ -520,11 +514,12 @@ details.fold .fold-body p{padding-top:1em}
       <blockquote class="pquote gs oneline">“아직까지 결혼 못(안)한 이유는··· 좌우지간, 얘기 끝. 야아, 재경아, 커피 마시고 싶지 않냐?”</blockquote>
 
       <div class="gallery">
-        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 1" style="--bg:url('images/gs-1.webp')"><img src="images/gs-1.webp" width="1200" height="851" alt="남경석 이미지 1" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 1" style="--bg:url('images/gs-main.webp')"><img src="images/gs-main.webp" width="1200" height="851" alt="남경석 이미지 1" loading="lazy"></button></figure>
         <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 2" style="--bg:url('images/gs-2.webp')"><img src="images/gs-2.webp" width="880" height="1048" alt="남경석 이미지 2" loading="lazy"></button></figure>
         <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 3" style="--bg:url('images/gs-3.webp')"><img src="images/gs-3.webp" width="960" height="960" alt="남경석 이미지 3" loading="lazy"></button></figure>
         <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 4" style="--bg:url('images/gs-4.webp')"><img src="images/gs-4.webp" width="655" height="648" alt="남경석 이미지 4" loading="lazy"></button></figure>
         <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 5" style="--bg:url('images/gs-5.webp')"><img src="images/gs-5.webp" width="1200" height="1499" alt="남경석 이미지 5" loading="lazy"></button></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="남경석 이미지 6" style="--bg:url('images/gs-6.webp')"><img src="images/gs-6.webp" width="1024" height="1024" alt="남경석 이미지 6" loading="lazy"></button></figure>
       </div>
 
       <div class="profile-grid">
@@ -619,7 +614,7 @@ details.fold .fold-body p{padding-top:1em}
             <summary>제작자 코멘트 (드림을 만든 이유)<svg class="ico" aria-hidden="true"><use href="#i-chev"/></svg></summary>
             <div class="fold-body">
               <p>그리고 저는 이 모든 요소에 사랑을 느낍니다. 차가운 아짐마가 사실은 연약한 모습을 어쩌다 한번 보여줄 때. 존나게 안아주고 싶고 이런 마음이 됩니다…</p>
-              <figure class="ph" style="max-width:340px;margin:0 0 1em"><button class="zoom" type="button" data-caption="제작자가 만든 텍스트 이미지"><img src="images/jg-2.webp" width="1080" height="1467" alt="문장이 길게 이어지는 텍스트 이미지" loading="lazy"></button></figure>
+              <figure class="ph" style="margin:0 0 1em"><button class="zoom" type="button" data-caption="제작자가 만든 텍스트 이미지"><img src="images/jg-2.webp" width="1080" height="1467" alt="문장이 길게 이어지는 텍스트 이미지" loading="lazy"></button></figure>
               <p>그래서 이런 드림을 만들었습니다. 이런 연상녀 한정 부치, 대디 성향, 그런 사람이 되는 바람에. 성별 일체감까지 포기하고 드림캐에게 가장 잘 어울리는 캐가 누굴까 고민해 만든 드림이기도 합니다. 드림캐가 아 이뻐 죽겠네 싶어서 만든 드림입니다. 초면이신데도 제 리비도를 읽어주셔서 대단히 감사합니다.</p>
               <p>중간중간 밤티한 쇼츠는 (…) 흐린 눈 하고 봐주시면 감사하겠습니다.</p>
             </div>
@@ -683,7 +678,7 @@ details.fold .fold-body p{padding-top:1em}
           <p>재경과 각종 신입생 환영회, 축제, 중간고사와 기말고사, 그리고 죽도록 마시고 토하던 야만의 시대까지 함께 한 사이. 그리고 사실은, 대학 때부터 재경을 좋아했다. 공교롭게도 그녀는 늘 사랑하는 대상이 있었지만. 한 때는 양찬미 선수였다가, 그 다음은 남편이었다가, 이제는 자신의 커리어가 됐다.</p>
           <p>관계가 깊어질라치면 타이밍이 어긋나거나, 매번 선수를 다른 사람에게 빼앗겼었다. 그럴 때마다 마지막 경기에서 공을 빼앗겼던 일도 왜 문득 생각이 나던지. 살다보니 경석도 연애를 전폐하지는 않았으나, 종착지는 늘 재경이었다.</p>
           <p>졸업 후 재경이 먼저 방송국에 취업. 경석은 군복무로 인해 자연스럽게 연락이 끊겼다. 사건 B. 이때 둘의 졸업년도에 차이가 발생했고, 각자의 공백이 생겼다. 이후 재경이 동문회에 어린 희도를 데리고 종종 나타났으나 그마저도 어느 순간부터 나오지 않았다. 그렇게 잊고 지냈다. 아니, 아주 가끔은. 뉴스 속에서 여전히 총명하다 못해 자신만만한 눈빛, 그리고··· 여전히 예쁜. 재경을 보면서 시선을 떼지 못할 때도 있었지만.</p>
-          <figure class="tl-img" style="max-width:30rem"><button class="zoom" type="button" data-caption="원작 캡처"><img src="images/story-2.webp" width="1080" height="716" alt="‘경경 사초생때. 이거 진짜같다’ 문구가 붙은 두 인물 컷" loading="lazy"></button></figure>
+          <figure class="tl-img"><button class="zoom" type="button" data-caption="원작 캡처"><img src="images/story-2.webp" width="1080" height="716" alt="‘경경 사초생때. 이거 진짜같다’ 문구가 붙은 두 인물 컷" loading="lazy"></button></figure>
         </div>
       </li>
 
@@ -844,7 +839,7 @@ details.fold .fold-body p{padding-top:1em}
 </main>
 
 <footer class="site-footer">
-  <div class="wrap">
+  <div class="wrap wide">
     <p><strong>시가렛 스윙!</strong> 드라마 &lt;스물다섯 스물하나&gt;를 바탕으로 한 팬 창작(드림) 설정집입니다.</p>
     <p>원작과 외부 이미지의 저작권은 각 권리자에게, 커미션 작품의 저작권은 각 창작자에게 있습니다.</p>
   </div>
