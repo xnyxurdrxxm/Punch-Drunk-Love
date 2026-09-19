@@ -11,9 +11,6 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2a14 14 0 0 0 0 28z' fill='%23E2A81D'/%3E%3Cpath d='M16 2a14 14 0 0 1 0 28z' fill='%2322406A'/%3E%3C/svg%3E">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 
 <style>
@@ -37,7 +34,7 @@
   --raised:inset -1px -1px var(--dk),inset 1px 1px var(--hl),inset -2px -2px var(--sh),inset 2px 2px var(--lt);
   --sunken:inset -1px -1px var(--hl),inset 1px 1px var(--sh),inset -2px -2px var(--lt),inset 2px 2px var(--dk);
   --font-body:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Noto Sans CJK KR",sans-serif;
-  --font-display:"Black Han Sans","Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Noto Sans CJK KR",sans-serif;
+  --font-display:"Dotum Web","Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Noto Sans CJK KR",sans-serif;
 }
 :root[data-theme="dark"]{
   --desk:#000070; --face:#0000a8; --hl:#7c7cff; --lt:#2c2cd0; --sh:#000058; --dk:#000030;
@@ -51,27 +48,14 @@
 }
 
 /* ============================================================
-   폰트: 림굴(Limgul) — SIL OFL 1.1 (fonts/OFL.txt)
-   픽셀 폰트라 크기별 파일이 따로 있어요. 글자 크기는 14·15·16·17·20·24px과 그 2배(28·30·32·40px)만 써요.
+   폰트: 돋움(Dotum) — SIL OFL 1.1 (fonts/OFL.txt)
+   윈도우 95/98 때 쓰던 그 돋움의 오픈소스 버전이에요. 굵은체 파일이 없어서 굵은 글씨는 브라우저가 굵게 만들어 보여줘요.
    ============================================================ */
-@font-face{font-family:"Limgul14";src:url("fonts/Limgul14.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Limgul14";src:url("fonts/Limgul14-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:"Limgul15";src:url("fonts/Limgul15.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Limgul15";src:url("fonts/Limgul15-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:"Limgul16";src:url("fonts/Limgul16.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Limgul16";src:url("fonts/Limgul16-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:"Limgul17";src:url("fonts/Limgul17.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Limgul17";src:url("fonts/Limgul17-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:"Limgul20";src:url("fonts/Limgul20.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Limgul20";src:url("fonts/Limgul20-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:"Limgul24";src:url("fonts/Limgul24.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Limgul24";src:url("fonts/Limgul24-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-
+@font-face{font-family:"Dotum Web";src:url("fonts/Dotum-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 :root{
-  --f14:"Limgul14",var(--font-body);--f15:"Limgul15",var(--font-body);--f16:"Limgul16",var(--font-body);
-  --f17:"Limgul17",var(--font-body);--f20:"Limgul20",var(--font-body);--f24:"Limgul24",var(--font-body);
+  --f14:"Dotum Web",var(--font-body);--f15:"Dotum Web",var(--font-body);--f16:"Dotum Web",var(--font-body);
+  --f17:"Dotum Web",var(--font-body);--f20:"Dotum Web",var(--font-body);--f24:"Dotum Web",var(--font-body);
 }
-html{font-synthesis:none}
 
 /* ============================================================ 기본 */
 *,*::before,*::after{box-sizing:border-box}
@@ -120,7 +104,7 @@ button{font:inherit;color:inherit}
 
 /* ============================================================ 첫 화면 */
 .hero{padding-top:clamp(28px,5vw,64px);padding-bottom:clamp(40px,6vw,72px)}
-.hero-title{font-family:var(--font-display);font-weight:900;font-synthesis:none;font-size:clamp(3.2rem,13.5vw,8.75rem);line-height:1.02;letter-spacing:-.02em}
+.hero-title{font-family:var(--font-display);font-weight:700;font-size:clamp(3.2rem,13.5vw,8.75rem);line-height:1.05;letter-spacing:-.02em;-webkit-text-stroke:.03em currentColor;paint-order:stroke fill}
 .hero-sub{margin-top:clamp(14px,2vw,22px);max-width:36rem;font-size:17px;font-family:var(--f17);color:var(--ink-2);line-height:1.75}
 .duo{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:clamp(28px,5vw,56px)}
 .duo-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;text-decoration:none}
@@ -229,7 +213,7 @@ figure.ph figcaption{padding:8px 12px 10px;font-size:14px;font-family:var(--f14)
 .pquote.gs{--accent:var(--gs)}.pquote.jg{--accent:var(--jg)}
 /* 넓은 화면에서는 줄바꿈 없이 한 줄로 (글자 크기는 화면 폭에 맞춰 자동 조절, 아래 스크립트가 미세 조정) */
 @media (min-width:960px){
-  .pquote{font-size:17px;font-family:var(--f17)}
+  .pquote{font-size:18px;font-family:var(--f17)}
   .pquote.oneline{max-width:none;white-space:nowrap}
 }
 .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:clamp(28px,5vw,52px)}
