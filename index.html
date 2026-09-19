@@ -1116,7 +1116,7 @@ details.fold .fold-body{background:var(--doc);box-shadow:var(--sunken);border-to
   <div class="tray">
     <div class="bgm" id="bgm">
       <p class="bgm-hint" id="bgmHint" hidden>화면을 한 번 누르면 배경음악이 시작돼요</p>
-      <button class="bgm-btn" id="bgmBtn" type="button" aria-pressed="false" aria-label="배경음악 켜고 끄기" title="이광조 - 즐거운 인생">
+      <button class="bgm-btn" id="bgmBtn" type="button" aria-pressed="false" aria-label="배경음악 켜고 끄기" title="배경음악">
         <svg class="ico i-off" aria-hidden="true"><use href="#i-mute"/></svg>
         <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
         <span>BGM <small id="bgmState">꺼짐</small></span>
@@ -1304,14 +1304,41 @@ details.fold .fold-body{background:var(--doc);box-shadow:var(--sunken);border-to
   }
   tick();setInterval(tick,15000);
 
-  /* ---------- 배경음악 (이광조 - 즐거운 인생) ---------- */
-  var BGM_ID='A-4dJU06sqY';       /* 다른 곡으로 바꾸려면 유튜브 영상 ID만 바꾸세요 */
+  /* ---------- 배경음악 (접속할 때마다 랜덤한 곡부터 시작해 전체 곡을 이어서 반복 재생) ---------- */
+  /* 곡을 추가·삭제하려면 이 목록만 고치세요. id = 유튜브 영상 ID (youtu.be/ 뒤의 11글자) */
+  var BGM_TRACKS=[
+    {id:'A-4dJU06sqY',title:'이광조 - 즐거운 인생'},
+    {id:'-Un2J8eCwCI',title:'인디고 - 여름아 부탁해!'},
+    {id:'sEWWvHKG8_s',title:'핑클 - 내 남자친구에게'},
+    {id:'i8dQN7_yg4o',title:'구피 - 다 잘 될 거야'},
+    {id:'yXcvTtK_bDA',title:'박지윤 - Steal away'},
+    {id:'mwt-TpwRhvI',title:'쿨 - 애상'}
+  ];
   var BGM_VOLUME=50;              /* 0~100 */
   var bgmBtn=$('#bgmBtn'),bgmState=$('#bgmState'),bgmHint=$('#bgmHint');
   var yt=null,ytLoading=false,bgmBroken=false;
   var bgmWant=true;               /* 사용자가 음악을 켜둔 상태인지 */
   try{if(localStorage.getItem('sigaret-bgm')==='off')bgmWant=false}catch(e){}
   function saveBgm(v){try{localStorage.setItem('sigaret-bgm',v)}catch(e){}}
+
+  /* 재생 순서 만들기: 접속할 때마다 곡 순서를 랜덤으로 섞고(직전에 들은 곡으로는 되도록 시작하지 않음),
+     한 곡이 끝나면 다음 곡으로 넘어가며 마지막 곡 다음엔 다시 처음 곡으로 돌아가 계속 반복합니다 */
+  function shuffle(a){
+    for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}
+    return a;
+  }
+  var lastId=null;
+  try{lastId=localStorage.getItem('sigaret-bgm-last')}catch(e){}
+  var bgmOrder=shuffle(BGM_TRACKS.slice());
+  if(bgmOrder.length>1&&bgmOrder[0].id===lastId){var sw=bgmOrder.shift();bgmOrder.push(sw)}
+  var bgmIdx=0;
+  function bgmTrack(){return bgmOrder[bgmIdx]}
+  function showTrack(){
+    var t=bgmTrack();
+    bgmBtn.title=t.title;
+    try{localStorage.setItem('sigaret-bgm-last',t.id)}catch(e){}
+  }
+  showTrack();
   function bgmUI(playing,label){
     bgmBtn.setAttribute('aria-pressed',playing?'true':'false');
     bgmBtn.classList.toggle('is-playing',playing);
@@ -1322,31 +1349,56 @@ details.fold .fold-body{background:var(--doc);box-shadow:var(--sunken);border-to
   function onBgmError(){
     bgmBroken=true;
     bgmUI(false,'재생 불가');
-    bgmHint.textContent='이 영상은 사이트 안에서 재생할 수 없어요.';
+    bgmHint.textContent='배경음악을 사이트 안에서 재생할 수 없어요.';
     bgmHint.hidden=false;
   }
+  /* 브라우저가 자동재생을 막았으면, 첫 터치·클릭 때 시작하도록 안내 */
+  function armAutoplayHint(){
+    setTimeout(function(){
+      if(bgmWant&&!bgmBroken&&!bgmIsPlaying()&&!(yt&&yt.getPlayerState&&yt.getPlayerState()===3)){bgmUI(false,'탭하면 시작');bgmHint.hidden=false}
+    },1800);
+  }
+  /* 다음 재생 가능한 곡으로 이동. 마지막 곡 다음은 첫 곡(전체 반복). 재생 가능한 곡이 하나도 없으면 false */
+  var bgmFailed={};
+  function bgmAdvance(){
+    for(var n=1;n<=bgmOrder.length;n++){
+      var i=(bgmIdx+n)%bgmOrder.length;
+      if(!bgmFailed[bgmOrder[i].id]){bgmIdx=i;showTrack();return true}
+    }
+    return false;
+  }
+  function playNextTrack(){
+    if(!bgmAdvance()){onBgmError();return}
+    if(!yt||!yt.loadVideoById)return;
+    if(bgmWant){yt.loadVideoById(bgmTrack().id);armAutoplayHint()}
+    else{yt.cueVideoById(bgmTrack().id)}
+  }
+  /* 이 곡이 사이트 안에서 재생 불가(임베드 금지·삭제 등)면 건너뛰고 다음 곡으로.
+     모든 곡이 실패했을 때만 '재생 불가'로 처리 */
+  function onBgmTrackError(){
+    bgmFailed[bgmTrack().id]=true;
+    playNextTrack();
+  }
   function createBgmPlayer(){
-    var vars={autoplay:1,controls:0,disablekb:1,fs:0,loop:1,playlist:BGM_ID,playsinline:1,rel:0,modestbranding:1};
+    var first=bgmTrack().id;
+    var vars={autoplay:1,controls:0,disablekb:1,fs:0,playsinline:1,rel:0,modestbranding:1};
     if(/^https?:$/.test(location.protocol))vars.origin=location.origin;
     yt=new YT.Player('bgmPlayer',{
-      width:'1',height:'1',videoId:BGM_ID,host:'https://www.youtube-nocookie.com',playerVars:vars,
+      width:'1',height:'1',videoId:first,host:'https://www.youtube-nocookie.com',playerVars:vars,
       events:{
         onReady:function(e){
           e.target.setVolume(BGM_VOLUME);
           if(bgmWant){
             e.target.playVideo();
-            /* 브라우저가 자동재생을 막았으면, 첫 터치·클릭 때 시작하도록 안내 */
-            setTimeout(function(){
-              if(bgmWant&&!bgmBroken&&!bgmIsPlaying()){bgmUI(false,'탭하면 시작');bgmHint.hidden=false}
-            },1800);
+            armAutoplayHint();
           }
         },
         onStateChange:function(e){
           if(e.data===1){bgmUI(true)}
-          else if(e.data===0){e.target.seekTo(0);e.target.playVideo()}
+          else if(e.data===0){playNextTrack()}   /* 곡이 끝나면 다음 곡 */
           else if(e.data===2&&!bgmWant){bgmUI(false)}
         },
-        onError:onBgmError
+        onError:onBgmTrackError
       }
     });
   }
