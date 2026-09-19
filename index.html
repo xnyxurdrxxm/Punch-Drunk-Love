@@ -330,6 +330,29 @@ details.fold .fold-body p{padding-top:1em}
 .site-footer strong{color:var(--ink-2)}
 .to-top{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));width:48px;height:48px;border-radius:50%;border:0;background:var(--ink);color:var(--paper);display:grid;place-items:center;cursor:pointer;font-size:1.3rem;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:40}
 
+
+/* ============================================================ 배경음악 버튼 */
+.bgm{position:fixed;left:max(16px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom));z-index:40;display:flex;flex-direction:column;align-items:flex-start;gap:8px;max-width:calc(100vw - 96px)}
+.bgm-btn{appearance:none;display:flex;align-items:center;gap:10px;height:48px;padding:0 18px 0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.18);font-weight:700;font-size:.92rem;line-height:1}
+.bgm-btn:hover{border-color:var(--muted)}
+.bgm-btn small{font-size:.85rem;font-weight:600;color:var(--muted)}
+.bgm-btn.is-playing{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.bgm-btn.is-playing small{color:inherit;opacity:.8}
+.bgm-btn .ico{width:1.25rem;height:1.25rem}
+.eq{display:none;align-items:flex-end;gap:2px;height:16px;width:18px}
+.eq i{display:block;width:3px;height:55%;background:currentColor;border-radius:1px}
+.eq i:nth-child(2){height:100%}.eq i:nth-child(3){height:40%}
+.bgm-btn.is-playing .eq{display:flex}
+.bgm-btn.is-playing .i-off{display:none}
+@media (prefers-reduced-motion:no-preference){
+  .bgm-btn.is-playing .eq i{animation:eq 1s ease-in-out infinite}
+  .eq i:nth-child(2){animation-delay:-.4s}.eq i:nth-child(3){animation-delay:-.75s}
+  @keyframes eq{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+  .eq i{transform-origin:bottom}
+}
+.bgm-hint{background:var(--ink);color:var(--paper);font-size:.88rem;line-height:1.5;padding:9px 13px;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.18)}
+.bgm-player{position:fixed;left:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden}
+
 /* ============================================================ 이미지 크게 보기 */
 .lb{position:fixed;inset:0;z-index:200;background:rgba(8,12,16,.96);display:flex;align-items:center;justify-content:center;padding:56px 64px}
 .lb figure{display:flex;flex-direction:column;align-items:center;gap:12px;max-width:100%;max-height:100%}
@@ -358,6 +381,7 @@ details.fold .fold-body p{padding-top:1em}
   <symbol id="i-prev" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M11 5L6 9H3v6h3l5 4V5z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
   <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
@@ -864,6 +888,17 @@ details.fold .fold-body p{padding-top:1em}
 
 <button class="to-top" id="toTop" type="button" aria-label="맨 위로 이동" hidden><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg></button>
 
+<!-- 배경음악: 이광조 - 즐거운 인생 (유튜브 영상을 숨겨서 재생) -->
+<div class="bgm" id="bgm">
+  <p class="bgm-hint" id="bgmHint" hidden>화면을 한 번 누르면 배경음악이 시작돼요</p>
+  <button class="bgm-btn" id="bgmBtn" type="button" aria-pressed="false" aria-label="배경음악 켜고 끄기" title="이광조 - 즐거운 인생">
+    <svg class="ico i-off" aria-hidden="true"><use href="#i-mute"/></svg>
+    <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span>BGM <small id="bgmState">꺼짐</small></span>
+  </button>
+</div>
+<div class="bgm-player" aria-hidden="true"><div id="bgmPlayer"></div></div>
+
 <!-- 이미지 크게 보기 -->
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="이미지 크게 보기" hidden>
   <button class="lb-btn lb-close" type="button" aria-label="닫기"><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button>
@@ -1016,6 +1051,83 @@ details.fold .fold-body p{padding-top:1em}
   window.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
   toTop.addEventListener('click',function(){window.scrollTo({top:0})});
+
+  /* ---------- 배경음악 (이광조 - 즐거운 인생) ---------- */
+  var BGM_ID='A-4dJU06sqY';       /* 다른 곡으로 바꾸려면 유튜브 영상 ID만 바꾸세요 */
+  var BGM_VOLUME=50;              /* 0~100 */
+  var bgmBtn=$('#bgmBtn'),bgmState=$('#bgmState'),bgmHint=$('#bgmHint');
+  var yt=null,ytLoading=false,bgmBroken=false;
+  var bgmWant=true;               /* 사용자가 음악을 켜둔 상태인지 */
+  try{if(localStorage.getItem('sigaret-bgm')==='off')bgmWant=false}catch(e){}
+  function saveBgm(v){try{localStorage.setItem('sigaret-bgm',v)}catch(e){}}
+  function bgmUI(playing,label){
+    bgmBtn.setAttribute('aria-pressed',playing?'true':'false');
+    bgmBtn.classList.toggle('is-playing',playing);
+    bgmState.textContent=label||(playing?'켜짐':'꺼짐');
+    if(playing)bgmHint.hidden=true;
+  }
+  function bgmIsPlaying(){return !!(yt&&yt.getPlayerState&&yt.getPlayerState()===1)}
+  function onBgmError(){
+    bgmBroken=true;
+    bgmUI(false,'재생 불가');
+    bgmHint.textContent='이 영상은 사이트 안에서 재생할 수 없어요.';
+    bgmHint.hidden=false;
+  }
+  function createBgmPlayer(){
+    var vars={autoplay:1,controls:0,disablekb:1,fs:0,loop:1,playlist:BGM_ID,playsinline:1,rel:0,modestbranding:1};
+    if(/^https?:$/.test(location.protocol))vars.origin=location.origin;
+    yt=new YT.Player('bgmPlayer',{
+      width:'1',height:'1',videoId:BGM_ID,host:'https://www.youtube-nocookie.com',playerVars:vars,
+      events:{
+        onReady:function(e){
+          e.target.setVolume(BGM_VOLUME);
+          if(bgmWant){
+            e.target.playVideo();
+            /* 브라우저가 자동재생을 막았으면, 첫 터치·클릭 때 시작하도록 안내 */
+            setTimeout(function(){
+              if(bgmWant&&!bgmBroken&&!bgmIsPlaying()){bgmUI(false,'탭하면 시작');bgmHint.hidden=false}
+            },1800);
+          }
+        },
+        onStateChange:function(e){
+          if(e.data===1){bgmUI(true)}
+          else if(e.data===0){e.target.seekTo(0);e.target.playVideo()}
+          else if(e.data===2&&!bgmWant){bgmUI(false)}
+        },
+        onError:onBgmError
+      }
+    });
+  }
+  function loadBgm(){
+    if(yt||ytLoading||bgmBroken)return;
+    ytLoading=true;
+    if(window.YT&&window.YT.Player){createBgmPlayer();return}
+    window.onYouTubeIframeAPIReady=createBgmPlayer;
+    var sc=document.createElement('script');
+    sc.src='https://www.youtube.com/iframe_api';
+    sc.onerror=onBgmError;
+    document.head.appendChild(sc);
+  }
+  function bgmOn(){
+    bgmWant=true;saveBgm('on');
+    if(yt&&yt.playVideo){yt.setVolume(BGM_VOLUME);yt.playVideo()}else{loadBgm()}
+  }
+  function bgmOff(){
+    bgmWant=false;saveBgm('off');
+    if(yt&&yt.pauseVideo)yt.pauseVideo();
+    bgmUI(false);
+  }
+  bgmBtn.addEventListener('click',function(){
+    if(bgmBroken){bgmHint.hidden=false;return}
+    if(bgmIsPlaying())bgmOff();else bgmOn();
+  });
+  /* 자동재생이 막힌 경우: 페이지 어디든 처음 누르면 음악을 시작합니다 */
+  function unlockBgm(e){
+    if(e.target.closest&&e.target.closest('#bgm'))return;
+    if(bgmWant&&yt&&yt.playVideo&&!bgmIsPlaying()&&!bgmBroken)yt.playVideo();
+  }
+  ['pointerdown','keydown','touchend'].forEach(function(ev){document.addEventListener(ev,unlockBgm,{passive:true})});
+  if(bgmWant){loadBgm()}else{bgmUI(false)}
 
   updateNav();
 })();
