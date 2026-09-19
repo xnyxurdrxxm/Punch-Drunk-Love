@@ -153,7 +153,8 @@ button{font:inherit;color:inherit}
   @keyframes slide-r{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
 }
 .songs{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:22px;align-items:center}
-.songs-label{font-weight:700;font-size:13px;font-family:var(--f13);color:var(--ink-2);margin-right:4px}
+.songs-label{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:13px;font-family:var(--f13);color:var(--ink-2);margin-right:4px}
+.songs-label .cd-ico{width:16px;height:16px;flex:none;image-rendering:pixelated}
 .song{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-family:var(--f13);padding:6px 14px 6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);text-decoration:none}
 .song:hover{border-color:var(--ink-2)}
 .dot{width:10px;height:10px;border-radius:50%;flex:none}
@@ -585,6 +586,7 @@ details.fold .fold-body{background:var(--doc);box-shadow:var(--sunken);border-to
   <symbol id="i-pc" viewBox="0 0 16 16"><path d="M1 1h14v10H1z" fill="#c0c0c0" stroke="#000"/><path d="M3 3h10v6H3z" fill="#0000aa"/><path d="M5 12h6v2H5z" fill="#808080"/><path d="M3 14h10v1H3z" fill="#000"/></symbol>
   <symbol id="i-page" viewBox="0 0 16 16"><path d="M3 1h7l3 3v11H3z" fill="#fff" stroke="#000"/><path d="M10 1v3h3" fill="none" stroke="#000"/><path d="M5 7h6M5 9h6M5 11h6" stroke="#0000aa"/></symbol>
   <symbol id="i-flag" viewBox="0 0 16 16"><rect x="1" y="2" width="6" height="6" fill="#ff0000"/><rect x="9" y="1" width="6" height="6" fill="#00a000"/><rect x="1" y="9" width="6" height="6" fill="#0000ff"/><rect x="9" y="8" width="6" height="6" fill="#ffd700"/></symbol>
+  <symbol id="i-cd" viewBox="0 0 16 16" shape-rendering="crispEdges"><path d="M6 0h4v1h-4zM4 1h2v1h-2zM10 1h2v1h-2zM3 2h1v1h-1zM12 2h1v1h-1zM2 3h1v1h-1zM13 3h1v1h-1zM1 4h1v1h-1zM14 4h1v1h-1zM1 5h1v1h-1zM14 5h1v1h-1zM0 6h1v1h-1zM7 6h2v1h-2zM15 6h1v1h-1zM0 7h1v1h-1zM6 7h1v1h-1zM9 7h1v1h-1zM15 7h1v1h-1zM0 8h1v1h-1zM6 8h1v1h-1zM9 8h1v1h-1zM15 8h1v1h-1zM0 9h1v1h-1zM7 9h2v1h-2zM15 9h1v1h-1zM1 10h1v1h-1zM14 10h1v1h-1zM1 11h1v1h-1zM14 11h1v1h-1zM2 12h1v1h-1zM13 12h1v1h-1zM3 13h1v1h-1zM12 13h1v1h-1zM4 14h2v1h-2zM10 14h2v1h-2zM6 15h4v1h-4z" fill="#000000"/><path d="M6 1h4v1h-4zM4 2h6v1h-6zM3 3h6v1h-6zM2 4h5v1h-5zM2 5h3v1h-3zM1 6h4v1h-4zM1 7h3v1h-3zM1 8h3v1h-3zM1 9h2v1h-2z" fill="#ffffff"/><path d="M10 2h2v1h-2zM9 3h4v1h-4zM7 4h7v1h-7zM5 5h2v1h-2zM9 5h5v1h-5zM5 6h1v1h-1zM10 6h3v1h-3zM4 7h1v1h-1zM11 7h1v1h-1zM4 8h1v1h-1zM11 8h1v1h-1zM3 9h3v1h-3zM10 9h1v1h-1zM2 10h5v1h-5zM9 10h2v1h-2zM2 11h7v1h-7zM3 12h4v1h-4zM4 13h2v1h-2z" fill="#c0c0c0"/><path d="M7 5h2v1h-2zM6 6h1v1h-1zM9 6h1v1h-1zM5 7h1v1h-1zM10 7h1v1h-1zM5 8h1v1h-1zM10 8h1v1h-1zM6 9h1v1h-1zM9 9h1v1h-1zM7 10h2v1h-2z" fill="#808080"/><path d="M13 6h2v1h-2zM12 7h3v1h-3zM12 8h2v1h-2zM11 9h2v1h-2zM11 10h1v1h-1zM9 11h2v1h-2zM7 12h3v1h-3zM6 13h3v1h-3zM6 14h2v1h-2z" fill="#55ffff"/><path d="M14 8h1v1h-1zM13 9h2v1h-2zM12 10h2v1h-2zM11 11h3v1h-3zM10 12h3v1h-3zM9 13h3v1h-3zM8 14h2v1h-2z" fill="#ff55ff"/></symbol>
   <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
@@ -636,7 +638,7 @@ details.fold .fold-body{background:var(--doc);box-shadow:var(--sunken);border-to
         <div class="duo-text">
           <div class="duo-name">신재경 <span class="duo-role">드림캐</span></div>
           <p class="duo-meta">44세 · UBS 9시 뉴스 메인앵커</p>
-          <blockquote class="duo-quote">“통화불량 아니지? 그냥 전화 끊은 거지?”</blockquote>
+          <blockquote class="duo-quote">“하여튼 뻔뻔하고 능글맞은 건 예나 지금이나 똑같네. 너 그 소리 하자고 이 바쁜 시간에 불러낸 거니? 허튼 소리 하지 말고 팩스나 보내.”</blockquote>
           <span class="duo-go">프로필 보기<svg class="ico" aria-hidden="true"><use href="#i-next"/></svg></span>
         </div>
       </a>
@@ -672,7 +674,7 @@ details.fold .fold-body{background:var(--doc);box-shadow:var(--sunken);border-to
         <ul>
           <li>1998년 IMF. 누군가는 시대에 꿈을 빼앗기고 누군가는 기회를 얻는다. 펜싱선수를 꿈꾸는 ‘희도’가 좌충우돌을 겪고, 또 깎이며 성장해나가는 이야기.</li>
           <li>청춘물인 만큼 전반부가 가볍고 청량하다. 그러나 후반부로 갈수록 현실적이고 어두운 감이 있어 호불호가 갈린다.</li>
-          <li>추측컨대, 작가가 전하고자 하는 바는 ‘유한성의 아름다움’이다. 청춘이란 영원하지 않기 때문에 슬프고, 그렇기 때문에 아름다우며, 삶의 모든 순간들도 마찬가지이므로 우리는 매 순간 최선을 다해 살아내야 한다는 메시지를 담고 있다고 생각한다. (개인적으로는 해당 결말을 매우 좋아한다.)</li>
+          <li>추측컨대, 작가가 전하고자 하는 바는 ‘유한성의 아름다움’ 이다. 청춘이란 영원하지 않기 때문에 슬프고, 그렇기 때문에 아름다우며, 삶의 모든 순간들도 마찬가지이므로 우리는 매 순간 최선을 다해 살아내야 한다는 메시지를 담고 있다고 생각한다. (개인적으로는 해당 결말을 매우 좋아한다.)</li>
         </ul>
         <p class="premise">이 사이트의 이야기는 원작의 1998년 방송가에 원작에 없는 인물 <b>남경석</b>(YBS 스포츠국 차장)이 있다는 설정에서 출발해요. 그는 대학 때부터 원작 인물 <b>신재경</b>(UBS 9시 뉴스 메인앵커)을 좋아해 온 동문입니다.</p>
       </div>
@@ -725,7 +727,7 @@ details.fold .fold-body{background:var(--doc);box-shadow:var(--sunken);border-to
       <article class="rel">
         <div class="rel-top"><h4>재경의 남편</h4><span class="role">재경과 사별</span></div>
         <span class="from">경석의 시선</span>
-        <p>경석만 아는 라이벌···혼자하는 싸움! 그러나 남편 쪽에서도 직감이라는 게 있는 바. 생전에 은근히 경계심을 느낀 대상이기도 하다.</p>
+        <p>경석만 아는 라이벌··· 혼자하는 싸움! 그러나 남편 쪽에서도 직감이라는 게 있는 바. 생전에 은근히 경계심을 느낀 대상이기도 하다.</p>
       </article>
 
       <article class="rel">
@@ -817,7 +819,7 @@ details.fold .fold-body{background:var(--doc);box-shadow:var(--sunken);border-to
       <h2 class="view-title" tabindex="-1">신재경</h2>
       <div class="tags"><span class="tag">드림캐</span></div>
     </div>
-      <blockquote class="pquote jg">“통화불량 아니지? 그냥 전화 끊은 거지?”</blockquote>
+      <blockquote class="pquote jg">“하여튼 뻔뻔하고 능글맞은 건 예나 지금이나 똑같네. 너 그 소리 하자고 이 바쁜 시간에 불러낸 거니? 허튼 소리 하지 말고 팩스나 보내.”</blockquote>
 
       <div class="gallery">
         <figure class="ph"><button class="zoom" type="button" data-caption="신재경 이미지 1" style="--bg:url('images/jg-1.webp')"><img src="images/jg-1.webp" width="1344" height="965" alt="신재경 이미지 1" loading="lazy"></button></figure>
@@ -837,7 +839,7 @@ details.fold .fold-body{background:var(--doc);box-shadow:var(--sunken);border-to
               <dt>학력</dt><dd>K대 신방과 학사. 수석 졸업.</dd>
               <dt>현직</dt><dd>UBS 9시 뉴스 메인앵커이자 희도의 모친.</dd>
             </dl>
-            <div class="chips"><span class="chip">냉철하고 이지적</span><span class="chip">약한 면을 감춤</span><span class="chip">희도의 어머니</span></div>
+            <div class="chips"><span class="chip">냉철하고 이지적</span><span class="chip">약한 면을 감춤</span><span class="chip">희도의 엄마</span></div>
           </div>
           <div class="theme">
             <h4>캐릭터 테마곡</h4>
@@ -911,15 +913,15 @@ details.fold .fold-body{background:var(--doc);box-shadow:var(--sunken);border-to
       <div class="tags"><span class="tag">타임라인</span></div>
     </div>
 
-    <div class="songs" style="margin:16px 0 32px"><span class="songs-label">Dream Couple Theme</span><a class="song" href="https://youtu.be/j1J3ZUd1Nqo" target="_blank" rel="noopener noreferrer"><span class="dot both"></span>전람회 - 취중진담</a></div>
+    <div class="songs" style="margin:16px 0 32px"><span class="songs-label"><svg class="cd-ico" aria-hidden="true"><use href="#i-cd"/></svg>Dream Couple Theme</span><a class="song" href="https://youtu.be/j1J3ZUd1Nqo" target="_blank" rel="noopener noreferrer"><span class="dot both"></span>전람회 - 취중진담</a></div>
 
     <nav class="flow" aria-label="서사 한눈에 보기">
-      <a href="#story/s-prehistory"><b>전사</b>대학 동문. 경석은 재경을 계속 좋아했지만 타이밍이 어긋났어요.</a>
-      <a href="#story/s-tf"><b>1화 무렵</b>IMF TF로 몇 년 만에 재회해요.</a>
-      <a href="#story/s-fifth"><b>5화 무렵</b>경석이 희도의 선발전을 취재하며 연락이 잦아져요.</a>
-      <a href="#story/s-night"><b>사고와 저녁 약속</b>술자리에서 서로의 마음이 잠시 맞물려요.</a>
-      <a href="#story/s-after"><b>다음 날 이후</b>재경은 ‘없던 셈’, 경석은 일방향 플러팅을 시작해요.</a>
-      <a href="#story/s-late"><b>12화~마지막화</b>남편 산소 방문 이후 서서히 스며들어 연인이 돼요.</a>
+      <a href="#story/s-prehistory"><b>전사</b>대학 동문. 경석은 재경을 계속 좋아했지만 타이밍이 어긋났다.</a>
+      <a href="#story/s-tf"><b>1화 무렵</b>IMF TF로 몇 년 만에 재회한다.</a>
+      <a href="#story/s-fifth"><b>5화 무렵</b>경석이 희도의 선발전을 취재하며 연락이 잦아진다.</a>
+      <a href="#story/s-night"><b>사고와 저녁 약속</b>술자리에서 서로의 마음이 잠시 맞물린다.</a>
+      <a href="#story/s-after"><b>다음 날 이후</b>재경은 ‘없던 셈’, 경석은 일방향 플러팅을 시작한다.</a>
+      <a href="#story/s-late"><b>12화~마지막화</b>남편 산소 방문 이후 서서히 스며들어 연인이 된다.</a>
     </nav>
 
     <ol class="tl" data-lb-scope>
