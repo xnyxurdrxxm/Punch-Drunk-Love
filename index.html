@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="light">
 <title>시가렛 스윙! | 남경석 × 신재경 드림 커플</title>
 <meta name="description" content="드라마 <스물다섯 스물하나>의 1998년 방송가를 배경으로 한 드림 커플, 남경석과 신재경의 설정집입니다.">
 <meta property="og:title" content="시가렛 스윙! | 남경석 × 신재경">
@@ -19,37 +19,35 @@
 <style>
 /* ============================================================
    디자인 토큰 (색·글꼴·간격은 여기서만 바꾸면 됩니다)
+   기본 = 윈도우98, 위쪽 "PC통신 모드" 버튼 = 파란 PC통신 화면
    gs = 남경석(금빛), jg = 신재경(남색)
    ============================================================ */
 :root{
-  --paper:#F3F5F8; --paper-glass:rgba(243,245,248,.92); --surface:#FFFFFF;
-  --ink:#151E28; --ink-2:#3A4655; --muted:#65717F; --line:#DCE1E8;
-  --jg:#22406A; --jg-ink:#22406A; --jg-tint:#E7EDF6; --jg-on:#FFFFFF;
-  --gs:#E2A81D; --gs-ink:#7A5400; --gs-tint:#FBF1D6; --gs-on:#1F1707;
-  --alert:#A93B35; --alert-tint:#FAEAE8;
-  --focus:#2F6FE4;
-  --radius:14px; --radius-lg:20px;
-  --gutter:clamp(16px,4vw,32px);
+  --desk:#008080; --face:#c0c0c0; --hl:#ffffff; --lt:#dfdfdf; --sh:#808080; --dk:#0a0a0a;
+  --doc:#ffffff; --link:#0000ee;
+  --tb:linear-gradient(90deg,#000080,#1084d0); --tb-gs:linear-gradient(90deg,#6b4a00,#d99a00); --tb-alert:linear-gradient(90deg,#800000,#c04040); --tb-text:#ffffff;
+  --paper:var(--desk); --paper-glass:var(--face); --surface:var(--face);
+  --ink:#000000; --ink-2:#1a1a1a; --muted:#4a4a4a; --line:#808080;
+  --jg:#000080; --jg-ink:#000080; --jg-tint:#d4d4f4; --jg-on:#ffffff;
+  --gs:#e2a81d; --gs-ink:#6b4a00; --gs-tint:#f3e2a8; --gs-on:#000000;
+  --alert:#a00000; --alert-tint:#f4d2d2;
+  --focus:#0000ff;
+  --radius:0px; --radius-lg:0px;
+  --gutter:clamp(8px,3vw,28px);
+  --raised:inset -1px -1px var(--dk),inset 1px 1px var(--hl),inset -2px -2px var(--sh),inset 2px 2px var(--lt);
+  --sunken:inset -1px -1px var(--hl),inset 1px 1px var(--sh),inset -2px -2px var(--lt),inset 2px 2px var(--dk);
   --font-body:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Noto Sans CJK KR",sans-serif;
   --font-display:"Black Han Sans","Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Noto Sans CJK KR",sans-serif;
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --paper:#0F151C; --paper-glass:rgba(15,21,28,.92); --surface:#161E27;
-    --ink:#E8EDF2; --ink-2:#C2CBD5; --muted:#93A0AE; --line:#263241;
-    --jg:#2C4F82; --jg-ink:#93B6EA; --jg-tint:#16263B; --jg-on:#FFFFFF;
-    --gs:#E9B93F; --gs-ink:#EDC25E; --gs-tint:#2A2211; --gs-on:#1F1707;
-    --alert:#EE9A94; --alert-tint:#2E1B1A;
-    --focus:#8DB4FF;
-  }
-}
 :root[data-theme="dark"]{
-  --paper:#0F151C; --paper-glass:rgba(15,21,28,.92); --surface:#161E27;
-  --ink:#E8EDF2; --ink-2:#C2CBD5; --muted:#93A0AE; --line:#263241;
-  --jg:#2C4F82; --jg-ink:#93B6EA; --jg-tint:#16263B; --jg-on:#FFFFFF;
-  --gs:#E9B93F; --gs-ink:#EDC25E; --gs-tint:#2A2211; --gs-on:#1F1707;
-  --alert:#EE9A94; --alert-tint:#2E1B1A;
-  --focus:#8DB4FF;
+  --desk:#000070; --face:#0000a8; --hl:#7c7cff; --lt:#2c2cd0; --sh:#000058; --dk:#000030;
+  --doc:#00007a; --link:#ffff66;
+  --tb:linear-gradient(90deg,#55ffff,#00b0b0); --tb-gs:linear-gradient(90deg,#ffe066,#c9a400); --tb-alert:linear-gradient(90deg,#ff9a9a,#d04040); --tb-text:#000070;
+  --ink:#b4ffff; --ink-2:#98f0f0; --muted:#78d4e8; --line:#4646d8;
+  --jg:#008b9c; --jg-ink:#7dffff; --jg-tint:#00005c; --jg-on:#ffffff;
+  --gs:#ffd23f; --gs-ink:#ffe066; --gs-tint:#3a3200; --gs-on:#000000;
+  --alert:#ff9a9a; --alert-tint:#500000;
+  --focus:#ffff66;
 }
 
 /* ============================================================
@@ -230,8 +228,9 @@ figure.ph figcaption{padding:8px 12px 10px;font-size:14px;font-family:var(--f14)
 .pquote{font-size:20px;font-family:var(--f20);font-weight:700;line-height:1.55;padding-left:20px;border-left:5px solid var(--accent);margin-bottom:clamp(24px,4vw,40px)}
 .pquote.gs{--accent:var(--gs)}.pquote.jg{--accent:var(--jg)}
 /* 넓은 화면에서는 줄바꿈 없이 한 줄로 (글자 크기는 화면 폭에 맞춰 자동 조절, 아래 스크립트가 미세 조정) */
-@media (min-width:860px){
-  .pquote.oneline{max-width:none;white-space:nowrap;font-size:17px;font-family:var(--f17)}
+@media (min-width:960px){
+  .pquote{font-size:17px;font-family:var(--f17)}
+  .pquote.oneline{max-width:none;white-space:nowrap}
 }
 .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:clamp(28px,5vw,52px)}
 @media (max-width:640px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -381,6 +380,183 @@ details.fold .fold-body p{padding-top:1em}
   .hero-sub,.duo-quote{font-size:20px;font-family:var(--f20)}
   .section-head h2{font-size:40px;font-family:var(--f20)}
 }
+
+/* ============================================================
+   1998 레트로: 윈도우98 창 + PC통신 파란 화면
+   (위의 기본 스타일 위에 덧씌우는 부분이에요)
+   ============================================================ */
+*,*::before,*::after{border-radius:0!important}
+html{scrollbar-color:var(--face) var(--lt)}
+::selection{background:#000080;color:#fff}
+::-webkit-scrollbar{width:16px;height:16px}
+::-webkit-scrollbar-track{background:repeating-conic-gradient(var(--face) 0 25%,var(--hl) 0 50%) 0 0/2px 2px}
+::-webkit-scrollbar-thumb{background:var(--face);box-shadow:var(--raised)}
+::-webkit-scrollbar-button{display:block;width:16px;height:16px;background:var(--face);box-shadow:var(--raised)}
+body{background:var(--desk);color:var(--ink);padding-bottom:56px}
+.wrap{--page:880px}
+.wrap.wide{--page:1120px}
+.view{padding-block:clamp(14px,3vw,30px) 40px;min-height:0}
+
+/* --- 상단 도구 모음 --- */
+.site-header{background:var(--face);box-shadow:inset 0 1px var(--hl),inset 0 -1px var(--dk),inset 0 -2px var(--sh);-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:0}
+.bar{gap:6px 10px;padding-block:6px}
+.brand{display:inline-flex;align-items:center;gap:8px;color:var(--ink)}
+.brand .ico{width:22px;height:22px}
+.nav{gap:6px}
+.nav a{background:var(--face);box-shadow:var(--raised);color:var(--ink);padding:5px 12px 6px;font-weight:700}
+.nav a:hover{background:var(--lt)}
+.nav a[aria-current="true"],.nav a[data-view][aria-current="true"]{background:var(--lt);color:var(--ink);box-shadow:var(--sunken);padding:6px 12px 5px}
+.nav a[data-view="gyeongseok"]::before,.nav a[data-view="jaegyeong"]::before{content:"";display:inline-block;width:8px;height:8px;margin-right:6px}
+.nav a[data-view="gyeongseok"]::before{background:var(--gs)}
+.nav a[data-view="jaegyeong"]::before{background:var(--jg)}
+.icon-btn{width:auto;height:auto;display:inline-block;padding:5px 12px 6px;background:var(--face);box-shadow:var(--raised);border:0;color:var(--ink);font-size:15px;font-family:var(--f15);font-weight:700}
+.icon-btn:hover{background:var(--lt)}
+.icon-btn .lbl-b{display:none}
+.icon-btn[data-mode="dark"] .lbl-a{display:none}
+.icon-btn[data-mode="dark"] .lbl-b{display:inline}
+
+/* --- 창 --- */
+.win{background:var(--face);box-shadow:var(--raised);padding:3px}
+.titlebar{display:flex;align-items:center;gap:6px;min-height:22px;padding:2px 3px 2px 5px;background:var(--tb);color:var(--tb-text);font-size:15px;font-family:var(--f15);font-weight:700}
+.ti-ico{width:16px;height:16px;flex:none}
+.ti-text{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ti-btns{display:flex;gap:2px}
+.tb-btn{display:grid;place-items:center;width:18px;height:16px;padding:0;border:0;background:var(--face);box-shadow:var(--raised);color:var(--ink);text-decoration:none}
+.tb-btn svg{width:8px;height:8px}
+a.tb-btn:active{box-shadow:var(--sunken)}
+.win-body{padding:6px}
+.doc{background:var(--doc);box-shadow:var(--sunken);padding:clamp(12px,3.5vw,28px);color:var(--ink)}
+.section-head{padding-bottom:14px;margin-bottom:24px;border-bottom:2px solid var(--sh);box-shadow:0 1px 0 var(--hl)}
+.tag{background:var(--face);color:var(--ink);border:0;box-shadow:var(--raised);padding:1px 9px}
+.ext{color:var(--link)}
+
+/* --- 홈 화면 --- */
+.hero{padding-top:clamp(14px,3vw,30px)}
+.home-win .doc{text-align:center}
+.hero-title{text-shadow:4px 4px 0 var(--sh)}
+.hero-sub{margin-inline:auto;max-width:none}
+.duo{text-align:left;margin-top:clamp(18px,3vw,30px)}
+.duo-card{background:var(--face);border:0;box-shadow:var(--raised);padding:3px;animation:none}
+.duo-tb{display:flex;align-items:center;gap:6px;min-height:22px;padding:2px 6px;background:var(--tb);color:var(--tb-text);font-size:15px;font-family:var(--f15);font-weight:700}
+.duo-card.gs .duo-tb{background:var(--tb-gs)}
+.duo-card.gs .duo-tb{color:#fff}
+:root[data-theme="dark"] .duo-card.gs .duo-tb{color:#000070}
+.duo-card img{margin:3px 0 0;border:2px solid;border-color:var(--sh) var(--hl) var(--hl) var(--sh)}
+.duo-card.gs .duo-text,.duo-card.jg .duo-text{background:transparent}
+.duo-text{padding:12px 8px 8px}
+.duo-meta{color:var(--muted)}
+.duo-go{background:var(--face);color:var(--ink);box-shadow:0 0 0 1px var(--dk),var(--raised);padding:10px 20px}
+.duo-card.gs .duo-go,.duo-card.jg .duo-go{background:var(--face);color:var(--ink)}
+.duo-go::before{content:"";width:10px;height:10px;background:var(--accent-c)}
+.duo-card.gs{--accent-c:var(--gs)}.duo-card.jg{--accent-c:var(--jg)}
+.duo-card:hover .duo-go{background:var(--lt);filter:none}
+.duo-x{background:var(--face);color:var(--ink);box-shadow:var(--raised);border:0;width:30px;height:30px;font-size:24px;font-family:var(--f24);font-weight:700;top:30%}
+.console{margin-top:clamp(16px,3vw,26px);background:#0000aa;color:#7ffbff;box-shadow:var(--sunken);padding:12px 16px;text-align:left;font-size:15px;font-family:var(--f15);line-height:1.8}
+:root[data-theme="dark"] .console{background:#000050;color:#b4ffff}
+.console .hl{background:#7ffbff;color:#0000aa;padding:0 4px}
+:root[data-theme="dark"] .console .hl{background:#b4ffff;color:#000050}
+.cursor{display:inline-block;width:8px;height:15px;background:currentColor;vertical-align:-2px}
+@media (prefers-reduced-motion:no-preference){.cursor{animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}}
+
+/* --- 이미지 프레임 --- */
+.banner,.tl-img,figure.ph{border:2px solid;border-color:var(--sh) var(--hl) var(--hl) var(--sh);background:var(--face)}
+figure.ph figcaption{background:var(--face);color:var(--ink);padding:4px 8px 5px}
+.gallery figure.ph,.gallery .zoom{background:#000}
+.gallery .zoom::before{display:none}
+.zoom{background:none}
+
+/* --- 글 --- */
+.pquote{background:#0000aa;color:#7ffbff;border:0;box-shadow:var(--sunken);padding:10px 14px;margin-bottom:24px}
+:root[data-theme="dark"] .pquote{background:#000050;color:#b4ffff}
+.premise,.tl-sum{background:var(--face);box-shadow:var(--raised);border:0;color:var(--ink)}
+.callout,.callout.gs,.callout.jg,.callout.alert{background:var(--face);box-shadow:var(--raised);border:0;padding:3px 3px 12px;margin:1.6em 0;color:var(--ink)}
+.callout>p:first-child{padding-top:12px}
+.callout p{padding-inline:14px}
+.callout h4,.callout.gs h4,.callout.jg h4,.callout.alert h4{margin:0 0 10px;padding:3px 8px;background:var(--tb);color:var(--tb-text);font-size:15px;font-family:var(--f15)}
+.callout.gs h4{background:var(--tb-gs)}
+.callout.alert h4{background:var(--tb-alert)}
+.callout.gs h4{color:#fff}.callout.alert h4{color:#fff}
+:root[data-theme="dark"] .callout.gs h4,:root[data-theme="dark"] .callout.alert h4{color:#000070}
+.cookie-asides .callout,.notes .callout{margin:0}
+.vids .ep{background:var(--face);color:var(--ink);box-shadow:var(--raised);padding:1px 9px}
+.relvids li,.vids li{border-top:1px dotted var(--sh)}
+.relvids li:last-child,.vids li:last-child{border-bottom:1px dotted var(--sh)}
+details.fold{background:var(--face);box-shadow:var(--raised);border:0;padding:3px}
+details.fold>summary{padding:8px 12px}
+details.fold .fold-body{background:var(--doc);box-shadow:var(--sunken);border-top:0;padding:4px 16px 12px}
+.beat>h4{border-top:1px dotted var(--sh)}
+
+/* --- 인물 화면 --- */
+.idcard{background:var(--face);box-shadow:var(--raised);border:0;padding:3px 3px 14px}
+.idcard h3{margin:0 0 12px;padding:3px 10px;background:var(--tb);color:var(--tb-text);font-size:20px;font-family:var(--f20)}
+.idcard.gs h3{background:var(--tb-gs);color:#fff}
+:root[data-theme="dark"] .idcard.gs h3{color:#000070}
+.idcard h3 small{color:inherit;opacity:.85}
+.idcard dl,.idcard .chips{padding-inline:12px}
+.chip,.gs .chip,.jg .chip{background:var(--face);color:var(--ink);box-shadow:var(--raised);padding:1px 9px}
+.theme{background:var(--face);box-shadow:var(--raised);border:0;padding:3px 3px 6px}
+.theme h4{margin:0 0 6px;padding:3px 10px;background:var(--tb);color:var(--tb-text)}
+.theme a{padding:6px 12px;color:var(--ink)}
+.theme a:hover{background:#000080;color:#fff}
+:root[data-theme="dark"] .theme a:hover{background:#55ffff;color:#000070}
+.theme a:hover span{text-decoration:none}
+.theme .ico{color:inherit}
+.rel-hub{background:var(--tb);color:var(--tb-text);box-shadow:var(--raised);border:0}
+.rel{background:var(--face);box-shadow:var(--raised);border:0}
+.rel-title{color:var(--ink)}
+
+/* --- 서사 --- */
+.flow{background:var(--face);box-shadow:var(--raised);border:0;gap:2px;padding:3px}
+.flow a{background:var(--face);box-shadow:var(--raised);color:var(--ink-2)}
+.flow a:hover{background:var(--lt);box-shadow:var(--sunken)}
+.tl-item::before{background:var(--sh)}
+.tl-item::after{box-shadow:0 0 0 4px var(--doc)}
+.song{background:var(--face);color:var(--ink);border:0;box-shadow:var(--raised)}
+.song:hover{background:var(--lt)}
+
+/* --- 연성 아카이브 --- */
+.filter{background:var(--face);color:var(--ink);border:0;box-shadow:var(--raised)}
+.filter:hover{background:var(--lt)}
+.filter[aria-pressed="true"]{background:var(--lt);color:var(--ink);box-shadow:var(--sunken)}
+.playlist{background:var(--doc);border:2px solid;border-color:var(--sh) var(--hl) var(--hl) var(--sh)}
+.playlist a{padding:9px 12px;border-bottom:1px dotted var(--sh);color:var(--ink)}
+.playlist a:hover{background:#000080;color:#fff}
+:root[data-theme="dark"] .playlist a:hover{background:#55ffff;color:#000070}
+.playlist a:hover span{text-decoration:none}
+.playlist .ico{color:inherit}
+
+/* --- 하단 --- */
+.site-footer{border-top:0;color:#fff;padding-block:18px 8px}
+.site-footer strong{color:#fff}
+.to-top{right:12px;bottom:calc(48px + env(safe-area-inset-bottom));width:36px;height:36px;border:0;background:var(--face);color:var(--ink);box-shadow:var(--raised)}
+.to-top:active{box-shadow:var(--sunken)}
+.taskbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;gap:6px;height:40px;padding:4px 4px calc(4px + env(safe-area-inset-bottom));background:var(--face);box-shadow:inset 0 1px var(--lt),inset 0 2px var(--hl);box-sizing:content-box}
+.start-btn{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px 0 8px;background:var(--face);box-shadow:var(--raised);color:var(--ink);font-size:16px;font-family:var(--f16);font-weight:700;text-decoration:none}
+.start-btn .ico{width:18px;height:18px}
+.start-btn:active{box-shadow:var(--sunken)}
+.tb-sep{flex:none;width:2px;height:28px;box-shadow:inset 1px 0 var(--sh),inset -1px 0 var(--hl)}
+.task-area{flex:1;min-width:0}
+.task{display:inline-flex;align-items:center;gap:6px;max-width:100%;height:30px;padding:0 12px 0 8px;background:var(--lt);box-shadow:var(--sunken);font-size:15px;font-family:var(--f15);font-weight:700;color:var(--ink);overflow:hidden;white-space:nowrap}
+.task span{overflow:hidden;text-overflow:ellipsis}
+.tray{display:flex;align-items:center;gap:8px;height:30px;padding:0 10px;margin-left:auto;box-shadow:var(--sunken);color:var(--ink)}
+.tray .tb-sep{height:20px}
+.clock{font-size:14px;font-family:var(--f14);white-space:nowrap}
+.bgm{position:relative;left:auto;bottom:auto;z-index:auto;display:block;max-width:none}
+.bgm-btn,.bgm-btn.is-playing{height:24px;padding:0 6px;background:transparent;border:0;box-shadow:none;color:var(--ink);font-size:14px;font-family:var(--f14);font-weight:700}
+.bgm-btn:hover{background:var(--lt)}
+.bgm-btn small,.bgm-btn.is-playing small{color:inherit;opacity:1;font-size:14px;font-family:var(--f14);font-weight:400}
+.bgm-btn .ico{width:1.15rem;height:1.15rem}
+.bgm-hint{position:absolute;right:-8px;bottom:calc(100% + 14px);width:max-content;max-width:min(240px,78vw);background:#ffffe1;color:#000;border:1px solid #000;box-shadow:none;padding:6px 10px;font-size:14px;font-family:var(--f14)}
+.bgm-hint::after{content:"";position:absolute;right:20px;top:100%;border:6px solid transparent;border-top-color:#000}
+@media (max-width:640px){.task-area{display:none}.tray{margin-left:auto}}
+
+/* --- 이미지 크게 보기 --- */
+.lb{background:rgba(0,0,0,.88)}
+.lb img{border:2px solid;border-color:var(--sh) var(--hl) var(--hl) var(--sh)}
+.lb-btn{background:var(--face);color:#000;box-shadow:var(--raised)}
+.lb-btn:hover{background:var(--lt)}
+.lb figcaption{color:#fff}
+@media (max-width:640px){.win{padding:2px}.win-body{padding:3px}.doc{padding:12px}}
 </style>
 <noscript><style>.view[hidden]{display:block!important}</style></noscript>
 </head>
@@ -397,15 +573,21 @@ details.fold .fold-body p{padding-top:1em}
   <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-mute" viewBox="0 0 24 24"><path d="M11 5L6 9H3v6h3l5 4V5z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-min" viewBox="0 0 8 8"><rect x="0" y="6" width="6" height="2" fill="currentColor"/></symbol>
+  <symbol id="i-max" viewBox="0 0 8 8"><path fill-rule="evenodd" d="M0 0h8v8H0zM1 2h6v5H1z" fill="currentColor"/></symbol>
+  <symbol id="i-x" viewBox="0 0 8 8"><path d="M0 0h2l2 2 2-2h2v1L5 4l3 3v1H6L4 6 2 8H0V7l3-3L0 1z" fill="currentColor"/></symbol>
+  <symbol id="i-pc" viewBox="0 0 16 16"><path d="M1 1h14v10H1z" fill="#c0c0c0" stroke="#000"/><path d="M3 3h10v6H3z" fill="#0000aa"/><path d="M5 12h6v2H5z" fill="#808080"/><path d="M3 14h10v1H3z" fill="#000"/></symbol>
+  <symbol id="i-page" viewBox="0 0 16 16"><path d="M3 1h7l3 3v11H3z" fill="#fff" stroke="#000"/><path d="M10 1v3h3" fill="none" stroke="#000"/><path d="M5 7h6M5 9h6M5 11h6" stroke="#0000aa"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 16 16"><rect x="1" y="2" width="6" height="6" fill="#ff0000"/><rect x="9" y="1" width="6" height="6" fill="#00a000"/><rect x="1" y="9" width="6" height="6" fill="#0000ff"/><rect x="9" y="8" width="6" height="6" fill="#ffd700"/></symbol>
   <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
 <a class="skip" href="#main">본문으로 바로가기</a>
 
-<!-- ================= 상단 바 ================= -->
+<!-- ================= 상단 바 (윈도우98 도구 모음) ================= -->
 <header class="site-header">
   <div class="wrap wide bar">
-    <a class="brand" href="#home">시가렛 스윙!</a>
+    <a class="brand" href="#home"><svg class="ico" aria-hidden="true"><use href="#i-pc"/></svg>시가렛 스윙!</a>
     <nav class="nav" id="nav" aria-label="페이지 이동">
       <a href="#world" data-view="world">세계관</a>
       <a href="#relations" data-view="relations">관계도</a>
@@ -414,10 +596,7 @@ details.fold .fold-body p{padding-top:1em}
       <a href="#story" data-view="story">서사</a>
       <a href="#archive" data-view="archive">연성·참고사항</a>
     </nav>
-    <button class="icon-btn" id="themeBtn" type="button" aria-label="화면 밝기 바꾸기 (밝게/어둡게)">
-      <svg class="ico i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
-      <svg class="ico i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
-    </button>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="화면 모드 바꾸기 (기본 / PC통신)"><span class="lbl-a">PC통신 모드</span><span class="lbl-b">기본 모드</span></button>
   </div>
 </header>
 
@@ -426,11 +605,16 @@ details.fold .fold-body p{padding-top:1em}
 <!-- ================= 첫 화면 ================= -->
 <section class="view hero" id="view-home" data-view="home">
   <div class="wrap wide">
+    <div class="win home-win">
+      <div class="titlebar"><svg class="ti-ico" aria-hidden="true"><use href="#i-page"/></svg><span class="ti-text" aria-hidden="true">시가렛 스윙! - 남경석 X 신재경</span><span class="ti-btns"><span class="tb-btn" aria-hidden="true"><svg><use href="#i-min"/></svg></span><span class="tb-btn" aria-hidden="true"><svg><use href="#i-max"/></svg></span><span class="tb-btn" aria-hidden="true"><svg><use href="#i-x"/></svg></span></span></div>
+      <div class="win-body"><div class="doc">
+
     <h1 class="hero-title">시가렛 스윙!</h1>
     <p class="hero-sub">드림주 남경석 X 드림캐 &lt;스물다섯 스물하나&gt; 신재경</p>
 
     <div class="duo">
       <a class="duo-card gs" href="#gyeongseok">
+        <span class="duo-tb" aria-hidden="true"><svg class="ti-ico"><use href="#i-page"/></svg>남경석.exe</span>
         <img src="images/gs-main.webp" width="1200" height="851" alt="남경석 대표 이미지: 수건을 두르고 웃는 모습">
         <div class="duo-text">
           <div class="duo-name">남경석 <span class="duo-role">드림주</span></div>
@@ -441,6 +625,7 @@ details.fold .fold-body p{padding-top:1em}
       </a>
       <div class="duo-x" aria-hidden="true">×</div>
       <a class="duo-card jg" href="#jaegyeong">
+        <span class="duo-tb" aria-hidden="true"><svg class="ti-ico"><use href="#i-page"/></svg>신재경.exe</span>
         <img src="images/jg-1.webp" width="1344" height="965" alt="신재경 이미지: 블레이저 차림으로 옆을 바라보는 모습">
         <div class="duo-text">
           <div class="duo-name">신재경 <span class="duo-role">드림캐</span></div>
@@ -451,12 +636,23 @@ details.fold .fold-body p{padding-top:1em}
       </a>
     </div>
 
+        <div class="console" aria-hidden="true">
+          <p>*** <span class="hl">남경석</span> 님이 입장하셨습니다 ***</p>
+          <p>*** <span class="hl">신재경</span> 님이 입장하셨습니다 ***</p>
+          <p>Chat : <span class="cursor"></span></p>
+        </div>
+      </div></div>
+    </div>
   </div>
 </section>
 
 <!-- ================= 원작 및 세계관 ================= -->
 <section class="view" id="view-world" data-view="world" hidden>
   <div class="wrap">
+    <div class="win">
+      <div class="titlebar"><svg class="ti-ico" aria-hidden="true"><use href="#i-page"/></svg><span class="ti-text" aria-hidden="true">원작 및 세계관.txt</span><span class="ti-btns"><span class="tb-btn" aria-hidden="true"><svg><use href="#i-min"/></svg></span><span class="tb-btn" aria-hidden="true"><svg><use href="#i-max"/></svg></span><a class="tb-btn" href="#home" aria-label="닫기 (처음 화면으로)"><svg aria-hidden="true"><use href="#i-x"/></svg></a></span></div>
+      <div class="win-body"><div class="doc">
+
     <div class="section-head">
       <h2 class="view-title" tabindex="-1">원작 및 세계관</h2>
       <div class="tags"><span class="tag">1998년</span><span class="tag">IMF</span><span class="tag">여름</span></div>
@@ -476,14 +672,18 @@ details.fold .fold-body p{padding-top:1em}
       </div>
 
     </div>
-
-
+      </div></div>
+    </div>
   </div>
 </section>
 
 <!-- ================= 인물 관계도 ================= -->
 <section class="view" id="view-relations" data-view="relations" hidden>
   <div class="wrap">
+    <div class="win">
+      <div class="titlebar"><svg class="ti-ico" aria-hidden="true"><use href="#i-page"/></svg><span class="ti-text" aria-hidden="true">인물 관계도.doc</span><span class="ti-btns"><span class="tb-btn" aria-hidden="true"><svg><use href="#i-min"/></svg></span><span class="tb-btn" aria-hidden="true"><svg><use href="#i-max"/></svg></span><a class="tb-btn" href="#home" aria-label="닫기 (처음 화면으로)"><svg aria-hidden="true"><use href="#i-x"/></svg></a></span></div>
+      <div class="win-body"><div class="doc">
+
     <div class="section-head">
       <h2 class="view-title" tabindex="-1">인물 관계도</h2>
       <div class="tags"><span class="tag">이진</span><span class="tag">재경의 남편</span><span class="tag">찬미</span><span class="tag">희도</span></div>
@@ -529,6 +729,8 @@ details.fold .fold-body p{padding-top:1em}
         <a class="ext" href="#jaegyeong/jg-relvideos">재경과의 관계 영상 보기</a>
       </article>
     </div>
+      </div></div>
+    </div>
   </div>
 </section>
 
@@ -536,6 +738,10 @@ details.fold .fold-body p{padding-top:1em}
 <!-- ================= 남경석 ================= -->
 <section class="view" id="view-gyeongseok" data-view="gyeongseok" data-lb-scope hidden>
   <div class="wrap">
+    <div class="win">
+      <div class="titlebar"><svg class="ti-ico" aria-hidden="true"><use href="#i-page"/></svg><span class="ti-text" aria-hidden="true">남경석.exe</span><span class="ti-btns"><span class="tb-btn" aria-hidden="true"><svg><use href="#i-min"/></svg></span><span class="tb-btn" aria-hidden="true"><svg><use href="#i-max"/></svg></span><a class="tb-btn" href="#home" aria-label="닫기 (처음 화면으로)"><svg aria-hidden="true"><use href="#i-x"/></svg></a></span></div>
+      <div class="win-body"><div class="doc">
+
     <div class="section-head">
       <h2 class="view-title" tabindex="-1">남경석</h2>
       <div class="tags"><span class="tag">드림주</span></div>
@@ -589,12 +795,18 @@ details.fold .fold-body p{padding-top:1em}
         </div>
       </div>
     
+      </div></div>
+    </div>
   </div>
 </section>
 
 <!-- ================= 신재경 ================= -->
 <section class="view" id="view-jaegyeong" data-view="jaegyeong" data-lb-scope hidden>
   <div class="wrap">
+    <div class="win">
+      <div class="titlebar"><svg class="ti-ico" aria-hidden="true"><use href="#i-page"/></svg><span class="ti-text" aria-hidden="true">신재경.exe</span><span class="ti-btns"><span class="tb-btn" aria-hidden="true"><svg><use href="#i-min"/></svg></span><span class="tb-btn" aria-hidden="true"><svg><use href="#i-max"/></svg></span><a class="tb-btn" href="#home" aria-label="닫기 (처음 화면으로)"><svg aria-hidden="true"><use href="#i-x"/></svg></a></span></div>
+      <div class="win-body"><div class="doc">
+
     <div class="section-head">
       <h2 class="view-title" tabindex="-1">신재경</h2>
       <div class="tags"><span class="tag">드림캐</span></div>
@@ -676,12 +888,18 @@ details.fold .fold-body p{padding-top:1em}
         </div>
       </div>
     
+      </div></div>
+    </div>
   </div>
 </section>
 
 <!-- ================= 서사 (타임라인) ================= -->
 <section class="view" id="view-story" data-view="story" hidden>
   <div class="wrap">
+    <div class="win">
+      <div class="titlebar"><svg class="ti-ico" aria-hidden="true"><use href="#i-page"/></svg><span class="ti-text" aria-hidden="true">서사.txt</span><span class="ti-btns"><span class="tb-btn" aria-hidden="true"><svg><use href="#i-min"/></svg></span><span class="tb-btn" aria-hidden="true"><svg><use href="#i-max"/></svg></span><a class="tb-btn" href="#home" aria-label="닫기 (처음 화면으로)"><svg aria-hidden="true"><use href="#i-x"/></svg></a></span></div>
+      <div class="win-body"><div class="doc">
+
     <div class="section-head">
       <h2 class="view-title" tabindex="-1">서사</h2>
       <div class="tags"><span class="tag">타임라인</span></div>
@@ -773,12 +991,18 @@ details.fold .fold-body p{padding-top:1em}
         </div>
       </li>
     </ol>
+      </div></div>
+    </div>
   </div>
 </section>
 
 <!-- ================= 연성 아카이빙 및 참고사항 ================= -->
-<section class="view" id="view-archive" data-view="archive" hidden>
-  <div class="wrap" data-lb-scope>
+<section class="view" id="view-archive" data-view="archive" data-lb-scope hidden>
+  <div class="wrap">
+    <div class="win">
+      <div class="titlebar"><svg class="ti-ico" aria-hidden="true"><use href="#i-page"/></svg><span class="ti-text" aria-hidden="true">연성 아카이빙 및 참고사항.zip</span><span class="ti-btns"><span class="tb-btn" aria-hidden="true"><svg><use href="#i-min"/></svg></span><span class="tb-btn" aria-hidden="true"><svg><use href="#i-max"/></svg></span><a class="tb-btn" href="#home" aria-label="닫기 (처음 화면으로)"><svg aria-hidden="true"><use href="#i-x"/></svg></a></span></div>
+      <div class="win-body"><div class="doc">
+
     <div class="section-head">
       <h2 class="view-title" tabindex="-1">연성 아카이빙 및 참고사항</h2>
       <div class="tags"><span class="tag">NG</span><span class="tag">커미션</span></div>
@@ -862,6 +1086,8 @@ details.fold .fold-body p{padding-top:1em}
         </div>
       </div>
     </div>
+      </div></div>
+    </div>
   </div>
 </section>
 
@@ -876,14 +1102,23 @@ details.fold .fold-body p{padding-top:1em}
 
 <button class="to-top" id="toTop" type="button" aria-label="맨 위로 이동" hidden><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg></button>
 
-<!-- 배경음악: 이광조 - 즐거운 인생 (유튜브 영상을 숨겨서 재생) -->
-<div class="bgm" id="bgm">
-  <p class="bgm-hint" id="bgmHint" hidden>화면을 한 번 누르면 배경음악이 시작돼요</p>
-  <button class="bgm-btn" id="bgmBtn" type="button" aria-pressed="false" aria-label="배경음악 켜고 끄기" title="이광조 - 즐거운 인생">
-    <svg class="ico i-off" aria-hidden="true"><use href="#i-mute"/></svg>
-    <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
-    <span>BGM <small id="bgmState">꺼짐</small></span>
-  </button>
+<!-- 작업표시줄: 시작 버튼 / 지금 보는 페이지 / 배경음악(이광조 - 즐거운 인생) / 시계 -->
+<div class="taskbar">
+  <a class="start-btn" href="#home" title="처음 화면으로"><svg class="ico" aria-hidden="true"><use href="#i-flag"/></svg>시작</a>
+  <span class="tb-sep" aria-hidden="true"></span>
+  <div class="task-area" aria-hidden="true"><span class="task" id="taskLabel"><svg class="ti-ico"><use href="#i-page"/></svg><span id="taskText">시가렛 스윙!</span></span></div>
+  <div class="tray">
+    <div class="bgm" id="bgm">
+      <p class="bgm-hint" id="bgmHint" hidden>화면을 한 번 누르면 배경음악이 시작돼요</p>
+      <button class="bgm-btn" id="bgmBtn" type="button" aria-pressed="false" aria-label="배경음악 켜고 끄기" title="이광조 - 즐거운 인생">
+        <svg class="ico i-off" aria-hidden="true"><use href="#i-mute"/></svg>
+        <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>BGM <small id="bgmState">꺼짐</small></span>
+      </button>
+    </div>
+    <span class="tb-sep" aria-hidden="true"></span>
+    <span class="clock" id="clock" aria-hidden="true"></span>
+  </div>
 </div>
 <div class="bgm-player" aria-hidden="true"><div id="bgmPlayer"></div></div>
 
@@ -903,15 +1138,12 @@ details.fold .fold-body p{padding-top:1em}
 
   /* ---------- 밝게/어둡게 ---------- */
   var themeBtn=$('#themeBtn');
-  var darkQuery=window.matchMedia('(prefers-color-scheme: dark)');
   function effectiveTheme(){
-    var t=root.getAttribute('data-theme');
-    return t||(darkQuery.matches?'dark':'light');
+    return root.getAttribute('data-theme')==='dark'?'dark':'light';
   }
   function syncThemeBtn(){themeBtn.setAttribute('data-mode',effectiveTheme())}
   try{var saved=localStorage.getItem('sigaret-theme');if(saved==='light'||saved==='dark')root.setAttribute('data-theme',saved)}catch(e){}
   syncThemeBtn();
-  if(darkQuery.addEventListener)darkQuery.addEventListener('change',syncThemeBtn);
   themeBtn.addEventListener('click',function(){
     var next=effectiveTheme()==='dark'?'light':'dark';
     root.setAttribute('data-theme',next);
@@ -938,6 +1170,8 @@ details.fold .fold-body p{padding-top:1em}
   var nav=$('#nav');
   var navLinks=$$('a',nav);
   var currentView=null;
+  var TASKS={home:'시가렛 스윙!',world:'원작 및 세계관',relations:'인물 관계도',gyeongseok:'남경석',jaegyeong:'신재경',story:'서사',archive:'연성 아카이빙 및 참고사항'};
+  var taskText=$('#taskText');
 
   function updateNav(){
     navLinks.forEach(function(a){
@@ -967,6 +1201,7 @@ details.fold .fold-body p{padding-top:1em}
       VIEWS.forEach(function(v){viewEls[v].hidden=(v!==name)});
       currentView=name;
       document.title=TITLES[name];
+      if(taskText)taskText.textContent=TASKS[name];
       updateNav();
       jumpTop();
       var h=$('.view-title',viewEls[name]);
@@ -1054,6 +1289,14 @@ details.fold .fold-body p{padding-top:1em}
   window.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
   toTop.addEventListener('click',function(){window.scrollTo({top:0})});
+
+  /* ---------- 작업표시줄 시계 ---------- */
+  var clockEl=$('#clock');
+  function tick(){
+    var d=new Date(),h=d.getHours(),m=d.getMinutes();
+    clockEl.textContent=(h<12?'오전 ':'오후 ')+((h%12)||12)+':'+(m<10?'0':'')+m;
+  }
+  tick();setInterval(tick,15000);
 
   /* ---------- 배경음악 (이광조 - 즐거운 인생) ---------- */
   var BGM_ID='A-4dJU06sqY';       /* 다른 곡으로 바꾸려면 유튜브 영상 ID만 바꾸세요 */
