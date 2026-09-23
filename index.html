@@ -328,6 +328,7 @@ details.fold .fold-body p{padding-top:1em}
 .group-note{font-size:13px;font-family:var(--f13);color:var(--ink-2);margin-bottom:16px}
 .shots{display:grid;gap:12px}
 .shots.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.shots.four{grid-template-columns:repeat(2,minmax(0,1fr))}
 .shots.two{grid-template-columns:1.323fr 1fr;align-items:start}
 @media (max-width:640px){.shots.two{grid-template-columns:1fr}}
 @media (max-width:640px){.shots.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -1186,13 +1187,17 @@ textarea.bin{resize:vertical;min-height:84px}
 
     <!-- 그림 -->
     <div class="group" data-group="art">
-      <div class="group-head"><h3>그림</h3><span>자체 드로잉, rosa님 커미션</span></div>
-      <div class="shots two">
+      <div class="group-head"><h3>그림</h3><span>자체 드로잉, rosa님 커미션 (@OLYKNo4H)</span></div>
+      <div class="shots four crop">
         <figure class="ph"><button class="zoom" type="button" data-caption="자체 드로잉"><img src="images/art-1.webp" width="1000" height="1000" alt="자체 드로잉: 소파에 기댄 남경석의 넥타이를 신재경이 붙잡고 있는 스케치" loading="lazy"></button><figcaption>자체 드로잉</figcaption></figure>
-        <figure class="ph"><button class="zoom" type="button" data-caption="rosa님 커미션 (@OLYKNo4H)"><img src="images/art-2.webp" width="1400" height="1852" alt="rosa님 커미션 일러스트" loading="lazy"></button><figcaption>rosa님 커미션 (@OLYKNo4H)</figcaption></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="자체 드로잉 2"><img src="images/art-3.webp" width="1000" height="1000" alt="자체 드로잉 2: 소파에서 입맞추는 남경석과 신재경 스케치" loading="lazy"></button><figcaption>자체 드로잉 2</figcaption></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="rosa님 커미션1 (@OLYKNo4H)"><img src="images/art-2.webp" width="1400" height="1852" alt="rosa님 커미션1 일러스트" loading="lazy"></button><figcaption>rosa님 커미션1 (@OLYKNo4H)</figcaption></figure>
+        <figure class="ph"><button class="zoom" type="button" data-caption="rosa님 커미션2 (@OLYKNo4H)"><img src="images/art-4.webp" width="865" height="1280" alt="rosa님 커미션2: 'More Than Words' 가사가 적힌 남경석·신재경 일러스트" loading="lazy"></button><figcaption>rosa님 커미션2 (@OLYKNo4H)</figcaption></figure>
       </div>
       <div class="cmts" data-cid="drawing" data-title="자체 드로잉" hidden></div>
-      <div class="cmts" data-cid="rosa" data-title="rosa님 커미션" hidden></div>
+      <div class="cmts" data-cid="drawing2" data-title="자체 드로잉 2" hidden></div>
+      <div class="cmts" data-cid="rosa" data-title="rosa님 커미션1" hidden></div>
+      <div class="cmts" data-cid="rosa2" data-title="rosa님 커미션2" hidden></div>
     </div>
 
     <!-- 플레이리스트 -->
